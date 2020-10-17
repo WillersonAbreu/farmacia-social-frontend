@@ -1,0 +1,41 @@
+.dark-footer {
+  background-color: #264653;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-component {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.left-content {
+  display: flex;
+}
+
+.right-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.share-button {
+  border: 0.5px solid #ccc;
+  outline: none;
+  background-color: transparent;
+  border-radius: 5px;
+  color: white;
+  min-width: 30px;
+}
+
+.share-button:hover {
+  opacity: 0.5;
+}
+
+.share-icon {
+  width: 2vw;
+  color: white;
+}
