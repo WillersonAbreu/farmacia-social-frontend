@@ -1,8 +1,8 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd">
       <div class="logo" style="display: flex; justify-content: center; align-items: center">
-          <a class="farmaciaSocial" href="index.html" style="text-decoration: none; padding: 0px">
-              <img src="assets/logo.png" height="50px" class="d-inline-block align-top" />
+          <a class="farmaciaSocial" href="/" style="text-decoration: none; padding: 0px">
+              <img src="../../../assets/images/logo.png" height="50px" class="d-inline-block align-top" />
               <span style="color: #f4a261">Farmácia</span>
               <span style="color: #2a9d8f">Social</span>
           </a>
@@ -14,28 +14,29 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mx-auto">
               <li class="nav-item active">
-                  <a class="nav-link" href="index.html">
-                      <i class="fas fa-home"></i> Home
-                      <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/home">
+                  <fa-icon [icon]="faHome"></fa-icon>Home
+                  <span class="sr-only">(current)</span>
+                </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="sobre.html">
-                      <i class="fas fa-info-circle"></i> Sobre
+                  <a class="nav-link" href="/sobre">
+                      <fa-icon [icon]="faInfoCircle"></fa-icon>Sobre
                   </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="duvidas.html">
-                      <i class="fas fa-question"></i> Duvidas
+                  <a class="nav-link" href="/duvidas">
+                    <fa-icon [icon]="faQuestion"></fa-icon>Duvidas
                   </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="contato.html">
-                      <i class="fas fa-headset"></i> Contato
+                  <a class="nav-link" href="/contato">
+                    <fa-icon [icon]="faHeadset"></fa-icon>Contato
                   </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="login.html">
-                      <i class="fas fa-user-circle"></i> Meu Perfil</a>
+                  <a class="nav-link" href="/login">
+                  <fa-icon [icon]="faUserCircle"></fa-icon>Meu Perfil</a>
               </li>
           </ul>
           <button id="novaDoacao" class="logo btn btn-orange my-2 my-sm-0" type="submit">
