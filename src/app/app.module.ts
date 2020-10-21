@@ -4,9 +4,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DonationsComponent } from './pages/donations/donations.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+
+// NGX Bootstrap components
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { StyledButtonComponent } from './components/styled-button/styled-button.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +20,15 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    DonationsComponent,
+    CarouselComponent,
+    StyledButtonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CarouselModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
