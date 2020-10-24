@@ -15,6 +15,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { StyledButtonComponent } from './components/styled-button/styled-button.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ShowcaseComponent } from './pages/showcase/showcase.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ShowcaseComponent } from './pages/showcase/showcase.component';
     StyledButtonComponent,
     SearchBarComponent,
     ShowcaseComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
