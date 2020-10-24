@@ -1,0 +1,18 @@
+.divSearch {
+  background-color: #f4a261;
+  height: 8rem;
+}
+
+.searchBar {
+  border-radius: 20px !important;
+  max-width: 80vw;
+  width: 600px !important;
+}
+
+.searchButton {
+  color: #fff !important;
+  background-color: #2a9d8f !important;
+  border-color: #2a9d8f !important;
+  border-radius: 20px !important;
+  padding: 5px 20px 5px 20px !important;
+}

@@ -13,6 +13,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 // NGX Bootstrap components
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { StyledButtonComponent } from './components/styled-button/styled-button.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { ShowcaseComponent } from './pages/showcase/showcase.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { StyledButtonComponent } from './components/styled-button/styled-button.
     DonationsComponent,
     CarouselComponent,
     StyledButtonComponent,
+    SearchBarComponent,
+    ShowcaseComponent,
   ],
   imports: [
     BrowserModule,

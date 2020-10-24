@@ -10,7 +10,7 @@ footer {
 .dark-footer {
   background-color: #264653;
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   width: 100%;
   height: 60px;
