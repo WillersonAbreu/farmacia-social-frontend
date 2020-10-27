@@ -1,1 +1,129 @@
-<p>donations works!</p>
+<h1>O que você esta doando?</h1>
+
+<form>
+    <div class="formatForm shadow-sm">
+        <div class="row">
+            <div class="form-group col-sm-12 col-md-6">
+                <label>Imagem Frontal</label>
+
+                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                    <input id="upload-front" type="file" onchange="readURLFront(this);" class="upload form-control border-0">
+                    <label id="upload-front-label" for="upload-front" class="upload-label font-weight-light text-muted">Selecione o arquivo</label>
+                    <div class="input-group-append">
+                        <label for="upload-front" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Selecione o arquivo</small></label>
+                    </div>
+                </div>
+
+                <!-- Area de Update da Imagem -->
+                <div class="image-area mt-4"><img id="imageResultFront" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+            </div>
+            <div class="form-group col-sm-12 col-md-6">
+                <label>Imagem Traseira</label>
+
+                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                    <input id="upload-back" type="file" onchange="readURLBack(this);" class="upload form-control border-0">
+                    <label id="upload-back-label" for="upload-back" class="upload-label font-weight-light text-muted">Selecione o arquivo</label>
+                    <div class="input-group-append">
+                        <label for="upload-back" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Selecione o arquivo</small></label>
+                    </div>
+                </div>
+
+                <!-- Area de Update da Imagem -->
+                <div class="image-area mt-4"><img id="imageResultBack" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="formTitulo">Título</label>
+            <input required type="text" class="form-control" id="formTitulo" placeholder="Nome do medicamento..">
+        </div>
+        <div class="form-group">
+            <label for="formDescricao">Descrição</label>
+            <textarea class="form-control" id="formDescricao" rows="3" placeholder="Descreva a composição do medicamento.."></textarea>
+        </div>
+        <fieldset class="form-group">
+            <label for="formDescricao">Tarja</label>
+            <div class="d-flex justify-content-around">
+                <div class="form-check d-flex">
+                    <input required class="form-check-input" type="radio" name="tarjas" id="tarjaVerde" value="verde" checked>
+                    <span class="badge badge-success" style="width: 30px; height: 24px">&nbsp;</span>
+                </div>
+                <div class="form-check d-flex">
+                    <input required class="form-check-input" type="radio" name="tarjas" id="tarjaAmarela" value="amarela">
+                    <span class="badge badge-warning" style="width: 30px; height: 24px">&nbsp;</span>
+                </div>
+                <div class="form-check d-flex">
+                    <input required class="form-check-input" type="radio" name="tarjas" id="tarjaVermelha" value="vermelha" checked>
+                    <span class="badge badge-danger" style="width: 30px; height: 24px">&nbsp;</span>
+                </div>
+                <div class="form-check d-flex">
+                    <input required class="form-check-input" type="radio" name="tarjas" id="tarjaPreta" value="preta">
+                    <span class="badge badge-dark" style="width: 30px; height: 24px">&nbsp;</span>
+                </div>
+            </div>
+
+
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="formDescricao">Embalagem</label>
+            <div class="d-flex justify-content-around">
+                <div class="form-check d-flex">
+                    <input required class="form-check-input" type="radio" name="embalagens" id="caixa" value="caixa" checked>
+                    <label class="form-check-label" for="caixa">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                            Caixa
+                        </label>
+                </div>
+                <div class="form-check d-flex">
+                    <input required class="form-check-input" type="radio" name="embalagens" id="cartela" value="cartela">
+                    <label class="form-check-label" for="cartela">
+                            <i class="fas fa-pills"></i>
+                            Cartela
+                        </label>
+                </div>
+            </div>
+
+        </fieldset>
+        <div class="row">
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="formQuantidade">Quantidade</label>
+                <input required type="number" min="1" class="form-control" id="formQuantidade" placeholder="Unidades a doar..">
+            </div>
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="formDosagem">Dosagem (mg)</label>
+                <input required type="number" min="1" class="form-control" id="formDosagem" placeholder="Descreva a dosagem do medicamento..">
+            </div>
+        </div>
+
+        <label class="text-bold">Embalagem</label>
+        <div class="custom-control custom-switch mb-3">
+            <input required type="checkbox" class="custom-control-input" id="customSwitch1">
+            <label class="custom-control-label" for="customSwitch1"></label> A caixa ou cartelas estão lacrada e bem conservadas?
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="formFabricação">Data de fabricação</label>
+                <input required type="date" class="form-control" id="formFabricação">
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6">
+                <label for="formValidade">Data de validade</label>
+                <input required type="date" class="form-control" id="formValidade">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="formLote">Número do lote</label>
+            <input required type="text" class="form-control" id="formLote" placeholder="Digite o número do lote do medicamento..">
+        </div>
+
+    </div>
+
+    <div class="row p-3 align-items-center">
+        <legend class="termosUso col-sm-12 col-md-9 mt-2">Ao publicar você concorda e aceita nossos Termos de Uso e Privacidade</legend>
+        <button class="logo btn btn-orange col-sm-12 col-md-3 mt-2" type="submit">Enviar Anúncio</button>
+    </div>
+
+</form>
