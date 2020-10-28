@@ -1,49 +1,49 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd">
-      <div class="logo" style="display: flex; justify-content: center; align-items: center">
-          <a class="farmaciaSocial" routerLink="/" routerLinkActive="active" style="text-decoration: none; padding: 0px">
-              <img src="../../../assets/images/logo.png" height="50px" class="d-inline-block align-top" />
-              <span style="color: #f4a261">Farmácia</span>
-              <span style="color: #2a9d8f">Social</span>
-          </a>
-      </div>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd">
+        <div class="logo" style="display: flex; justify-content: center; align-items: center">
+            <a class="farmaciaSocial" routerLink="/" routerLinkActive="active" style="text-decoration: none; padding: 0px">
+                <img src="../../../assets/images/logo.png" height="50px" class="d-inline-block align-top" />
+                <span style="color: #f4a261"> Farmácia </span>
+                <span style="color: #2a9d8f">Social</span>
+            </a>
+        </div>
+        <!--  https://ng-bootstrap.github.io/#/components/collapse/examples -->
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed" (click)='animateMe()'>
     <span class="navbar-toggler-icon"></span>
   </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mx-auto">
-              <li class="nav-item active">
-                <a class="nav-link" routerLink="/home">
-                  <fa-icon [icon]="faHome"></fa-icon>Home
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="/sobre">
-                      <fa-icon [icon]="faInfoCircle"></fa-icon>Sobre
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="/duvidas">
-                    <fa-icon [icon]="faQuestion"></fa-icon>Duvidas
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="/contato">
-                    <fa-icon [icon]="faHeadset"></fa-icon>Contato
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="/login">
-                  <fa-icon [icon]="faUserCircle"></fa-icon>Meu Perfil</a>
-              </li>
-          </ul>
-          <app-styled-button [buttonTitle]="'DOAR'" ></app-styled-button>
-          <!-- <form class="form-inline mt-2 mt-md-0">
+        <div [@animation]='state' [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/" (click)="isMenuCollapsed = true">
+                        <fa-icon [icon]="faHome"></fa-icon> Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/sobre" (click)="isMenuCollapsed = true">
+                        <fa-icon [icon]="faInfoCircle"></fa-icon> Sobre
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/duvidas" (click)="isMenuCollapsed = true">
+                        <fa-icon [icon]="faQuestion"></fa-icon> Duvidas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/contato" (click)="isMenuCollapsed = true">
+                        <fa-icon [icon]="faHeadset"></fa-icon> Contato
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed = true">
+                        <fa-icon [icon]="faUserCircle"></fa-icon> Meu Perfil</a>
+                </li>
+            </ul>
+            <app-styled-button [buttonTitle]="'DOAR'"></app-styled-button>
+            <!-- <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form> -->
-      </div>
-  </nav>
+        </div>
+    </nav>
 </header>

@@ -1,0 +1,14 @@
+.corpoTela {
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.corpoTela>h1 {
+    text-align: center;
+}
+
+.imagem {
+    overflow: hidden;
+    border-radius: 15px;
+    border: 2px tomato;
+}

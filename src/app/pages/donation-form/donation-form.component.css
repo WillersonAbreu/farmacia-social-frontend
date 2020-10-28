@@ -1,0 +1,70 @@
+.corpoTela {
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.corpoTela>h1 {
+    font-size: x-large;
+    text-align: center;
+}
+
+.form-group>label,
+.text-bold {
+    font-weight: bold;
+}
+
+.formatForm {
+    padding: 1rem;
+    border: solid 1px #2a9d8f;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff!important;
+    border-color: #f4a261 !important;
+    background-color: #f4a261!important;
+}
+
+.termosUso {
+    font-size: 14px;
+    margin: 0 !important;
+}
+
+
+/*FORMATAR SELETOR DE IMAGEM*/
+
+.upload {
+    opacity: 0;
+}
+
+.upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.image-area {
+    border: 2px dashed #2a9d8f;
+    padding: 1rem;
+    position: relative;
+}
+
+.image-area::before {
+    content: 'Imagem Carregada';
+    color: #2a9d8f;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.image-area img {
+    z-index: 2;
+    position: relative;
+}
