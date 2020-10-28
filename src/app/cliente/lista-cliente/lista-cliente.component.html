@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-between bg-light p-2 mb-2">
+    <h3> Lista de clientes </h3>
+    <a class="btn btn-primary" [routerLink]="['/clientes/cadastrar']">Novo cliente</a>
+</div>
+
+<table class="table table-striped thead-dark display" style="width:100%">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Telefone</th>
+            <th scope="col" class=" text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cliente of clientes">
+            <th scope="row"> {{cliente.id}}</th>
+            <td>{{cliente.nome}}</td>
+            <td>{{cliente.cpf}}</td>
+            <td>{{cliente.telefone}}</td>
+            <td class="d-flex justify-content-center">
+                <a [routerLink]="['/clientes', cliente.id]" class="btn btn-info mr-2">Exibir</a>
+                <a [routerLink]="['/clientes', cliente.id, 'editar']" class="btn btn-primary mr-2">Atualizar</a>
+                <button (click)="deleteConfirm(cliente.id, cliente.nome)" class="btn btn-danger"> Deletar</button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

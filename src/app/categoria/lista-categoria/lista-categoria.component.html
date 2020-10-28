@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between bg-light p-2 mb-2">
+    <h3> Lista de categorias </h3>
+    <a class="btn btn-primary" [routerLink]="['/categorias/cadastrar']">Nova categoria</a>
+</div>
+
+<table class="table table-striped thead-dark display" style="width:100%">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col" class=" text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let categoria of categorias">
+
+            <th scope="row"> {{categoria.id}}</th>
+            <td>{{categoria.nome}}</td>
+            <td class="d-flex justify-content-center">
+                <a [routerLink]="['/categorias', categoria.id]" class="btn btn-info mr-2">Exibir</a>
+                <a [routerLink]="['/categorias', categoria.id, 'editar']" class="btn btn-primary mr-2">Atualizar</a>
+                <button (click)="deleteConfirm(categoria.id, categoria.nome)" class="btn btn-danger"> Deletar</button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
