@@ -3,13 +3,16 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css','./mbr-additional.component.css','style.component.css']
+  styleUrls: ['./about.component.css','./mbr-additional.component.css','style.component.css','./mobirise2.component.css']
 })
 export class AboutComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
+    
+    
   }
+  
 
 }
