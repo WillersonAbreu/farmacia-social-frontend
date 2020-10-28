@@ -12,6 +12,7 @@ import { DonationsComponent } from './pages/donations/donations.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { AboutComponent } from './pages/about/about.component';
 import { DonationFormComponent } from './pages/donation-form/donation-form.component';
+import { QuestionComponent } from './pages/question/question.component';
 
 // NGX Bootstrap components
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -20,6 +21,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { ShowcaseComponent } from './pages/home/components/showcase/showcase.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from './pages/signup/signup.component';
+
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     StyledButtonComponent,
     SearchBarComponent,
     ShowcaseComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
