@@ -1,3 +1,4 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
 section {
     background-color: #ffffff;
 }
@@ -1280,3 +1281,4 @@ pre {
     top: 0;
     left: -2400px;
 }
+
