@@ -17,6 +17,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { ShowcaseComponent } from './pages/home/components/showcase/showcase.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoginComponent } from './pages/login/login.component';
     SearchBarComponent,
     ShowcaseComponent,
     AboutComponent,
-    LoginComponent,
+    //LoginComponent,
+    //ProfileComponent,
   ],
   imports: [
     BrowserModule,

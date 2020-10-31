@@ -3,7 +3,7 @@ body {
     height: 100%;
 }
 
-body-login {
+.div-login {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
