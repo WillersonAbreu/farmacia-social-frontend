@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,10 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { ShowcaseComponent } from './pages/home/components/showcase/showcase.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from './pages/signup/signup.component';
+import { ListUsersComponent } from './pages/user/list-users/list-users.component';
+import { DetailUserComponent } from './pages/user/detail-user/detail-user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserModule } from './pages/user/user.module';
 
 
 @NgModule({
@@ -43,7 +48,9 @@ import { SignupComponent } from './pages/signup/signup.component';
     AppRoutingModule,
     FontAwesomeModule,
     CarouselModule.forRoot(),
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
