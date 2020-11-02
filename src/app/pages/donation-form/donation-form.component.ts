@@ -5,11 +5,11 @@ import { faCloudUploadAlt, faPrescriptionBottle, faPills } from '@fortawesome/fr
 
 
 @Component({
-  selector: 'app-donations',
-  templateUrl: './donations.component.html',
-  styleUrls: ['./donations.component.css']
+  selector: 'app-donation-form',
+  templateUrl: './donation-form.component.html',
+  styleUrls: ['./donation-form.component.css']
 })
-export class DonationsComponent implements OnInit {
+export class DonationFormComponent implements OnInit {
 
   faCloudUploadAlt = faCloudUploadAlt;
   faPrescriptionBottle = faPrescriptionBottle;
@@ -17,7 +17,7 @@ export class DonationsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -9,15 +10,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DonationsComponent } from './pages/donations/donations.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { AboutComponent } from './pages/about/about.component';
+import { DonationFormComponent } from './pages/donation-form/donation-form.component';
 
 // NGX Bootstrap components
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { StyledButtonComponent } from './components/styled-button/styled-button.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ShowcaseComponent } from './pages/home/components/showcase/showcase.component';
-import { AboutComponent } from './pages/about/about.component';
-import { LoginComponent } from './pages/login/login.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SignupComponent } from './pages/signup/signup.component';
+
 
 @NgModule({
   declarations: [
@@ -25,20 +28,22 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    AboutComponent,
     DonationsComponent,
+    DonationFormComponent,
+    SignupComponent,
     CarouselComponent,
     StyledButtonComponent,
     SearchBarComponent,
     ShowcaseComponent,
-    AboutComponent,
-    //LoginComponent,
-    //ProfileComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FontAwesomeModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
