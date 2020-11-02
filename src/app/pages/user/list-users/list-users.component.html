@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between bg-light p-2 mb-2">
     <h3> Lista de usuários </h3>
-    <!-- <a class="btn btn-primary" [routerLink]="['/users']">Novo usuário</a> -->
+    <a class="btn btn-primary" [routerLink]="['/users/cadastrar']">Novo usuário</a>
 </div>
 
 <table class="table table-striped thead-dark display" style="width:100%">
@@ -32,7 +32,7 @@
             <td class="d-flex justify-content-center ">
                 <a [routerLink]="['/users', user.id]" class="btn btn-info mr-2">Exibir</a>
                 <a [routerLink]="['/users', user.id, 'editar']" class="btn btn-primary mr-2">Atualizar</a>
-                <button (click)="deleteConfirm(user.id, user.nome)" class="btn btn-danger"> Deletar</button>
+                <button (click)="deleteConfirm(user.id, user.name)" class="btn btn-danger"> Deletar</button>
             </td>
         </tr>
 

@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DonationsComponent } from './pages/donations/donations.component';
@@ -18,29 +17,23 @@ import { DonationFormComponent } from './pages/donation-form/donation-form.compo
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { StyledButtonComponent } from './components/styled-button/styled-button.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { ShowcaseComponent } from './pages/home/components/showcase/showcase.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SignupComponent } from './pages/signup/signup.component';
-import { ListUsersComponent } from './pages/user/list-users/list-users.component';
-import { DetailUserComponent } from './pages/user/detail-user/detail-user.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserModule } from './pages/user/user.module';
+import { HomeModule } from './pages/home/home.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     HeaderComponent,
     FooterComponent,
     AboutComponent,
     DonationsComponent,
     DonationFormComponent,
-    SignupComponent,
     CarouselComponent,
     StyledButtonComponent,
-    SearchBarComponent,
-    ShowcaseComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +43,8 @@ import { UserModule } from './pages/user/user.module';
     CarouselModule.forRoot(),
     NgbModule,
     HttpClientModule,
-    UserModule
+    UserModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
