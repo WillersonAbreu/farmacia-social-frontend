@@ -1,21 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// Components
-import { HomeComponent } from './pages/home/home.component';
-import { AboutComponent } from './pages/about/about.component';
-import { DonationsComponent } from './pages/donations/donations.component';
-import { DonationFormComponent } from './pages/donation-form/donation-form.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'doações/cadastro', component: DonationFormComponent },
-  { path: 'doação', component: DonationsComponent },
-  { path: 'sobre', component: AboutComponent },
-  { path: 'cadastro', component: SignupComponent },
-  { path: 'meu-perfil', component: ProfileComponent },
+  {
+    path: '', loadChildren: './pages/home/home.module#HomeModule'
+  },
+  {
+    path: '', loadChildren: './pages/user/user.module#UserModule'
+  },
+
 ];
 
 @NgModule({
