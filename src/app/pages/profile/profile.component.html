@@ -1,0 +1,135 @@
+<!--
+  div do meu cadastro
+-->
+<div class="container d-flex flex-row justify-content-center">
+  <h2>Meu cadastro
+    <br>
+    <p class="font-size-15 font-weight-normal">Configure seu cadastro</p>
+  </h2>
+</div>
+
+<!--
+  div do menu estendido
+-->
+
+<div class="container d-flex flex-row justify-content-right">
+<div class="col-md-4 col-lg-4">
+  <div class="list-group">
+
+    <a href="#" class="list-group-item"><i class="fa fa-address-card"></i> <span>Meu cadastro</span></a>
+    <a href="#" class="list-group-item"><i class="fa fa-shopping-basket"></i> <span>Meus pedidos / minhas
+        doações</span></a>
+    <a href="#" class="list-group-item"><i class="fa fa-smile-o"></i> <span>Minhas doações</span></a>
+
+  </div>
+</div>
+  <div class="card col-md-6 col-lg-6">
+
+  <form class="card-body" id="cadastro-perfil">
+    <div class="form-group">
+      <label class="font-weight-bold">Dados da conta</label>
+      <br>
+      <label for="exampleInputName">Nome</label>
+      <input type="email" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+        placeholder="Nome completo">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail">E-mail</label>
+      <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+      <small id="emailHelp" class="form-text text-muted">Não compartilharmos seus dados com terceiros.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Senha</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputCPF">CPF</label>
+      <input type="password" class="form-control" id="exampleCPF" placeholder="CPF">
+    </div>
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-3 pt-0">Gênero</legend>
+        <div class="col">
+          <div class="form-check row">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+            <label class="form-check-label" for="gridRadios1">
+              Masculino
+            </label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="col-sm-9">
+
+            <div class="form-check row">
+              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+              <label class="form-check-label" for="gridRadios2">
+                Feminino
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <label class="font-weight-bold">Endereço</label>
+    <div class="form-group">
+      <div class="form-group row">
+        <div class="form-group col-md-9">
+          <label for="inputAddress2">Rua*</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputAddress2">Número</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">Cidade</label>
+          <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputState">Estado</label>
+          <select id="inputState" class="form-control">
+            <option selected>UF...</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputZip">CEP</label>
+          <input type="text" class="form-control" id="inputZip">
+        </div>
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+
+  </div>
+</div>
