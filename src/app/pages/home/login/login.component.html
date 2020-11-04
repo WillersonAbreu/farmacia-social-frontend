@@ -1,6 +1,6 @@
 <div class="container form-center">
 
-    <form class="form-signin text-center">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-signin text-center">
         <div class="logo" style="display: flex; justify-content: center; align-items: center">
             <a class="farmaciaSocial" href="/" style="text-decoration: none; padding: 0px">
                 <img src="../../../assets/images/logo.png" height="50px" class="d-inline-block align-top" />
@@ -11,27 +11,30 @@
         <div>
             <h1 class="h4 mb-3">Acesse sua conta</h1>
             <label for="inputEmail" class="sr-only">Endereço de e-mail</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de e-mail" required autofocus>
+            <fieldset class="form-group">
+                <input formControlName="email" placeholder="Endereço de e-mail" class="form-control form-control-lg" type="email" />
+            </fieldset>
             <label for="inputPassword" class="sr-only">Senha</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
-
-            <a class="nav-link" routerLink="/cadastro">Não tem conta? Cadastre-se</a>
+            <fieldset class="form-group">
+                <input formControlName="password" placeholder="Senha" class="form-control form-control-lg" type="password" required />
+            </fieldset>
+            <a class="nav-link" [routerLink]="['/cadastro']">Não tem conta? Cadastre-se</a>
             <div class="checkbox mb-3">
-                <label>
-  <input type="checkbox" value="remember-me"> Me lembre
-</label>
-            </div>
-            <button class="btn btn-primary btn-block btn-orange" type="submit" id="btn-entrar">Entrar</button>
+                <fieldset class="form-group">
+                    <input id="checkbox" value="remember-me" type="checkbox" /> Me lembre
+                </fieldset>
 
+            </div>
+            <button class="btn btn-primary btn-block btn-orange" [disabled]="!form.valid" type="submit">Entrar</button>
             <br>
             <br>
-            <a class="nav-link" routerLink="/esqueci-senha">Esqueceu seu login ou senha?</a>
+            <a class="nav-link" [routerLink]="['/esqueci-senha']">Esqueceu seu login ou senha?</a>
 
             <br>
             <br>
 
             <p class="disclaimer">
-                Ao se registrar, você concorda com os
+                Ao se logar, você concorda com os
                 <strong><a href="#1">Termos de Uso</a></strong> e com a
                 <strong> <a href="#2">Política de Privacidade</a> </strong>, do site Farmácia Social
             </p>

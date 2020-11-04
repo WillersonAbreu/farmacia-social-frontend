@@ -9,71 +9,85 @@
         </div>
 
         <span>Crie a sua conta. É gratis!</span>
-        <form class="form-cadastro-usuario" action="#" method="POST">
+        <form [formGroup]="form" (ngSubmit)="submit()" class="form-cadastro-usuario">
             <label>Nome Completo</label>
-            <input class="form-control form-control-sm" type="text" id="name" name="name" />
+            <fieldset class="form-group">
+                <input formControlName="name" placeholder="Nome" class="form-control form-control-sm" type="text" />
+            </fieldset>
 
             <label>Email</label>
-            <input class="form-control form-control-sm" type="text" id="email" name="email" />
+            <fieldset class="form-group">
+                <input formControlName="email" placeholder="Email " class="form-control form-control-sm" type="email" />
+            </fieldset>
 
             <label>Telefone Celular</label>
-            <input class="form-control form-control-sm" maxlength="15" type="text" id="phone" name="phone" />
+            <fieldset class="form-group">
+                <input formControlName="phone" placeholder="Telefone" class="form-control form-control-sm" maxlength="15" type="text" />
+            </fieldset>
 
             <label>Senha</label>
             <div class="input-group flex-row">
-                <input class="form-control form-control-sm" type="password" id="password" name="password" />
+                <input formControlName="password" placeholder="Senha" class="form-control form-control-sm" type="password" />
                 <div class="input-group-append sm btn-eye" onclick="handlePasswordInput()">
-                    <i class="input-group-text fas fa-eye-slash" id="basic-addon2"></i>
+                    <fa-icon class="input-group-text" [icon]="faEyeSlash"></fa-icon>
                 </div>
             </div>
             <div id="bouncer-error_password"></div>
             <label>CPF</label>
-            <input class="form-control form-control-sm" maxlength="14" type="text" id="cpf" name="cpf" />
+            <fieldset class="form-group">
+                <input formControlName="cpf" placeholder="CPF" class="form-control form-control-sm" maxlength="14" type="text" />
+            </fieldset>
 
             <div class="input-wrapper">
                 <div>
                     <label>CEP</label>
-                    <input class="form-control form-control-sm" onblur="getCep(this.value);" type="text" id="cep" name="cep" maxlength="9" />
+                    <fieldset class="form-group">
+                        <input formControlName="cep" placeholder="CEP" class="form-control form-control-sm" type="text" onblur="getCep(this.value);" maxlength="9" />
+                    </fieldset>
                 </div>
                 <div>
                     <label>Rua</label>
-                    <input class="form-control form-control-sm" type="text" id="street" name="street" />
+                    <fieldset class="form-group">
+                        <input formControlName="street" placeholder="Rua" class="form-control form-control-sm" type="text" />
+                    </fieldset>
                 </div>
-                <!-- </div> -->
 
-                <!-- <div class="input-wrapper"> -->
                 <div>
                     <label>Bairro</label>
-                    <input class="form-control form-control-sm" type="text" id="neighborhood" name="neighborhood" />
+                    <fieldset class="form-group">
+                        <input formControlName="neighborhood" placeholder="Bairro" class="form-control form-control-sm" type="text" />
+                    </fieldset>
                 </div>
                 <div>
                     <label>Número</label>
-                    <input class="form-control form-control-sm" type="text" id="number" name="number" />
+                    <fieldset class="form-group">
+                        <input formControlName="number" placeholder="Número" class="form-control form-control-sm" type="number" />
+                    </fieldset>
                 </div>
 
                 <div>
                     <label>Cidade</label>
-                    <input class="form-control form-control-sm" type="text" id="city" name="city" />
+                    <fieldset class="form-group">
+                        <input formControlName="city" placeholder="Cidade" class="form-control form-control-sm" type="text" />
+                    </fieldset>
                 </div>
 
                 <div>
                     <label>Estado</label>
-                    <input class="form-control form-control-sm" type="text" id="state" name="state" />
+                    <fieldset class="form-group">
+                        <input formControlName="state" placeholder="Estado" class="form-control form-control-sm" type="text" />
+                    </fieldset>
                 </div>
             </div>
-            <br>
-            <button class="btn btn-block btn-orange">Registrar</button>
-        </form>
 
-        <!-- <div
-      class="fb-login-button"
-      data-size="medium"
-      data-button-type="login_with"
-      data-layout="rounded"
-      data-auto-logout-link="true"
-      data-use-continue-as="false"
-      data-width=""
-    ></div> -->
+            <label>Endereço Completo</label>
+            <fieldset class="form-group">
+                <input formControlName="address" placeholder="Endereço" class="form-control form-control-sm" type="text" />
+            </fieldset>
+            <button class="btn btn-block btn-orange" type="submit">
+              {{ id ? 'Atualizar' : 'Registrar'}} usuário
+            </button>
+        </form>
 
         <p>
             Ao se registrar, você concorda com os

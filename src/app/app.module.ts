@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserModule } from './pages/user/user.module';
 import { HomeModule } from './pages/home/home.module';
 import { CoreModule } from './core/core.module';
+import { DonationsModule } from './pages/donations/donation.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CoreModule } from './core/core.module';
     NgbModule,
     HttpClientModule,
     UserModule,
-    HomeModule
+    HomeModule,
+    DonationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

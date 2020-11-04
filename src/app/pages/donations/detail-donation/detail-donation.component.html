@@ -1,15 +1,24 @@
 <app-header></app-header>
-<div class="corpoTela container">
+<div class="corpoTela container" *ngIf="donation">
     <div class="row">
         <section class="imagem col-sm-12 col-md-6">
-            <img src="../../../assets/images/remedio.jpg" class="imagem img-fluid">
+
+            <carousel>
+                <slide class="carousel-slide-item">
+                    <img class="carousel-images " src="{{donation.pictureFile}}" alt="first slide" height="800">
+                </slide>
+                <slide class="carousel-slide-item">
+                    <img class="carousel-images " src="{{donation.pictureFileBack}}" alt="second slide" height="800">
+                </slide>
+            </carousel>
+
         </section>
 
         <section class="conteudo col-sm-12 col-md-6 d-flex-column">
-            <h2 class="text-weight-bold text-center">Amoxicilina</h2>
+            <h2 class="text-weight-bold text-center">{{donation.title}}</h2>
 
             <h3>Descrição</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde autem voluptatibus voluptatum, debitis qui corporis sit quam esse laborum culpa aliquam. Porro consequuntur delectus molestias nesciunt nulla deserunt nostrum velit.</p>
+            <p>{{donation.description}}</p>
             <button class="btn btn-orange logo">Eu quero!</button>
 
             <h3 class="my-2">Detalhes</h3>
@@ -24,15 +33,15 @@
                         </tr>
                         <tr>
                             <td><strong>Embalagem: </strong></td>
-                            <td>Caixa</td>
+                            <td>{{donation.packing}}</td>
                         </tr>
                         <tr>
                             <td><strong>Quantidade: </strong></td>
-                            <td>5 un</td>
+                            <td>{{donation.amount}} un</td>
                         </tr>
                         <tr>
                             <td><strong>Dosagem: </strong></td>
-                            <td>500 mg</td>
+                            <td>{{donation.dosage}} mg</td>
                         </tr>
                     </tbody>
                 </table>
@@ -42,15 +51,15 @@
                     <tbody>
                         <tr>
                             <td><strong>Data Fabricação: </strong></td>
-                            <td>23/01/2018</td>
+                            <td>{{donation.manufacturyDate}}</td>
                         </tr>
                         <tr>
                             <td><strong>Data Validade: </strong></td>
-                            <td>23/01/2021</td>
+                            <td>{{donation.shelfLife}}</td>
                         </tr>
                         <tr>
                             <td><strong>Número Lote: </strong></td>
-                            <td>5048000354</td>
+                            <td>{{donation.batchCode}}</td>
                         </tr>
                         <tr>
                             <td><strong>Distancia: </strong></td>

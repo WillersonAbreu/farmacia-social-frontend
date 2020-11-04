@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
+import { SignupComponent } from '../home/signup/signup.component';
 import { DetailUserComponent } from './detail-user/detail-user.component';
 import { FormUserComponent } from './form-user/form-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
@@ -10,8 +11,8 @@ const routes: Routes = [
     component: UserComponent,
     children: [
       { path: '', component: ListUsersComponent }, // usuarios
-      { path: 'cadastrar', component: FormUserComponent }, // usuarios/cadastrar
-      { path: ':id/editar', component: FormUserComponent }, // usuarios/:id/editar
+      { path: 'cadastrar', component: SignupComponent }, // usuarios/cadastrar
+      { path: ':id/editar', component: SignupComponent }, // usuarios/:id/editar
       { path: ':id', component: DetailUserComponent }, // usuarios/:id
     ]
   },

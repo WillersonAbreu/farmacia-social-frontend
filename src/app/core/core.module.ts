@@ -11,6 +11,9 @@ import { StyledButtonComponent } from './components/styled-button/styled-button.
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { HttpTokenInterceptor } from './interceptors/http-token.interceptor';
 
 @NgModule({
   imports: [
@@ -38,9 +41,9 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     SearchBarComponent
   ],
   providers: [
-    // AuthGuard,
-    // AuthService,
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    AuthGuard,
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
 
   ],
 })
