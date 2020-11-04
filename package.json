@@ -26,6 +26,7 @@
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@sweetalert2/ngx-sweetalert2": "^8.1.1",
     "bootstrap": "^4.5.3",
+    "ionicons": "^4.6.3",
     "ng-bootstrap": "^1.6.3",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.9.0",

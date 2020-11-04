@@ -1,0 +1,18 @@
+<div class="container page">
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3 col-xs-12">
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <fieldset>
+                    <fieldset class="form-group">
+                        <input formControlName="nome" placeholder="Nome" class="form-control form-control-lg" type="text" />
+                    </fieldset>
+                    <button class="btn btn-lg btn-primary float-right" type="submit">
+            {{ id ? 'Atualizar' : 'Cadastrar'}} categoria
+          </button>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+</div>
