@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
+import { QuestionComponent } from '../question/question.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'cadastrar', component: SignupComponent },
       { path: 'login', component: LoginComponent },
       { path: 'sobre', component: AboutComponent },
+      { path: 'duvidas', component: QuestionComponent },
       //  { path: 'doações/cadastro', component: DonationFormComponent },
       // { path: 'doação', component: DonationsComponent }
       // { path: 'esqueci-senha', component: ForgotPasswordComponent },

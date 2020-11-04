@@ -10,6 +10,9 @@ import { ShowcaseComponent } from './components/showcase/showcase.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { AboutComponent } from './about/about.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { QuestionComponent } from '../question/question.component';
+import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   imports: [
@@ -18,7 +21,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HomeRoutes,
     ReactiveFormsModule,
     CoreModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule,
+    CarouselModule.forRoot()
   ],
   declarations: [
     HomeComponent,
@@ -26,7 +31,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     SignupComponent,
     ShowcaseComponent,
-    AboutComponent
+    AboutComponent,
+    QuestionComponent
   ]
 })
 export class HomeModule { }
