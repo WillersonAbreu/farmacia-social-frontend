@@ -62,8 +62,8 @@ export class DonationFormComponent implements OnInit {
   submit() {
     const donation = this.form.value;
     console.log(donation);
-    donation.imageFront = this.imageBase64Front;
-    donation.imageBack = this.imageBase64Back;
+    donation.pictureFile = this.imageBase64Front;
+    donation.pictureFileBack = this.imageBase64Back;
 
     if (this.id) {
       // atualizar
