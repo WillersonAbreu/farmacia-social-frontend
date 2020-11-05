@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 // FontAwsome Icons
-import { faHome, faInfoCircle, faQuestion, faHeadset, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-
+import { faHome, faInfoCircle, faQuestion, faHeadset, faUserCircle, faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { JwtService } from '../../services/jwt.service';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,12 @@ import { faHome, faInfoCircle, faQuestion, faHeadset, faUserCircle } from '@fort
 })
 export class HeaderComponent implements OnInit {
 
+  constructor(
+    private router: Router,
+    private jwtService: JwtService
+  ) { }
+
+  public isAuthenticated: boolean = !!this.jwtService.getToken();
   public isMenuCollapsed = true;
 
   state: string = "hide";
@@ -28,19 +35,14 @@ export class HeaderComponent implements OnInit {
     this.state = (this.state === 'hide' ? 'show' : 'hide');
   }
 
-
   faHome = faHome;
   faInfoCircle = faInfoCircle;
   faQuestion = faQuestion;
   faHeadset = faHeadset;
   faUserCircle = faUserCircle;
-
-  constructor() { }
+  faSignInAlt = faSignInAlt;
+  faUserPlus = faUserPlus;
 
   ngOnInit(): void {
-
   }
-
-
-
 }

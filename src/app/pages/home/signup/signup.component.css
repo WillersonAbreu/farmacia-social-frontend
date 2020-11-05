@@ -1,7 +1,7 @@
 .form-wrapper {
     display: flex;
     flex-direction: column;
-    margin: 5vh auto 5vh auto;
+    margin: 10vh auto 5vh auto;
     background-color: white;
     width: 40vw;
     border: 1px solid white;
@@ -44,48 +44,40 @@
 }
 
 .input-wrapper {
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    grid-row-gap: 2vh;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-row-gap: 2vh;
 }
 
 .input-wrapper>div {
-    width: 100%;
+  width: 100%;
 }
 
 .input-wrapper input {
-    width: 90%;
+  width: 90%;
 }
 
 .btn-eye:hover {
-    cursor: pointer;
-    opacity: 0.6;
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 .error-message {
-    color: red;
-    font-weight: bold;
-    font-size: 0.85em;
-    margin-top: -1vh;
-    margin-bottom: 2vh;
+  color: red;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 2vh;
 }
 
-#bouncer-error_password {
-    color: red;
-    font-weight: bold;
-    font-size: 0.85em;
-    margin-top: 1vh;
-    margin-bottom: 2vh;
-}
 
 @media (min-width: 230px) and (max-width: 599px) {
     .form-wrapper {
-        width: 90vw;
+      width: 90vw;
     }
 }
 
 @media (min-width: 600px) and (max-width: 1000px) {
     .form-wrapper {
-        width: 60vw;
+      width: 60vw;
     }
 }

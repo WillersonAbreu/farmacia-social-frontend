@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from '../home/signup/signup.component';
 import { DetailUserComponent } from './detail-user/detail-user.component';
-import { FormUserComponent } from './form-user/form-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { UserComponent } from './user.component';
 

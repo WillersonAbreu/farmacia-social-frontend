@@ -6,20 +6,22 @@ import { DetailUserComponent } from './detail-user/detail-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { UserService } from './user.service';
 import { UserRoutes } from './user.routing';
-import { FormUserComponent } from './form-user/form-user.component';
+import { CoreModule } from 'src/app/core/core.module';
+// import { FormUserComponent } from './form-user/form-user.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     UserRoutes,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ],
   declarations: [
     UserComponent,
     DetailUserComponent,
     ListUsersComponent,
-    FormUserComponent
+    // FormUserComponent
   ],
   providers: [
     UserService

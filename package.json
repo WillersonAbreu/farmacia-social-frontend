@@ -26,10 +26,12 @@
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@sweetalert2/ngx-sweetalert2": "^8.1.1",
     "bootstrap": "^4.5.3",
+    "cpf-cnpj-validator": "^1.0.3",
     "ng-bootstrap": "^1.6.3",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.9.0",
     "tslib": "^2.0.3",
+    "yup": "^0.29.3",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
