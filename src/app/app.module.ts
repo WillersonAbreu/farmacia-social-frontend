@@ -8,10 +8,12 @@ import { AppComponent } from './app.component';
 
 // NGX Bootstrap components
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CoreModule } from './core/core.module';
 import { UserModule } from './pages/user/user.module';
 import { HomeModule } from './pages/home/home.module';
-import { CoreModule } from './core/core.module';
 import { DonationsModule } from './pages/donations/donation.module';
+
+
 
 @NgModule({
   declarations: [

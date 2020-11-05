@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
-
 import { JwtService } from './jwt.service';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 
@@ -20,7 +19,6 @@ export class AuthService {
     private api: HttpClient,
     private jwtService: JwtService
   ) { }
-
   // Verifique o JWT no armazenamento local com as informações do servidor e do usuário de carga.
   // Isso é executado uma vez na inicialização do aplicativo.
   public populate() {
@@ -36,14 +34,12 @@ export class AuthService {
       this.purgeAuth();
     }
   }
-
   private setAuth(usuario) {
     // Defina os dados atuais do usuário em observáveis
     this.currentUserSubject.next(usuario);
     // Defina isAuthenticated como true
     this.isAuthenticatedSubject.next(true);
   }
-
   public purgeAuth() {
     // Remover JWT do localstorage
     this.jwtService.destroyToken();
@@ -52,7 +48,6 @@ export class AuthService {
     // Defina o status de autenticação como falso
     this.isAuthenticatedSubject.next(false);
   }
-
   public login(credentials): Observable<any> {
     return this.api.post(this.baseUrl + '/login', credentials)
       .pipe(map(

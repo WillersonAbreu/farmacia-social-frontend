@@ -32,8 +32,8 @@ export class DonationFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
-      pictureFile: ['', Validators.required],
-      pictureFileBack: ['', Validators.required],
+      // pictureFile: ['', Validators.required],
+      // pictureFileBack: ['', Validators.required],
       description: ['', Validators.required],
       stripe: ['', Validators.required],
       packing: ['', Validators.required],
@@ -43,6 +43,8 @@ export class DonationFormComponent implements OnInit {
       shelfLife: ['', Validators.required],
       batchCode: ['', Validators.required],
       userId: ['', Validators.required],
+      pharmacyId: ['', Validators.required],
+      statusId: ['', Validators.required],
     });
     this.getDonation();
   }
@@ -53,6 +55,8 @@ export class DonationFormComponent implements OnInit {
       this.service.getOne(this.id)
         .subscribe(
           donation => {
+            this.imageBase64Front = donation.pictureFile;
+            this.imageBase64Back = donation.pictureFileBack;
             this.form.patchValue(donation);
           }
         );
