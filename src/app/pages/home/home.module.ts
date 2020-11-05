@@ -13,6 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionComponent } from '../question/question.component';
 import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ProfileComponent } from '../profile/profile.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     SignupComponent,
     ShowcaseComponent,
     AboutComponent,
-    QuestionComponent
+    QuestionComponent,
+    ProfileComponent
   ]
 })
 export class HomeModule { }

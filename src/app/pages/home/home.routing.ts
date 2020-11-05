@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
+import { ProfileComponent } from '../profile/profile.component';
 import { QuestionComponent } from '../question/question.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'sobre', component: AboutComponent },
       { path: 'duvidas', component: QuestionComponent },
+      { path: 'meuPerfil', component: ProfileComponent },
       //  { path: 'doações/cadastro', component: DonationFormComponent },
       // { path: 'doação', component: DonationsComponent }
       // { path: 'esqueci-senha', component: ForgotPasswordComponent },

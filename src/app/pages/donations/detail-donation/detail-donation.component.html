@@ -29,11 +29,11 @@
                             <td><strong> Tarja: </strong></td>
                             <td>
                                 <!-- <span class="badge badge-danger" style="width: 30px; height: 18px">&nbsp;</span> -->
-                                <span class="badge badge-default" [ng-class]="{
-                                'badge-success': donation.stripe === 'verde',
-                                'badge-warning': donation.stripe === 'amarelo',
-                                'badge-danger': donation.stripe === 'vermelho',
-                                'badge-dark': donation.stripe === 'preto' }" style="width: 30px; height: 18px">&nbsp;</span>
+                                <span class="badge" [ngClass]="{
+                                'badge-success': donation.stripe == 'verde',
+                                'badge-warning': donation.stripe == 'amarela',
+                                'badge-danger': donation.stripe == 'vermelha',
+                                'badge-dark': donation.stripe == 'preta' }" style="width: 30px; height: 18px">&nbsp;</span>
 
                             </td>
                         </tr>
