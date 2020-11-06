@@ -14,6 +14,7 @@ import { QuestionComponent } from '../question/question.component';
 import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProfileComponent } from '../profile/profile.component';
+import { ContatoComponent } from './contato/contato.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { ProfileComponent } from '../profile/profile.component';
     ShowcaseComponent,
     AboutComponent,
     QuestionComponent,
-    ProfileComponent
+    ProfileComponent,
+    ContatoComponent
   ]
 })
 export class HomeModule { }
