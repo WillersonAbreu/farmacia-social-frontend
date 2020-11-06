@@ -8,37 +8,22 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 // Validators
 import * as Yup from 'yup';
-import { cpf } from 'cpf-cnpj-validator';
+import {
+  customYupCepValidator,
+  customYupCpfValidator,
+  customYupPhoneValidator,
+  formatCep,
+  formatCpf,
+  formatPhone,
+  userSchemaValidator
+} from 'src/app/core/utils/formUserHelpers';
+import Swal from 'sweetalert2';
+import { Endereco, ErroCep, NgxViacepService } from '@brunoc/ngx-viacep';
 
-Yup.addMethod(Yup.mixed, 'CPF', function(_errorAttributes) {
-    return this.test('validateCPF', 'CPF inválido', function(value) {
-    const { path, createError } = this;
-    if (value === undefined || value === null) {
-      return;
-    }
-    let cleanCpf = value.split('.').join('');
-    cleanCpf = cleanCpf.split('-').join('');
-    if (!cpf.isValid(cleanCpf)) {
-      return createError({ path, message: 'CPF inválido' });
-    }
-    return cpf.isValid(cleanCpf);
-  });
-});
-
-Yup.addMethod(Yup.mixed, 'phone', function(_errorAttributes) {
-  return this.test('validatePhone', 'Celular inválido', function(value) {
-    const { path, createError } = this;
-    if (value === undefined || value === null) {
-      return;
-    }
-
-    if (!validatePhone(value)) {
-      return createError({ path, message: 'Celular inválido' });
-    }
-    return validatePhone(value);
-  });
-});
-
+// Call the custom methods to validate inputs
+customYupCepValidator();
+customYupCpfValidator();
+customYupPhoneValidator();
 
 
 @Component({
@@ -54,12 +39,19 @@ export class SignupComponent implements OnInit {
   id: number;
   ocultaSenha: boolean;
   address: string;
+  userSchema = userSchemaValidator();
+
+  //Input masks
+  phoneMask: string = '(00) 00000-0000';
+  cepMask: string = '00000-000';
+  cpfMask: string = '000.000.000-00';
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private service: UserService
+    private service: UserService,
+    private viacep: NgxViacepService
   ) { }
 
   ngOnInit() {
@@ -71,11 +63,9 @@ export class SignupComponent implements OnInit {
       password: [''],
       cpf: [''],
       cep: [''],
-      street: [''],
       neighborhood: [''],
       number: [''],
       city: [''],
-      state: [''],
       address: [''],
     });
     this.getUser();
@@ -84,6 +74,19 @@ export class SignupComponent implements OnInit {
   handlePasswordInput(): boolean {
     this.showPassword = !this.showPassword;
     return this.showPassword;
+  }
+
+  getAddressData(target): void {
+    this.viacep.buscarPorCep(target.value).then( ( endereco: Endereco ) => {
+      const { logradouro, bairro, localidade, uf } = endereco;
+      // Injecting the address string to the input
+      this.form.controls.address.setValue(`${logradouro}, ${bairro}, ${localidade} - ${uf}`);
+     }).catch( (error: ErroCep) => {
+      Swal.fire({icon: 'error',
+       title: 'Erro ao encontrar o endereço pelo CEP!',
+       text: 'Tente outro CEP ou insira o endereço manualmente no campo "Endereço".'
+      });
+     });
   }
 
   getUser(): void {
@@ -100,54 +103,41 @@ export class SignupComponent implements OnInit {
   }
 
   submit() {
-    const user = this.form.value;
+    let user = this.form.value;
 
-    const userSchema = Yup.object().shape({
-      name: Yup.string().required('O campo nome é necessário para realizar o registro'),
-      email:  Yup.string().email('É necessário um email válido').required('O campo email é necessário para realizar o registro'),
-      phone:  Yup.string().phone().required('O campo celular é necessário para realizar o registro'),
-      password:  Yup.string().required('O campo senha é necessário para realizar o registro'),
-      cpf:  Yup.string().CPF('CPF inválido').required('O campo é CPF necessário para realizar o registro'),
-      cep:  Yup.string().required('O campo é CEP necessário para realizar o registro'),
-      number:  Yup.string().required('O campo é número necessário para realizar o registro'),
-      address:  Yup.string().required('O campo é endereço necessário para realizar o registro'),
-      // neighborhood:  Yup.string().required('O campo bairro é necessário para realizar o registro'),
-      // city:  Yup.string().required('O campo é cidade necessário para realizar o registro'),
-      // state:  Yup.string().required('O campo é estado necessário para realizar o registro'),
-    });
+    this.userSchema.validate(user, {abortEarly: false}).then(success => {
+      // Format some input before save on database
+      user.cep = formatCep(user.cep);
+      user.cpf = formatCpf(user.cpf);
+      user.phone = formatPhone(user.phone);
 
-      userSchema.validate(user, {abortEarly: false}).then(success => {
-        if (this.id) {
-        // atualizar
-        this.service.update(this.id, user).subscribe(
-          data => this.router.navigate(['users']),
-          erro => console.log(erro)
-        );
+      if (this.id) {
+      // atualizar
+      this.service.update(this.id, user).subscribe(
+        data => this.router.navigate(['users']),
+        erro => Swal.fire({icon: 'error', title: 'Erro ao atualizar o usuário'})
+      );
       } else {
         // cadastrar
         this.service.store(user).subscribe(
-          data => this.router.navigate(['users']),
-          erro => console.log(erro)
+          data => {
+            Swal.fire({icon: 'success', title: 'Usuário cadastrado com sucesso!'});
+            this.router.navigate(['login']);
+          },
+          erro => Swal.fire({icon: 'error', title: 'Erro ao cadastrar o usuário!'})
         );
       }
-      })
-      .catch(err => {
-        if(err instanceof Yup.ValidationError){
-          err.inner.forEach(error => {
-            this.form.controls[error.path].setErrors(error.message);
-          });
-        }
-      });
+    })
+    .catch(err => {
+      if(err instanceof Yup.ValidationError){
+        err.inner.forEach(error => {
+          this.form.controls[error.path].setErrors(error.message);
+        });
+      }
+    });
 
   }
 
 }
 
-function validatePhone(value: string): boolean {
-  const regex = /^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/;
 
-  if(!regex.test(value)){
-    return false
-  }
-  return true;
-}

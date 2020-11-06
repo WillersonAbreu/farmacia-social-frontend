@@ -22,7 +22,7 @@
       </fieldset>
       <label>Telefone Celular</label>
       <fieldset class="form-group">
-        <input formControlName="phone" placeholder="Telefone" class="form-control form-control-sm" maxlength="15" type="text" />
+        <input formControlName="phone" mask="{{phoneMask}}" placeholder="Telefone" class="form-control form-control-sm" maxlength="15" type="text" />
         <div class="error-message" *ngIf="!form.controls['phone'].valid">{{form.controls['phone'].errors}}</div>
       </fieldset>
       <label>Senha</label>
@@ -35,13 +35,13 @@
       <div class="error-message" *ngIf="!form.controls['password'].valid">{{form.controls['password'].errors}}</div>
       <label>CPF</label>
       <fieldset class="form-group">
-        <input formControlName="cpf" placeholder="CPF" class="form-control form-control-sm" maxlength="14" type="text" />
+        <input formControlName="cpf" mask="{{cpfMask}}" placeholder="CPF" class="form-control form-control-sm" maxlength="14" type="text" />
         <div class="error-message" *ngIf="!form.controls['cpf'].valid">{{form.controls['cpf'].errors}}</div>
       </fieldset>
 
       <label>CEP</label>
       <fieldset class="form-group">
-        <input formControlName="cep" placeholder="CEP" class="form-control form-control-sm" type="text" onblur="getCep(this.value);" maxlength="9" />
+        <input formControlName="cep" (blur)="getAddressData($event.target)" mask="{{cepMask}}" placeholder="CEP" class="form-control form-control-sm" type="text" maxlength="9" />
         <div class="error-message" *ngIf="!form.controls['cep'].valid">{{form.controls['cep'].errors}}</div>
       </fieldset>
 
@@ -50,51 +50,6 @@
         <input formControlName="number" placeholder="Número" class="form-control form-control-sm" type="number" />
         <div class="error-message" *ngIf="!form.controls['number'].valid">{{form.controls['number'].errors}}</div>
       </fieldset>
-
-      <!-- <div class="input-wrapper">
-        <div>
-          <label>CEP</label>
-          <fieldset class="form-group">
-            <input formControlName="cep" placeholder="CEP" class="form-control form-control-sm" type="text" onblur="getCep(this.value);" maxlength="9" />
-            <div class="error-message" *ngIf="!form.controls['cep'].valid">{{form.controls['cep'].errors}}</div>
-          </fieldset>
-        </div>
-        <div>
-          <label>Rua</label>
-          <fieldset class="form-group">
-            <input formControlName="street" placeholder="Rua" class="form-control form-control-sm" type="text" />
-          <div class="error-message" *ngIf="!form.controls['street'].valid">{{form.controls['street'].errors}}</div>
-          </fieldset>
-        </div>
-        <div>
-          <label>Bairro</label>
-          <fieldset class="form-group">
-            <input formControlName="neighborhood" placeholder="Bairro" class="form-control form-control-sm" type="text" />
-            <div class="error-message" *ngIf="!form.controls['neighborhood'].valid">{{form.controls['neighborhood'].errors}}</div>
-          </fieldset>
-        </div>
-        <div>
-          <label>Número</label>
-          <fieldset class="form-group">
-            <input formControlName="number" placeholder="Número" class="form-control form-control-sm" type="number" />
-            <div class="error-message" *ngIf="!form.controls['number'].valid">{{form.controls['number'].errors}}</div>
-          </fieldset>
-        </div>
-        <div>
-          <label>Cidade</label>
-          <fieldset class="form-group">
-            <input formControlName="city" placeholder="Cidade" class="form-control form-control-sm" type="text" />
-            <div class="error-message" *ngIf="!form.controls['city'].valid">{{form.controls['city'].errors}}</div>
-          </fieldset>
-        </div>
-        <div>
-          <label>Estado</label>
-          <fieldset class="form-group">
-            <input formControlName="state" placeholder="Estado" class="form-control form-control-sm" type="text" />
-            <div class="error-message" *ngIf="!form.controls['state'].valid">{{form.controls['state'].errors}}</div>
-          </fieldset>
-        </div>
-      </div> -->
 
       <label>Endereço Completo</label>
       <fieldset class="form-group">

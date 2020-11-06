@@ -14,6 +14,13 @@ import { QuestionComponent } from '../question/question.component';
 import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProfileComponent } from '../profile/profile.component';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
+
 
 @NgModule({
   imports: [
@@ -24,7 +31,8 @@ import { ProfileComponent } from '../profile/profile.component';
     CoreModule,
     FontAwesomeModule,
     NgbModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    NgxMaskModule.forRoot(maskConfig),
   ],
   declarations: [
     HomeComponent,
