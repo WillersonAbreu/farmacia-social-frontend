@@ -25,7 +25,6 @@ customYupCepValidator();
 customYupCpfValidator();
 customYupPhoneValidator();
 
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -68,7 +67,7 @@ export class SignupComponent implements OnInit {
       city: [''],
       address: [''],
     });
-    this.getUser();
+    // this.getUser();
   }
 
   handlePasswordInput(): boolean {
@@ -89,13 +88,29 @@ export class SignupComponent implements OnInit {
      });
   }
 
+  setNumberOnAddress(target): void {
+    let address = this.form.controls.address.value;
+
+    if(address.length > 0){
+      address = address.split(',');
+      this.form.controls.address.setValue(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`);
+    }else{
+      Swal.fire({
+        icon: 'warning',
+        title: 'É necessário preencher o campo "Endereço" antes',
+        text: 'Preencha o campo "Endereço automaticamente através do CEP ou manualmente'
+      });
+    }
+
+  }
+
   getUser(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
     if (this.id) {
       this.service.getOne(this.id)
         .subscribe(
           user => {
-            delete user.password;
+            // delete user.password;
             this.form.patchValue(user);
           }
         );
@@ -114,17 +129,24 @@ export class SignupComponent implements OnInit {
       if (this.id) {
       // atualizar
       this.service.update(this.id, user).subscribe(
-        data => this.router.navigate(['users']),
-        erro => Swal.fire({icon: 'error', title: 'Erro ao atualizar o usuário'})
+        data => {
+          Swal.fire({icon: 'success', title: data.message});
+          this.router.navigate(['users'])
+        },
+        erro => {
+          Swal.fire({icon: 'error', title: 'Erro ao atualizar o usuário', text: erro.error.message});
+        }
       );
       } else {
         // cadastrar
         this.service.store(user).subscribe(
           data => {
-            Swal.fire({icon: 'success', title: 'Usuário cadastrado com sucesso!'});
+            Swal.fire({icon: 'success', title: data.message});
             this.router.navigate(['login']);
           },
-          erro => Swal.fire({icon: 'error', title: 'Erro ao cadastrar o usuário!'})
+          erro => {
+            Swal.fire({icon: 'error', title: 'Erro ao cadastrar o usuário!', text: erro.error.message});
+          }
         );
       }
     })
@@ -135,9 +157,7 @@ export class SignupComponent implements OnInit {
         });
       }
     });
-
   }
-
 }
 
 
