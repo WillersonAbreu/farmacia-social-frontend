@@ -15,6 +15,7 @@ import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProfileComponent } from '../profile/profile.component';
 import { ContatoComponent } from './contato/contato.component';
+import { PedidosComponent } from '../pedidos/pedidos.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { ContatoComponent } from './contato/contato.component';
     AboutComponent,
     QuestionComponent,
     ProfileComponent,
-    ContatoComponent
+    ContatoComponent,
+    PedidosComponent
   ]
 })
 export class HomeModule { }

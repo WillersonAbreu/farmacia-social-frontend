@@ -6,6 +6,7 @@ import { ContatoComponent } from './contato/contato.component';
 import { HomeComponent } from './home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
+import { PedidosComponent } from '../pedidos/pedidos.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -20,6 +21,8 @@ const routes: Routes = [
       { path: 'duvidas', component: QuestionComponent },
       { path: 'meuPerfil', component: ProfileComponent },
       { path: 'contato', component: ContatoComponent },
+      { path: 'pedidos', component: PedidosComponent },
+
       //  { path: 'doações/cadastro', component: DonationFormComponent },
       // { path: 'doação', component: DonationsComponent }
       // { path: 'esqueci-senha', component: ForgotPasswordComponent },
