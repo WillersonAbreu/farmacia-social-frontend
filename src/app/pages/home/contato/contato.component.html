@@ -1,5 +1,5 @@
 <app-header></app-header>
-
+<script src="https://kit.fontawesome.com/da77f520d1.js" crossorigin="anonymous"></script>
 <section class="remedio">
 
     <div class="container">
@@ -20,56 +20,34 @@
                 <div data-form-alert="" hidden="">
                     Obrigado por preencher o formulário! Em breve entraremos em contato.
                 </div>
+                
+                
+                
                 <form class="mbr-form" action="" method="post">
                     <input type="hidden" data-form-email="true" value="6P93kNKo0YMrlhki4aqAh6kWEOLpuhFCYRe6n1FvaZgJ/pa39BUyHBYCW4WA4rZvUr5K4HMIOOmyetX9vVlNIOE3Nf/x57GRMvbDPtNT2dl1hbyF3plFTnLCQuB9fjD/" />
                     <div class="row row-sm-offset">
                         <div class="col-md-4 multi-horizontal" data-for="name">
                             <div class="form-group">
-                                <label class="form-control-label mbr-fonts-style display-7" for="name-form1-4t">Nome</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  name="name"
-                  data-form-field="Name"
-                  required=""
-                  id="name-form1-4t"
-                />
+                              <label for="nome" class="sr-only">Nome</label>
+                
+                              <input type="nome" id="inputNome" class="form-control" placeholder="Nome" required autofocus>
               </div>
             </div>
+            
+            
             <div class="col-md-4 multi-horizontal" data-for="email">
               <div class="form-group">
-                <label
-                  class="form-control-label mbr-fonts-style display-7"
-                  for="email-form1-4t"
-                  >Email</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  name="email"
-                  data-form-field="Email"
-                  required=""
-                  id="email-form1-4t"
-                />
-              </div>
+                <label for="inputEmail" class="sr-only">Endereço de e-mail</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de e-mail" required autofocus>
+            </div>
+            
             </div>
             <div class="col-md-4 multi-horizontal" data-for="phone">
               <div class="form-group">
-                <label
-                  class="form-control-label mbr-fonts-style display-7"
-                  for="phone-form1-4t"
-                  >Telefone</label
-                >
-                <input
-                  type="tel"
-                  class="form-control"
-                  name="phone"
-                  data-form-field="Phone"
-                  maxlength="15"
-                  required=""
-                  id="phone-form1-4t"
-                />
+                <label for="inputphone" class="sr-only">Telefone</label>
+                <input type="phone" id="inputphone" class="form-control" placeholder="Telefone" required autofocus>
+              
+     
                 
               </div>
             </div>
@@ -79,7 +57,7 @@
               name="form[assunto]"
               id="assunto"
               class="select-form form-control"
-              required=""
+              required autofocus
             >
               <option selected>Selecione um assunto</option>
               <option value="1">Comercial</option>
@@ -91,11 +69,9 @@
             </select>
           </div>
           <div class="form-group" data-for="message">
-            <label
-              class="form-control-label mbr-fonts-style display-7"
-              for="message-form1-4t"
-              >Messagem</label
-            >
+
+            <label  class="form-control-label mbr-fonts-style display-7" for="message-form1-4t" >Messagem</label>
+           
             <textarea
               type="text"
               class="form-control"
@@ -103,6 +79,7 @@
               rows="7"
               data-form-field="Message"
               id="message-form1-4t"
+              required autofocus
             ></textarea>
           </div>
           <div class="send-btn">
