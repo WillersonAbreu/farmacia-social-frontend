@@ -14,6 +14,7 @@ import { QuestionComponent } from '../question/question.component';
 import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProfileComponent } from '../profile/profile.component';
+import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { ProfileComponent } from '../profile/profile.component';
     LandingPageComponent,
     LoginComponent,
     SignupComponent,
+    ConfirmRegisterComponent,
     ShowcaseComponent,
     AboutComponent,
     QuestionComponent,
