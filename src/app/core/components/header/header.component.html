@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd">
     <div class="logo" style="display: flex; justify-content: center; align-items: center">
-      <a class="farmaciaSocial" routerLink="/" routerLinkActive="active" style="text-decoration: none; padding: 0px">
+      <a class="farmaciaSocial" routerLinkActive="active" routerLink="/" style="text-decoration: none; padding: 0px">
         <img src="../../../assets/images/logo.png" height="50px" class="d-inline-block align-top" />
         <span style="color: #f4a261"> Farmácia </span>
         <span style="color: #2a9d8f">Social</span>
@@ -14,52 +14,54 @@
     <div [@animation]='state' [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item ">
-          <a class="nav-link" routerLink="/" (click)="isMenuCollapsed = true">
+          <a class="nav-link"
+            routerLinkActive="active"
+            routerLink="/"
+            >
             <fa-icon [icon]="faHome"></fa-icon> Home
-            <!-- <span class="sr-only">(current)</span> -->
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/sobre" (click)="isMenuCollapsed = true">
+          <a class="nav-link" routerLinkActive="active" routerLink="/sobre">
             <fa-icon [icon]="faInfoCircle"></fa-icon> Sobre
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/duvidas" (click)="isMenuCollapsed = true">
+          <a class="nav-link" routerLinkActive="active" routerLink="/duvidas">
             <fa-icon [icon]="faQuestion"></fa-icon> Duvidas
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contato" (click)="isMenuCollapsed = true">
+          <a class="nav-link" routerLinkActive="active" routerLink="/contato">
             <fa-icon [icon]="faHeadset"></fa-icon> Contato
           </a>
         </li>
         <ng-container *ngIf="isAuthenticated; else elseTemplate">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed = true">
+            <a class="nav-link" routerLinkActive="active" routerLink="/usuarios/meu-perfil"  >
               <fa-icon [icon]="faUserCircle"></fa-icon> Meu Perfil
             </a>
           </li>
         </ng-container>
         <ng-template #elseTemplate>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login" (click)="isMenuCollapsed = true">
+            <a class="nav-link" routerLinkActive="active" routerLink="/login">
               <fa-icon [icon]="faSignInAlt"></fa-icon> Entrar
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/usuarios/cadastrar" (click)="isMenuCollapsed = true">
+            <a class="nav-link" routerLinkActive="active" routerLink="/usuarios/cadastrar">
               <fa-icon [icon]="faUserPlus"></fa-icon> Registrar Usuário
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/farmacias/cadastrar" (click)="isMenuCollapsed = true">
+            <a class="nav-link" routerLinkActive="active" routerLink="/farmacias/cadastrar">
               <fa-icon [icon]="faPrescriptionBottleAlt"></fa-icon> Registrar Farmácia
             </a>
           </li>
         </ng-template>
       </ul>
-      <app-styled-button [buttonTitle]="'DOAR'">
+      <app-styled-button routerLink="/doacoes/cadastro" [buttonTitle]="'DOAR'">
       </app-styled-button>
     </div>
   </nav>

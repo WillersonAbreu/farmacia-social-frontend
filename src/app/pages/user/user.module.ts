@@ -7,6 +7,7 @@ import { ListUsersComponent } from './list-users/list-users.component';
 import { UserService } from './user.service';
 import { UserRoutes } from './user.routing';
 import { CoreModule } from 'src/app/core/core.module';
+import { ProfileComponent } from './profile/profile.component';
 // import { FormUserComponent } from './form-user/form-user.component';
 
 @NgModule({
@@ -21,7 +22,7 @@ import { CoreModule } from 'src/app/core/core.module';
     UserComponent,
     DetailUserComponent,
     ListUsersComponent,
-    // FormUserComponent
+    ProfileComponent
   ],
   providers: [
     UserService

@@ -1,5 +1,4 @@
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileComponent } from '../profile/profile.component';
 import { QuestionComponent } from '../question/question.component';
 import { AboutComponent } from './about/about.component';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
@@ -17,7 +16,6 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'sobre', component: AboutComponent },
       { path: 'duvidas', component: QuestionComponent },
-      { path: 'meuPerfil', component: ProfileComponent },
       { path: 'farmacias/cadastrar', component: SignupPharmacyComponent },
       { path: 'confirm-register', component: ConfirmRegisterComponent },
       //  { path: 'doações/cadastro', component: DonationFormComponent },

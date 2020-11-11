@@ -14,7 +14,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionComponent } from '../question/question.component';
 import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { ProfileComponent } from '../profile/profile.component';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 
 const maskConfig: Partial<IConfig> = {
@@ -51,8 +50,7 @@ import { ConfirmRegisterComponent } from './confirm-register/confirm-register.co
     ConfirmRegisterComponent,
     ShowcaseComponent,
     AboutComponent,
-    QuestionComponent,
-    ProfileComponent
+    QuestionComponent
   ]
 })
 export class HomeModule { }
