@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <!--
   div do meu cadastro
 -->
@@ -25,28 +26,28 @@
 
         </div>
     </div>
-    <form [formGroup]="form" (ngSubmit)="submit()"class="card col-md-6 col-lg-6">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="card col-md-6 col-lg-6">
         <div>
 
-            <form class="card-body" id="cadastro-perfil">
+            <div class="card-body" id="cadastro-perfil">
                 <div class="form-group">
                     <label class="font-weight-bold">Dados da conta</label>
                     <br>
                     <label for="exampleInputName">Nome</label>
-                    <input formControlName="name" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
-                        placeholder="Nome completo">
+                    <input formControlName="name" class="form-control" id="exampleInputName"
+                        aria-describedby="emailHelp" placeholder="Nome completo">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail">E-mail</label>
-                    <input formControlName="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                        placeholder="E-mail">
+                    <input formControlName="email" class="form-control" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="E-mail">
                     <small id="emailHelp" class="form-text text-muted">Não compartilharmos seus dados com
                         terceiros.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPhone">Telefone</label>
-                    <input formControlName="phone" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                        placeholder="Telefone">
+                    <input formControlName="phone" class="form-control" id="exampleInputEmail"
+                        aria-describedby="emailHelp" placeholder="Telefone">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Senha</label>
@@ -54,15 +55,15 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputCPF">CPF</label>
-                    <input type="password" class="form-control" id="exampleCPF" placeholder="CPF">
+                    <input formControlName="cpf" class="form-control" id="exampleCPF" placeholder="CPF">
                 </div>
 
                 <label class="font-weight-bold">Endereço</label>
                 <div class="form-group">
                     <div class="form-group row">
                         <div class="form-group col-md-9">
-                            <label for="inputAddress2">Rua*</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="">
+                            <label for="rua">Rua*</label>
+                            <input formControlName="address" type="text" class="form-control" id="inputAddress2" placeholder="">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputAddress2">Número</label>
@@ -72,7 +73,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputCity">Cidade</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input formControlName="city" type="text" class="form-control" id="inputCity">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputState">Estado</label>
@@ -109,13 +110,13 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputZip">CEP</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input formControlName="cep" type="text" class="form-control" id="inputZip">
                         </div>
                     </div>
 
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar</button>
-            </form>
+            </div>
 
         </div>
     </form>

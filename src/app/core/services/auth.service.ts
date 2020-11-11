@@ -34,8 +34,10 @@ export class AuthService {
       this.purgeAuth();
     }
   }
+
   private setAuth(usuario) {
     // Defina os dados atuais do usuário em observáveis
+    console.log(usuario);
     this.currentUserSubject.next(usuario);
     // Defina isAuthenticated como true
     this.isAuthenticatedSubject.next(true);
@@ -58,6 +60,10 @@ export class AuthService {
           return user;
         }
       ));
+  }
+
+  public getUserData():Observable<any>{
+    return this.api.get(this.baseUrl + '/login');
   }
 
   public getCurrentUser(): any {
