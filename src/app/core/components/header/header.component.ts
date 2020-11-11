@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 // FontAwsome Icons
-import { faHome, faInfoCircle, faQuestion, faHeadset, faUserCircle, faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faInfoCircle, faQuestion, faHeadset, faUserCircle, faSignInAlt, faUserPlus, faPrescriptionBottleAlt } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { JwtService } from '../../services/jwt.service';
 
@@ -42,6 +42,8 @@ export class HeaderComponent implements OnInit {
   faUserCircle = faUserCircle;
   faSignInAlt = faSignInAlt;
   faUserPlus = faUserPlus;
+  faPrescriptionBottleAlt = faPrescriptionBottleAlt;
+
 
   ngOnInit(): void {
   }

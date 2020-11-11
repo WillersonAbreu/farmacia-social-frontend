@@ -6,6 +6,7 @@ import { HomeRoutes } from './home.routing';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { SignupPharmacyComponent } from './signup-pharmacy/signup-pharmacy.component';
 import { ShowcaseComponent } from './components/showcase/showcase.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { AboutComponent } from './about/about.component';
@@ -15,12 +16,13 @@ import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProfileComponent } from '../profile/profile.component';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { NgxViacepModule } from '@brunoc/ngx-viacep';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
 
+import { AgmCoreModule } from '@agm/core';
+import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
 
 @NgModule({
   imports: [
@@ -33,12 +35,18 @@ const maskConfig: Partial<IConfig> = {
     NgbModule,
     CarouselModule.forRoot(),
     NgxMaskModule.forRoot(maskConfig),
+    AgmCoreModule.forRoot({
+      apiKey: GOOGLE_MAPS_API_KEY,
+      libraries: ['places']
+    })
+
   ],
   declarations: [
     HomeComponent,
     LandingPageComponent,
     LoginComponent,
     SignupComponent,
+    SignupPharmacyComponent,
     ShowcaseComponent,
     AboutComponent,
     QuestionComponent,

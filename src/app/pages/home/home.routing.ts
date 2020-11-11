@@ -5,7 +5,7 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { SignupPharmacyComponent } from './signup-pharmacy/signup-pharmacy.component';
 
 const routes: Routes = [
   {
@@ -13,11 +13,11 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', component: LandingPageComponent },
-      { path: 'cadastrar', component: SignupComponent },
       { path: 'login', component: LoginComponent },
       { path: 'sobre', component: AboutComponent },
       { path: 'duvidas', component: QuestionComponent },
       { path: 'meuPerfil', component: ProfileComponent },
+      { path: 'farmacias/cadastrar', component: SignupPharmacyComponent }
       //  { path: 'doações/cadastro', component: DonationFormComponent },
       // { path: 'doação', component: DonationsComponent }
       // { path: 'esqueci-senha', component: ForgotPasswordComponent },

@@ -82,8 +82,8 @@ export class SignupComponent implements OnInit {
       this.form.controls.address.setValue(`${logradouro}, ${bairro}, ${localidade} - ${uf}`);
      }).catch( (error: ErroCep) => {
       Swal.fire({icon: 'error',
-       title: 'Erro ao encontrar o endereço pelo CEP!',
-       text: 'Tente outro CEP ou insira o endereço manualmente no campo "Endereço".'
+        title: 'Erro ao encontrar o endereço pelo CEP!',
+        text: 'Tente outro CEP ou insira o endereço manualmente no campo "Endereço".'
       });
      });
   }
@@ -120,7 +120,7 @@ export class SignupComponent implements OnInit {
   submit() {
     let user = this.form.value;
 
-    this.userSchema.validate(user, {abortEarly: false}).then(success => {
+    this.userSchema.validate(user, {abortEarly: false}).then(_success => {
       // Format some input before save on database
       user.cep = formatCep(user.cep);
       user.cpf = formatCpf(user.cpf);
@@ -131,7 +131,7 @@ export class SignupComponent implements OnInit {
       this.service.update(this.id, user).subscribe(
         data => {
           Swal.fire({icon: 'success', title: data.message});
-          this.router.navigate(['users'])
+          this.router.navigate(['usuarios'])
         },
         erro => {
           Swal.fire({icon: 'error', title: 'Erro ao atualizar o usuário', text: erro.error.message});
@@ -152,7 +152,7 @@ export class SignupComponent implements OnInit {
     })
     .catch(err => {
       if(err instanceof Yup.ValidationError){
-        err.inner.forEach(error => {
+        err.inner.forEach((error) => {
           this.form.controls[error.path].setErrors(error.message);
         });
       }
