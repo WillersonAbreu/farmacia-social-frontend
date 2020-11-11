@@ -80,6 +80,8 @@ export class AuthService {
   public resetaSenha(credencials): Observable<any> {
     return this.api.post(this.baseUrl + '/reseta-senha', credencials);
   }
-
+  public contato(contato): Observable<any> {
+    return this.api.post(this.baseUrl + '/contatos', contato);
+  }
 
 }

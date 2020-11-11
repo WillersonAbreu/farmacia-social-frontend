@@ -22,6 +22,9 @@ const maskConfig: Partial<IConfig> = {
 
 import { AgmCoreModule } from '@agm/core';
 import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
+// import { ProfileComponent } from '../profile/profile.component';
+import { ContatoComponent } from './contato/contato.component';
+import { PedidosComponent } from '../pedidos/pedidos.component';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -54,7 +57,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AboutComponent,
     QuestionComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ContatoComponent,
+    PedidosComponent
   ]
 })
 export class HomeModule { }
