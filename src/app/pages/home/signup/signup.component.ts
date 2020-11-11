@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 // FontAwsome Icons
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 // Validators
 import * as Yup from 'yup';
@@ -17,7 +19,6 @@ import {
   formatPhone,
   userSchemaValidator
 } from 'src/app/core/utils/formUserHelpers';
-import Swal from 'sweetalert2';
 import { Endereco, ErroCep, NgxViacepService } from '@brunoc/ngx-viacep';
 
 // Call the custom methods to validate inputs
@@ -50,7 +51,8 @@ export class SignupComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private service: UserService,
-    private viacep: NgxViacepService
+    private viacep: NgxViacepService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -118,7 +120,9 @@ export class SignupComponent implements OnInit {
   }
 
   submit() {
-    let user = this.form.value;
+    Swal.showLoading();
+    const user = this.form.value;
+    console.log(user);
 
     this.userSchema.validate(user, {abortEarly: false}).then(_success => {
       // Format some input before save on database

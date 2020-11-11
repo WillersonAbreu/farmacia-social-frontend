@@ -23,6 +23,7 @@ const maskConfig: Partial<IConfig> = {
 
 import { AgmCoreModule } from '@agm/core';
 import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
+import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
     LoginComponent,
     SignupComponent,
     SignupPharmacyComponent,
+    ConfirmRegisterComponent,
     ShowcaseComponent,
     AboutComponent,
     QuestionComponent,
