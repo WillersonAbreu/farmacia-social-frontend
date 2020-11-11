@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.css']
 })
-export class LoginComponent {
+export class ForgotPasswordComponent {
   form: FormGroup;
-
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService,
     private fb: FormBuilder
   ) {
-    // use FormBuilder to create a form group
     this.form = this.fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
+      'email': ['', Validators.required]
     });
   }
 
@@ -39,6 +37,7 @@ export class LoginComponent {
         }
       );
   }
+
 
 
 }
