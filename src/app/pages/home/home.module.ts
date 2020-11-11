@@ -12,7 +12,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { AboutComponent } from './about/about.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionComponent } from '../question/question.component';
-import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 
@@ -23,6 +23,8 @@ const maskConfig: Partial<IConfig> = {
 import { AgmCoreModule } from '@agm/core';
 import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   imports: [
@@ -50,7 +52,9 @@ import { ConfirmRegisterComponent } from './confirm-register/confirm-register.co
     ConfirmRegisterComponent,
     ShowcaseComponent,
     AboutComponent,
-    QuestionComponent
+    QuestionComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ]
 })
 export class HomeModule { }

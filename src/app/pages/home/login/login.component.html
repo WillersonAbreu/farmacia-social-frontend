@@ -2,7 +2,7 @@
 
     <form [formGroup]="form" (ngSubmit)="submit()" class="form-signin text-center">
         <div class="logo" style="display: flex; justify-content: center; align-items: center">
-            <a class="farmaciaSocial" href="/" style="text-decoration: none; padding: 0px">
+            <a class="farmaciaSocial" routerLink="/" style="text-decoration: none; padding: 0px">
                 <img src="../../../assets/images/logo.png" height="50px" class="d-inline-block align-top" />
                 <span style="color: #f4a261">Farmácia </span>
                 <span style="color: #2a9d8f">Social</span>
@@ -28,7 +28,7 @@
             <button class="btn btn-primary btn-block btn-orange" [disabled]="!form.valid" type="submit">Entrar</button>
             <br>
             <br>
-            <a class="nav-link" [routerLink]="['/esqueci-senha']">Esqueceu seu login ou senha?</a>
+            <a class="nav-link" routerLink="/esqueci-senha">Esqueceu seu login ou senha?</a>
 
             <br>
             <br>

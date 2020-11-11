@@ -139,10 +139,13 @@ export class SignupPharmacyComponent implements OnInit {
           (data: IResponse) => {
             const results = data.results[0];
 
-            this.latitude = results.geometry.location.lat;
-            this.longitude = results.geometry.location.lng;
-            this.form.controls.latitude.setValue(this.latitude);
-            this.form.controls.longitude.setValue(this.longitude);
+            if(results.geometry.location.lat && results.geometry.location.lng){
+              this.latitude = results.geometry.location.lat;
+              this.longitude = results.geometry.location.lng;
+              this.form.controls.latitude.setValue(this.latitude);
+              this.form.controls.longitude.setValue(this.longitude);
+            }
+
           },
           error => {
             console.log(error);
@@ -156,18 +159,6 @@ export class SignupPharmacyComponent implements OnInit {
       });
     }
   }
-
-  // getUser(): void {
-  //   this.id = +this.route.snapshot.paramMap.get('id');
-  //   if (this.id) {
-  //     this.service.getOne(this.id)
-  //       .subscribe(
-  //         user => {
-  //           this.form.patchValue(user);
-  //         }
-  //       );
-  //   }
-  // }
 
   mapClicked($event: MouseEvent) {
     this.latitude = $event.coords.lat;
@@ -185,6 +176,7 @@ export class SignupPharmacyComponent implements OnInit {
     let pharmacy = this.form.value;
 
     this.pharmacySchema.validate(pharmacy, {abortEarly: false}).then(_success => {
+      Swal.showLoading();
       // Format some input before save on database
       pharmacy.cep = formatCep(pharmacy.cep);
       pharmacy.cnpj = formatCnpj(pharmacy.cnpj);
@@ -199,6 +191,7 @@ export class SignupPharmacyComponent implements OnInit {
           this.router.navigate(['login']);
         },
         erro => {
+        Swal.hideLoading();
           Swal.fire({icon: 'error', title: 'Erro ao cadastrar o usuário!', text: erro.error.message});
         }
       );

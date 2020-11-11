@@ -52,7 +52,6 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private service: UserService,
     private viacep: NgxViacepService,
-    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -64,7 +63,6 @@ export class SignupComponent implements OnInit {
       password: [''],
       cpf: [''],
       cep: [''],
-      neighborhood: [''],
       number: [''],
       city: [''],
       address: [''],
@@ -120,39 +118,27 @@ export class SignupComponent implements OnInit {
   }
 
   submit() {
-    Swal.showLoading();
     const user = this.form.value;
     console.log(user);
 
     this.userSchema.validate(user, {abortEarly: false}).then(_success => {
+      Swal.showLoading();
       // Format some input before save on database
       user.cep = formatCep(user.cep);
       user.cpf = formatCpf(user.cpf);
       user.phone = formatPhone(user.phone);
 
-      if (this.id) {
-      // atualizar
-      this.service.update(this.id, user).subscribe(
+      // cadastrar
+      this.service.store(user).subscribe(
         data => {
           Swal.fire({icon: 'success', title: data.message});
-          this.router.navigate(['usuarios'])
+          this.router.navigate(['login']);
         },
         erro => {
-          Swal.fire({icon: 'error', title: 'Erro ao atualizar o usuário', text: erro.error.message});
+          Swal.hideLoading();
+          Swal.fire({icon: 'error', title: 'Erro ao cadastrar o usuário!', text: erro.error.message});
         }
       );
-      } else {
-        // cadastrar
-        this.service.store(user).subscribe(
-          data => {
-            Swal.fire({icon: 'success', title: data.message});
-            this.router.navigate(['login']);
-          },
-          erro => {
-            Swal.fire({icon: 'error', title: 'Erro ao cadastrar o usuário!', text: erro.error.message});
-          }
-        );
-      }
     })
     .catch(err => {
       if(err instanceof Yup.ValidationError){

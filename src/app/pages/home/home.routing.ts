@@ -2,10 +2,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { QuestionComponent } from '../question/question.component';
 import { AboutComponent } from './about/about.component';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
 import { SignupPharmacyComponent } from './signup-pharmacy/signup-pharmacy.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -18,10 +20,8 @@ const routes: Routes = [
       { path: 'duvidas', component: QuestionComponent },
       { path: 'farmacias/cadastrar', component: SignupPharmacyComponent },
       { path: 'confirm-register', component: ConfirmRegisterComponent },
-      //  { path: 'doações/cadastro', component: DonationFormComponent },
-      // { path: 'doação', component: DonationsComponent }
-      // { path: 'esqueci-senha', component: ForgotPasswordComponent },
-      // { path: 'reset-senha', component: ResetPasswordComponent },
+      { path: 'esqueci-senha', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
     ]
   },
 ];
