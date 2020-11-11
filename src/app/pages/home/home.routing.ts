@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { HomeComponent } from './home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -22,10 +23,7 @@ const routes: Routes = [
       { path: 'meuPerfil', component: ProfileComponent },
       { path: 'confirm-register', component: ConfirmRegisterComponent },
       { path: 'esqueci-senha', component: ForgotPasswordComponent },
-      //  { path: 'doações/cadastro', component: DonationFormComponent },
-      // { path: 'doação', component: DonationsComponent }
-      // { path: 'esqueci-senha', component: ForgotPasswordComponent },
-      // { path: 'reset-senha', component: ResetPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
     ]
   },
 ];

@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
   form: FormGroup;
   constructor(
     private router: Router,
@@ -17,25 +17,52 @@ export class ForgotPasswordComponent {
     private authService: AuthService,
     private fb: FormBuilder
   ) {
+  }
+  ngOnInit() {
+    this.buildForm();
+  }
+
+  buildForm() {
     this.form = this.fb.group({
-      'email': ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+  submit() {
+    this.loading();
+    const credentials = this.form.value;
+    this.authService.esqueciSenha(credentials.email)
+      .subscribe(
+        data => {
+          this.success();
+          this.form.reset();
+        },
+        err => {
+          Swal.close();
+          console.log(err.error.message);
+        }
+      );
+
+  }
+
+
+  success() {
+    Swal.close();
+    Swal.fire({
+      title: 'Sucesso',
+      text: 'Seu pedido foi envido.',
+      icon: 'success'
     });
   }
 
-  submit() {
-    const credenciais = this.form.value;
-    this.authService.login(credenciais)
-      .subscribe(
-        data => this.router.navigateByUrl('/'),
-        erro => {
-          console.log(erro);
-          Swal.fire({
-            icon: 'error',
-            title: 'Aconteceu um erro durante o login!',
-            text: erro.error.message == "Access Denied" ? "Senha está incorreta!" : erro.error.message
-          });
-        }
-      );
+  loading() {
+    Swal.fire({
+      title: 'Aguarde!',
+      text: 'Estamos enviando o email de recuperação de senha.',
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
   }
 
 
