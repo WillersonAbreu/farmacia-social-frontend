@@ -3,9 +3,11 @@ import { ProfileComponent } from '../profile/profile.component';
 import { QuestionComponent } from '../question/question.component';
 import { AboutComponent } from './about/about.component';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -20,10 +22,8 @@ const routes: Routes = [
       { path: 'duvidas', component: QuestionComponent },
       { path: 'meuPerfil', component: ProfileComponent },
       { path: 'confirm-register', component: ConfirmRegisterComponent },
-      //  { path: 'doações/cadastro', component: DonationFormComponent },
-      // { path: 'doação', component: DonationsComponent }
-      // { path: 'esqueci-senha', component: ForgotPasswordComponent },
-      // { path: 'reset-senha', component: ResetPasswordComponent },
+      { path: 'esqueci-senha', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
     ]
   },
 ];

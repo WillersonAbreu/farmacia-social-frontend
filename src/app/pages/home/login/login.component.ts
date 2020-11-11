@@ -34,7 +34,7 @@ export class LoginComponent {
           Swal.fire({
             icon: 'error',
             title: 'Aconteceu um erro durante o login!',
-            text: erro.error.message
+            text: erro.error.message == "Access Denied" ? "Senha está incorreta!" : erro.error.message
           });
         }
       );

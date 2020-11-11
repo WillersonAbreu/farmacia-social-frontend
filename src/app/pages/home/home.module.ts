@@ -15,6 +15,8 @@ import { NgbModule, NgbPanel } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProfileComponent } from '../profile/profile.component';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { ConfirmRegisterComponent } from './confirm-register/confirm-register.co
     ShowcaseComponent,
     AboutComponent,
     QuestionComponent,
-    ProfileComponent
+    ProfileComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ]
 })
 export class HomeModule { }
