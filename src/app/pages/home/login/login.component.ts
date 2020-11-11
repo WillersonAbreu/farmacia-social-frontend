@@ -34,7 +34,7 @@ export class LoginComponent {
           Swal.fire({
             icon: 'error',
             title: 'Aconteceu um erro durante o login!',
-            text: erro.error.mensagem
+            text: erro.error.message
           });
         }
       );

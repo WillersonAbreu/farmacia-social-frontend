@@ -16,6 +16,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ProfileComponent } from '../profile/profile.component';
 import { ContatoComponent } from './contato/contato.component';
 import { PedidosComponent } from '../pedidos/pedidos.component';
+import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { PedidosComponent } from '../pedidos/pedidos.component';
     LandingPageComponent,
     LoginComponent,
     SignupComponent,
+    ConfirmRegisterComponent,
     ShowcaseComponent,
     AboutComponent,
     QuestionComponent,

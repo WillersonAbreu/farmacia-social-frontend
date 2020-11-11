@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 // FontAwsome Icons
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +25,8 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private service: UserService
+    private service: UserService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -59,6 +62,7 @@ export class SignupComponent implements OnInit {
   }
 
   submit() {
+    Swal.showLoading();
     const user = this.form.value;
     console.log(user);
 
@@ -70,9 +74,25 @@ export class SignupComponent implements OnInit {
       );
     } else {
       // cadastrar
-      this.service.store(user).subscribe(
-        data => this.router.navigate(['users']),
-        erro => console.log(erro)
+      //this.service.store(user).subscribe
+      this.authService.register(user).subscribe(
+        data => {
+          Swal.fire({
+            title: 'O cadastro foi um sucesso!',
+            text: 'Verifica sua caixa de email e valide sua conta.',
+            confirmButtonText: `OK`,
+          }).then((result) => {
+            this.router.navigateByUrl('/login');
+            // this.router.navigate(['users'])
+          });
+        },
+        erro => {
+          console.log(erro);
+          Swal.fire({
+            icon: 'error',
+            title: erro.error.message,
+          });
+        }
       );
     }
   }
