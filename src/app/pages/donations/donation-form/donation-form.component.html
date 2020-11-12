@@ -23,7 +23,7 @@
                     <!-- Area de Update da Imagem -->
                     <div class="image-area mt-4">
                         <!-- <img id="imageResultFront" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"> -->
-                        <img src="{{imageBase64Front ? imageBase64Front : '' }}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" height="600" width="400">
+                        <img src="{{imageBase64Front}}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" height="600" width="400">
                     </div>
                     <fieldset class="form-group">
                         <input formControlName="pictureFile" class="form-control" required type="text" value="{{imageBase64Back ? imageBase64Back : '' }}" hidden />
@@ -48,7 +48,7 @@
                     <!-- Area de Update da Imagem -->
                     <div class="image-area mt-4">
                         <!-- <img id="imageResultBack" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"> -->
-                        <img src="{{imageBase64Back ? imageBase64Back : '' }}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" height="600" width="400">
+                        <img src="{{imageBase64Back}}" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" height="600" width="400">
                     </div>
                     <fieldset class="form-group">
                         <input formControlName="pictureFileBack" class="form-control" required type="text" value="{{imageBase64Back ? imageBase64Back : '' }}" hidden />

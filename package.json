@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.1.5",
+    "@angular/cdk": "^11.0.0",
     "@angular/common": "~10.1.5",
     "@angular/compiler": "~10.1.5",
     "@angular/core": "~10.1.5",
@@ -28,6 +29,8 @@
     "bootstrap": "^4.5.3",
     "ionicons": "^4.6.3",
     "ng-bootstrap": "^1.6.3",
+    "primeicons": "^4.0.0",
+    "primeng": "^10.0.3",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.9.0",
     "tslib": "^2.0.3",
