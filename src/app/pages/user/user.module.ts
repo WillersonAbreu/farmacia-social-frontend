@@ -16,7 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     UserRoutes,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
   ],
   declarations: [
     UserComponent,

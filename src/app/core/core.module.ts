@@ -23,7 +23,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
     FontAwesomeModule,
     NgbModule,
     CarouselModule.forRoot(),
-    NgxViacepModule
+    NgxViacepModule,
   ],
   declarations: [
     HeaderComponent,

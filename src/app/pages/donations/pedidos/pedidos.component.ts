@@ -10,9 +10,9 @@ export class PedidosComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
-    
+
+
   }
-  
+
 
 }

@@ -11,7 +11,7 @@ import { ShowcaseComponent } from './components/showcase/showcase.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { AboutComponent } from './about/about.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { QuestionComponent } from '../question/question.component';
+import { QuestionComponent } from './question/question.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
@@ -24,7 +24,6 @@ import { AgmCoreModule } from '@agm/core';
 import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
 // import { ProfileComponent } from '../profile/profile.component';
 import { ContatoComponent } from './contato/contato.component';
-import { PedidosComponent } from '../pedidos/pedidos.component';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -43,8 +42,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AgmCoreModule.forRoot({
       apiKey: GOOGLE_MAPS_API_KEY,
       libraries: ['places']
-    })
-
+    }),
   ],
   declarations: [
     HomeComponent,
@@ -59,7 +57,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ContatoComponent,
-    PedidosComponent
   ]
 })
 export class HomeModule { }

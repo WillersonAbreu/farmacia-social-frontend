@@ -4,6 +4,7 @@ import { DetailDonationComponent } from './detail-donation/detail-donation.compo
 import { DonationFormComponent } from './donation-form/donation-form.component';
 import { DonationsComponent } from './donations.component';
 import { ListDonationsComponent } from './list-donations/list-donations.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 const routes: Routes = [
   {
@@ -13,8 +14,9 @@ const routes: Routes = [
     children: [
       { path: '', component: ListDonationsComponent },
       { path: 'cadastro', component: DonationFormComponent },
-      { path: ':id', component: DetailDonationComponent },
-      { path: ':id/editar', component: DonationFormComponent },
+      // { path: ':id', component: DetailDonationComponent },
+      // { path: ':id/editar', component: DonationFormComponent },
+      { path: 'pedidos', component: PedidosComponent },
     ]
   },
 ];

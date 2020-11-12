@@ -42,6 +42,11 @@
               <fa-icon [icon]="faUserCircle"></fa-icon> Meu Perfil
             </a>
           </li>
+          <li class="nav-item">
+            <button style="background-color: transparent; outline: none; border: none;" class="nav-link" (click)="logout()"  >
+              <fa-icon [icon]="faSignOutAlt"></fa-icon> Logout
+            </button>
+          </li>
         </ng-container>
         <ng-template #elseTemplate>
           <li class="nav-item">
