@@ -17,7 +17,9 @@ import { ProfileComponent } from '../profile/profile.component';
 import { ContatoComponent } from './contato/contato.component';
 import { PedidosComponent } from '../pedidos/pedidos.component';
 import { ConfirmRegisterComponent } from './confirm-register/confirm-register.component';
-
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { ConfirmRegisterComponent } from './confirm-register/confirm-register.co
     CoreModule,
     FontAwesomeModule,
     NgbModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    PaginatorModule,
   ],
   declarations: [
     HomeComponent,
@@ -41,6 +44,12 @@ import { ConfirmRegisterComponent } from './confirm-register/confirm-register.co
     ProfileComponent,
     ContatoComponent,
     PedidosComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
+  ],
+  exports: [
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

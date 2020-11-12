@@ -1,8 +1,11 @@
 <section class="divSearch d-flex justify-content-center">
-  <form class="form-inline mt-2 mt-md-0">
-      <input class="searchBar form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-      <button class="searchButton logo btn my-2 my-sm-0" type="submit">
+    <form class="form-inline mt-2 mt-md-0">
+        <!-- <input class="searchBar form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" /> -->
+        <fieldset class="form-group">
+            <input formControlName="search" placeholder="Buscar pelo nome ou descrição do medicamento" class="searchBar form-control mr-sm-2" required type="text" />
+        </fieldset>
+        <button class="searchButton logo btn my-2 my-sm-0" type="submit">
       <fa-icon [icon]="faSearch"></fa-icon>
   </button>
-  </form>
+    </form>
 </section>
