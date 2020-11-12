@@ -37,7 +37,7 @@ export class ConfirmRegisterComponent implements OnInit {
   success(usuario) {
     let timerInterval;
     Swal.fire({
-      title: 'Olá,' + usuario.name,
+      title: 'Olá, ' + usuario.name,
       text: 'Você está autenticado no sistema.',
       timer: 4000,
       timerProgressBar: true,
