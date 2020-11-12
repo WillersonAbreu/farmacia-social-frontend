@@ -21,10 +21,10 @@ export class AuthService {
   ) { }
   // Verifique o JWT no armazenamento local com as informações do servidor e do usuário de carga.
   // Isso é executado uma vez na inicialização do aplicativo.
-  public populate() {
+  public populate(credentials) {
     // Se o JWT for detectado, tente obter e armazenar as informações do usuário
     if (this.jwtService.getToken()) {
-      this.api.get(this.baseUrl + '/login')
+      this.api.post(this.baseUrl + '/login', credentials)
         .subscribe(
           data => this.setAuth(data),
           err => this.purgeAuth()
@@ -56,7 +56,7 @@ export class AuthService {
         user => {
           // Salvar JWT enviado do servidor no localstorage
           this.jwtService.saveToken(user['token']);
-          this.populate();
+          this.populate(credentials);
           return user;
         }
       ));
@@ -86,6 +86,8 @@ export class AuthService {
   public resetaSenha(credencials): Observable<any> {
     return this.api.post(this.baseUrl + '/reseta-senha', credencials);
   }
-
+  public contato(contato): Observable<any> {
+    return this.api.post(this.baseUrl + '/contatos', contato);
+  }
 
 }

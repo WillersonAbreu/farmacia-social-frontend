@@ -14,7 +14,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { HttpTokenInterceptor } from './interceptors/http-token.interceptor';
-
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
 @NgModule({
   imports: [
     // BrowserModule,
@@ -23,6 +23,7 @@ import { HttpTokenInterceptor } from './interceptors/http-token.interceptor';
     FontAwesomeModule,
     NgbModule,
     CarouselModule.forRoot(),
+    NgxViacepModule,
   ],
   declarations: [
     HeaderComponent,
