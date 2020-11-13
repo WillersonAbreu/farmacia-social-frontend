@@ -56,7 +56,8 @@ import { PaginatorModule } from 'primeng/paginator';
     AboutComponent,
     QuestionComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ContatoComponent
   ],
   exports: [
     ReactiveFormsModule,

@@ -11,3 +11,8 @@
 .div-header{
     margin-top: 66px;
 }
+
+.centralize{
+    display: flex;
+    margin: 0 auto;
+}

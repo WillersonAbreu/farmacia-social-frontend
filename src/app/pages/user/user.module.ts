@@ -8,6 +8,8 @@ import { UserService } from './user.service';
 import { UserRoutes } from './user.routing';
 import { CoreModule } from 'src/app/core/core.module';
 import { ProfileComponent } from './profile/profile.component';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 // import { FormUserComponent } from './form-user/form-user.component';
 
 @NgModule({
@@ -17,6 +19,8 @@ import { ProfileComponent } from './profile/profile.component';
     UserRoutes,
     ReactiveFormsModule,
     CoreModule,
+    NgxViacepModule,
+    TabsModule.forRoot(),
   ],
   declarations: [
     UserComponent,
