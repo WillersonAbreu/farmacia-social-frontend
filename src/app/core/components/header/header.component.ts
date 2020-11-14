@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { JwtService } from '../../services/jwt.service';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { Store } from '@ngrx/store';
+import { IUserType } from '../../store/user/user.actions';
 
 @Component({
   selector: 'app-header',
@@ -22,14 +24,21 @@ import Swal from 'sweetalert2';
   ]
 })
 export class HeaderComponent implements OnInit {
+  public isAuthenticated: boolean = false;
 
   constructor(
     private route: Router,
     private jwtService: JwtService,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private store: Store<{ user: IUserType }>
+  ) {
+    const reduxUser = this.store.select('user');
+    reduxUser.subscribe(
+      res => this.isAuthenticated = res.isAuthenticated,
+      err => console.log(err)
+    )
+  }
 
-  public isAuthenticated: boolean = !!this.jwtService.getToken();
   public isMenuCollapsed = true;
 
   state: string = "hide";

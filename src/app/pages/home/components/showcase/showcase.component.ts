@@ -73,7 +73,7 @@ export class ShowcaseComponent implements OnInit {
   //   );
   // }
   getAll(pageNumber: number) {
-    this.loading();
+    // this.loading();
     this.service.getPagableAndSorting(pageNumber, this.pageSize, this.filter).subscribe(
       (data) => {
         this.donations = data.content;
