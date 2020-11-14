@@ -92,8 +92,14 @@ export class SignupComponent implements OnInit {
     let address = this.form.controls.address.value;
 
     if(address.length > 0){
-      address = address.split(',');
-      this.form.controls.address.setValue(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`);
+      address = address.split(', ');
+
+      if(address.length == 4){
+        address[1] = target.value;
+        this.form.controls.address.setValue(`${address[0]}, ${address[1]}, ${address[2]}, ${address[3]}`);
+      }else{
+        this.form.controls.address.setValue(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`);
+      }
     }else{
       Swal.fire({
         icon: 'warning',
