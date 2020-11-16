@@ -1,29 +1,35 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-
-import { AuthService } from './auth.service';
-import { take } from 'rxjs/operators';
 import { JwtService } from './jwt.service';
 import Swal from 'sweetalert2';
-import { icon } from '@fortawesome/fontawesome-svg-core';
+import { AuthService } from './auth.service';
+import { Store } from '@ngrx/store';
+import { IUserType } from '../store/user/user.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  private isAuthenticated: boolean = false;
+
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private jwtService: JwtService
-  ) { }
+    private userStore: Store<{ user: IUserType }>
+  ) {
+    const reduxUser = this.userStore.select('user');
+    reduxUser.subscribe(
+      (res) => this.isAuthenticated = res.isAuthenticated,
+      (err) => null
+    );
+   }
 
   canActivate(
     route?: ActivatedRouteSnapshot,
     state?: RouterStateSnapshot,
   ): boolean {
-    const isAuthenticated: boolean = !!this.jwtService.getToken();
-    if(!isAuthenticated){
+
+
+    if(!this.isAuthenticated){
       Swal.fire({
         icon: 'error',
         title: 'Você não está logado!',
@@ -32,6 +38,6 @@ export class AuthGuard implements CanActivate {
 
       this.router.navigate(['/login']);
     }
-    return isAuthenticated;
+    return this.isAuthenticated;
   }
 }

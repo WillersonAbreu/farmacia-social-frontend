@@ -14,8 +14,8 @@ const routes: Routes = [
     children: [
       { path: '', component: ListDonationsComponent },
       { path: 'cadastro', component: DonationFormComponent },
-      // { path: ':id', component: DetailDonationComponent },
-      // { path: ':id/editar', component: DonationFormComponent },
+      { path: ':id', component: DetailDonationComponent },
+      { path: ':id/editar', component: DonationFormComponent },
       { path: 'pedidos', component: PedidosComponent },
     ]
   },

@@ -18,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: '', component: LandingPageComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'cadastrar', component: SignupComponent },
       { path: 'sobre', component: AboutComponent },
       { path: 'duvidas', component: QuestionComponent },
       { path: 'farmacias/cadastrar', component: SignupPharmacyComponent },

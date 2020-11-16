@@ -52,6 +52,7 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private service: UserService,
     private viacep: NgxViacepService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -67,8 +68,9 @@ export class SignupComponent implements OnInit {
       city: [''],
       address: [''],
     });
-    // this.getUser();
+    this.getUser();
   }
+
 
   handlePasswordInput(): boolean {
     this.showPassword = !this.showPassword;
@@ -76,25 +78,32 @@ export class SignupComponent implements OnInit {
   }
 
   getAddressData(target): void {
-    this.viacep.buscarPorCep(target.value).then( ( endereco: Endereco ) => {
+    this.viacep.buscarPorCep(target.value).then((endereco: Endereco) => {
       const { logradouro, bairro, localidade, uf } = endereco;
       // Injecting the address string to the input
       this.form.controls.address.setValue(`${logradouro}, ${bairro}, ${localidade} - ${uf}`);
-     }).catch( (error: ErroCep) => {
-      Swal.fire({icon: 'error',
+    }).catch((error: ErroCep) => {
+      Swal.fire({
+        icon: 'error',
         title: 'Erro ao encontrar o endereço pelo CEP!',
         text: 'Tente outro CEP ou insira o endereço manualmente no campo "Endereço".'
       });
-     });
+    });
   }
 
   setNumberOnAddress(target): void {
     let address = this.form.controls.address.value;
 
-    if(address.length > 0){
-      address = address.split(',');
-      this.form.controls.address.setValue(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`);
-    }else{
+    if (address.length > 0) {
+      address = address.split(', ');
+
+      if (address.length == 4) {
+        address[1] = target.value;
+        this.form.controls.address.setValue(`${address[0]}, ${address[1]}, ${address[2]}, ${address[3]}`);
+      } else {
+        this.form.controls.address.setValue(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`);
+      }
+    } else {
       Swal.fire({
         icon: 'warning',
         title: 'É necessário preencher o campo "Endereço" antes',
@@ -110,7 +119,7 @@ export class SignupComponent implements OnInit {
       this.service.getOne(this.id)
         .subscribe(
           user => {
-            // delete user.password;
+            delete user.password;
             this.form.patchValue(user);
           }
         );
@@ -121,32 +130,64 @@ export class SignupComponent implements OnInit {
     const user = this.form.value;
     console.log(user);
 
-    this.userSchema.validate(user, {abortEarly: false}).then(_success => {
+    this.userSchema.validate(user, { abortEarly: false }).then(_success => {
       Swal.showLoading();
       // Format some input before save on database
       user.cep = formatCep(user.cep);
       user.cpf = formatCpf(user.cpf);
       user.phone = formatPhone(user.phone);
 
-      // cadastrar
-      this.service.store(user).subscribe(
-        data => {
-          Swal.fire({icon: 'success', title: data.message});
-          this.router.navigate(['login']);
-        },
-        erro => {
-          Swal.hideLoading();
-          Swal.fire({icon: 'error', title: 'Erro ao cadastrar o usuário!', text: erro.error.message});
-        }
-      );
-    })
-    .catch(err => {
-      if(err instanceof Yup.ValidationError){
-        err.inner.forEach((error) => {
-          this.form.controls[error.path].setErrors(error.message);
-        });
+      //Verifica se é atualização ou cadastro
+
+      if (this.id) {
+        // atualizar
+        this.service.update(this.id, user).subscribe(
+          data => this.router.navigate(['usuarios']),
+          erro => console.log(erro)
+        );
+      } else {
+        // cadastrar
+        //this.service.store(user).subscribe
+        this.authService.register(user).subscribe(
+          data => {
+            Swal.fire({
+              title: 'O cadastro foi um sucesso!',
+              text: 'Verifica sua caixa de email e valide sua conta.',
+              confirmButtonText: `OK`,
+            }).then((result) => {
+              this.router.navigateByUrl('/login');
+              // this.router.navigate(['users'])
+            });
+          },
+          erro => {
+            console.log(erro);
+            Swal.fire({
+              icon: 'error',
+              title: erro.error.message,
+            });
+          }
+        );
       }
-    });
+
+      // // cadastrar
+      // this.service.store(user).subscribe(
+      //   data => {
+      //     Swal.fire({ icon: 'success', title: data.message });
+      //     this.router.navigate(['login']);
+      //   },
+      //   erro => {
+      //     Swal.hideLoading();
+      //     Swal.fire({ icon: 'error', title: 'Erro ao cadastrar o usuário!', text: erro.error.message });
+      //   }
+      // );
+    })
+      .catch(err => {
+        if (err instanceof Yup.ValidationError) {
+          err.inner.forEach((error) => {
+            this.form.controls[error.path].setErrors(error.message);
+          });
+        }
+      });
   }
 }
 
