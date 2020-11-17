@@ -19,9 +19,10 @@ export class JwtTokenHelpers {
 
     const isExpired: boolean = helper.isTokenExpired(token);
     if(isExpired) return false;
-    const {id, sub, address, name, cep} = helper.decodeToken(token);
+    const {id, role, sub, address, name, cep} = helper.decodeToken(token);
     const user: CustomUser = {
       user: {
+        roleId: role,
         id: id,
         isAuthenticated: true,
         email: sub,

@@ -30,6 +30,11 @@ export class ProfileComponent implements OnInit {
   id: number;
   userSchema = updateUserSchemaValidator();
 
+  //Input masks
+  phoneMask: string = '(00) 00000-0000';
+  cepMask: string = '00000-000';
+  cpfMask: string = '000.000.000-00';
+
   constructor(
     private viacep: NgxViacepService,
     private authService: AuthService,
