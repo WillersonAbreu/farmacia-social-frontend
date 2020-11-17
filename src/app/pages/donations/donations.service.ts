@@ -20,4 +20,5 @@ export class DonationsService extends BaseService {
     return this.api.get(`${this.baseURL}/pageable`, { params });
   }
 
+
 }

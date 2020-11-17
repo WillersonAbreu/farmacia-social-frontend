@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { JwtService } from './jwt.service';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { removeToken, saveToken } from '../store/auth/auth.actions';
 import { JwtTokenHelpers } from '../utils/jwtTokenHelpers';
@@ -12,6 +12,12 @@ import { IUserType, removeUser } from '../store/user/user.actions';
   providedIn: 'root'
 })
 export class AuthService {
+  private currentUserSubject = new BehaviorSubject<any>({});
+  public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+
+  private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
+  public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+
   protected baseUrl = 'http://localhost:8080/api';
 
   constructor(
@@ -64,7 +70,7 @@ export class AuthService {
       ));
   }
 
-  public getUserData():Observable<any>{
+  public getUserData(): Observable<any> {
     return this.api.get(this.baseUrl + '/login');
   }
 
