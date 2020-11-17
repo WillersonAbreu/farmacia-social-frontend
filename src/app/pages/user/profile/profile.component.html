@@ -5,7 +5,7 @@
       <tab heading="Meu cadastro">
         <form [formGroup]="form" (ngSubmit)="submit()" class="centralize col-md-6 col-lg-6">
             <div>
-    
+
                 <div class="card-body" id="cadastro-perfil">
                     <div class="form-group">
                         <label class="font-weight-bold">Dados da conta</label>
@@ -13,6 +13,10 @@
                         <label for="exampleInputName">Nome</label>
                         <input formControlName="name" class="form-control" id="exampleInputName"
                             aria-describedby="emailHelp" placeholder="Nome completo">
+                        <div class="error-message" *ngIf="!form.controls['name'].valid">
+                          {{form.controls['name'].errors}}
+                        </div>
+
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail">E-mail</label>
@@ -34,7 +38,7 @@
                         <label for="exampleInputCPF">CPF</label>
                         <input formControlName="cpf" class="form-control" id="exampleCPF" placeholder="CPF">
                     </div>
-    
+
                     <label class="font-weight-bold">Endereço</label>
                     <div class="form-group">
                         <div class="form-group row">
@@ -47,54 +51,10 @@
                                 <input (blur)="setNumberOnAddress($event.target)"formControlName="number" type="text" class="form-control" id="inputAddress2" placeholder="">
                             </div>
                         </div>
-                        <div class="form-row">
-                            <!-- <div class="form-group col-md-6">
-                                <label for="inputCity">Cidade</label>
-                                <input formControlName="city" type="text" class="form-control" id="inputCity">
-                            </div> -->
-                            <!-- <div class="form-group col-md-3">
-                                <label for="inputState">Estado</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>UF...</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espírito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="PE">Pernambuco</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="TO">Tocantins</option>
-                                </select>
-                            </div> -->
-                            <div class="form-group col-md-3">
-                                <label for="inputZip">CEP</label>
-                                <input (blur)="getAddressData($event.target)" formControlName="cep" type="text" class="form-control" id="inputZip">
-                            </div>
-                        </div>
-    
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
-    
+
             </div>
         </form>
       </tab>
@@ -164,7 +124,7 @@
       </tab>
     </tabset>
   </section>
-  
+
 <!--
   div do meu cadastro
 -->

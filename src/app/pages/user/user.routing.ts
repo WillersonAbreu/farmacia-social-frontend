@@ -14,7 +14,6 @@ const routes: Routes = [
       { path: '', component: ListUsersComponent, canActivate: [AuthGuard] }, // usuarios
       { path: 'meu-perfil', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'cadastrar', component: SignupComponent }, // usuarios/cadastrar
-      { path: ':id/editar', component: SignupComponent, canActivate: [AuthGuard] }, // usuarios/:id/editar
       { path: ':id', component: DetailUserComponent, canActivate: [AuthGuard] }, // usuarios/:id
     ]
   },
