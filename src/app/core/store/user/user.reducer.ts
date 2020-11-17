@@ -4,6 +4,7 @@ import * as UserActions from './user.actions';
 import { IUserType } from './user.actions';
 
 export const initialState: IUserType = {
+  id: 0,
   isAuthenticated: false,
   address: '',
   cep: '',

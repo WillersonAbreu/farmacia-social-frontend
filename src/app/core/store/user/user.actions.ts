@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 export interface IUserType {
+  id: number,
   isAuthenticated: boolean,
   address: string,
   cep: string,
