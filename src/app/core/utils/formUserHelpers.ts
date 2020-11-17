@@ -152,6 +152,17 @@ export const userSchemaValidator = () => Yup.object().shape({
   address:  Yup.string().required('O campo é endereço necessário para realizar o registro')
 });
 
+export const updateUserSchemaValidator = () => Yup.object().shape({
+  name: Yup.string().required('O campo nome é necessário para realizar o registro'),
+  email:  Yup.string().email('É necessário um email válido').required('O campo email é necessário para realizar o registro'),
+  phone:  Yup.string().phone().required('O campo celular é necessário para realizar o registro'),
+  password:  Yup.string(),
+  cpf:  Yup.string().CPF('CPF inválido').required('O campo é CPF necessário para realizar o registro'),
+  cep:  Yup.string().CEP().required('O campo é CEP necessário para realizar o registro'),
+  number:  Yup.string().required('O campo é número necessário para realizar o registro'),
+  address:  Yup.string().required('O campo é endereço necessário para realizar o registro')
+});
+
 export const pharmacySchemaValidator = () => Yup.object().shape({
   fantasyName: Yup.string().required('O campo nome fantasia é necessário para realizar o registro'),
   email:  Yup.string().email('É necessário um email válido').required('O campo email é necessário para realizar o registro'),

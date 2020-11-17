@@ -37,7 +37,7 @@ export class FormUserComponent implements OnInit {
   }
 
   getUser(): void {
-    this.id = +this.route.snapshot.paramMap.get('id');
+    
     if (this.id) {
       this.service.getOne(this.id)
         .subscribe(
