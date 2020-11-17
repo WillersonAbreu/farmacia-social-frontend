@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 export interface IUserType {
   id: number,
+  roleId: number,
   isAuthenticated: boolean,
   address: string,
   cep: string,
