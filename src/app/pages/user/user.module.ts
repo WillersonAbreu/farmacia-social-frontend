@@ -11,7 +11,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { FormUserComponent } from './form-user/form-user.component';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   imports: [
@@ -23,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CoreModule,
     NgxViacepModule,
     TabsModule.forRoot(),
+    NgxMaskModule.forRoot(maskConfig),
   ],
   declarations: [
     UserComponent,
