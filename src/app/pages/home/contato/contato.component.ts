@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class ContatoComponent implements OnInit {
   form: FormGroup;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -27,43 +27,43 @@ export class ContatoComponent implements OnInit {
       email: ['', Validators.required],
       telefone: ['', Validators.required],
       assunto: ['', Validators.required],
-      comentario: ['', Validators.required],
-      
-    
+      mensagem: ['', Validators.required],
+
+
     });
-    
+
   }
   submit() {
     Swal.showLoading();
     const contato = this.form.value;
-    
-    console.log(contato);
-   
 
-  
-     
-       this.service.contato(contato).subscribe(
-        data => {
-          Swal.fire({
-            title: 'Contato enviado com sucesso',
-            text: 'Assim que possivel entraremos em contato.',
-            confirmButtonText: `OK`,
-          }).then((result) => {
-            this.router.navigateByUrl('/contato');
-            // this.router.navigate(['users'])
-          });
-        },
-        erro => {
-          console.log(erro);
-          Swal.fire({
-            icon: 'error',
-//title: erro.error.message,
-          });
-        }
-      );
-    
+    console.log(contato);
+
+
+
+
+    this.service.contato(contato).subscribe(
+      data => {
+        Swal.fire({
+          title: 'Contato enviado com sucesso',
+          text: 'Assim que possivel entraremos em contato.',
+          confirmButtonText: `OK`,
+        }).then((result) => {
+          this.router.navigateByUrl('/contato');
+          // this.router.navigate(['users'])
+        });
+      },
+      erro => {
+        console.log(erro);
+        Swal.fire({
+          icon: 'error',
+          //title: erro.error.message,
+        });
+      }
+    );
+
   }
 
-  
+
 
 }
