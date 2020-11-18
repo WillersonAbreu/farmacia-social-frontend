@@ -1,19 +1,20 @@
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/core/services/auth-guard.service';
 import { SignupComponent } from '../home/signup/signup.component';
 import { DetailUserComponent } from './detail-user/detail-user.component';
-import { FormUserComponent } from './form-user/form-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [
   {
-    path: 'users',
+    path: 'usuarios',
     component: UserComponent,
     children: [
-      { path: '', component: ListUsersComponent }, // usuarios
+      { path: '', component: ListUsersComponent, canActivate: [AuthGuard] }, // usuarios
+      { path: 'meu-perfil', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'cadastrar', component: SignupComponent }, // usuarios/cadastrar
-      { path: ':id/editar', component: SignupComponent }, // usuarios/:id/editar
-      { path: ':id', component: DetailUserComponent }, // usuarios/:id
+      { path: ':id', component: DetailUserComponent, canActivate: [AuthGuard] }, // usuarios/:id
     ]
   },
 ];

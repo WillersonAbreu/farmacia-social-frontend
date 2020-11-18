@@ -18,7 +18,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
     const token = this.jwtService.getToken();
 
-    if (token) {
+    if (token && req.url.indexOf('https://viacep') == -1) {
       headersConfig['Authorization'] = `Bearer ${token}`;
     }
 

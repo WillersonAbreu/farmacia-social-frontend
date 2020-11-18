@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { JwtService } from './jwt.service';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { removeToken, saveToken } from '../store/auth/auth.actions';
+import { JwtTokenHelpers } from '../utils/jwtTokenHelpers';
+import { IUserType, removeUser } from '../store/user/user.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +17,25 @@ export class AuthService {
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+
   protected baseUrl = 'http://localhost:8080/api';
 
   constructor(
     private api: HttpClient,
-    private jwtService: JwtService
-  ) { }
+    private jwtService: JwtService,
+    private store: Store<{ token: string }>,
+    private userStore: Store<{ user: IUserType }>
+  ) {
+  }
+
+  private jwtHelper = new JwtTokenHelpers(this.userStore);
+
   // Verifique o JWT no armazenamento local com as informações do servidor e do usuário de carga.
   // Isso é executado uma vez na inicialização do aplicativo.
-  public populate() {
+  public populate(credentials) {
     // Se o JWT for detectado, tente obter e armazenar as informações do usuário
     if (this.jwtService.getToken()) {
-      this.api.get(this.baseUrl + '/login')
+      this.api.post(this.baseUrl + '/login', credentials)
         .subscribe(
           data => this.setAuth(data),
           err => this.purgeAuth()
@@ -34,19 +45,18 @@ export class AuthService {
       this.purgeAuth();
     }
   }
+
   private setAuth(usuario) {
     // Defina os dados atuais do usuário em observáveis
-    this.currentUserSubject.next(usuario);
-    // Defina isAuthenticated como true
-    this.isAuthenticatedSubject.next(true);
+    // console.log(usuario.token);
+    this.store.dispatch(saveToken(usuario));
+    this.jwtHelper.decodeToken(usuario.token);
   }
   public purgeAuth() {
     // Remover JWT do localstorage
     this.jwtService.destroyToken();
-    // Defina o usuário atual como um objeto vazio
-    this.currentUserSubject.next({});
-    // Defina o status de autenticação como falso
-    this.isAuthenticatedSubject.next(false);
+    this.store.dispatch(removeToken());
+    this.userStore.dispatch(removeUser());
   }
   public login(credentials): Observable<any> {
     return this.api.post(this.baseUrl + '/login', credentials)
@@ -54,14 +64,14 @@ export class AuthService {
         user => {
           // Salvar JWT enviado do servidor no localstorage
           this.jwtService.saveToken(user['token']);
-          this.populate();
+          this.populate(credentials);
           return user;
         }
       ));
   }
 
-  public getCurrentUser(): any {
-    return this.currentUserSubject.value;
+  public getUserData(): Observable<any> {
+    return this.api.get(this.baseUrl + '/login');
   }
 
   public register(usuario): Observable<any> {

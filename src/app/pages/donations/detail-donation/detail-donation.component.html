@@ -19,7 +19,7 @@
 
             <h3>Descrição</h3>
             <p>{{donation.description}}</p>
-            <button class="btn btn-orange logo">Eu quero!</button>
+            <button class="btn btn-orange logo" type="button" [disabled]="statusId != 1" (click)="submitReserve()">{{ statusId == '1' ? 'Eu quero!' : 'Doação já reservada!'}}</button>
 
             <h3 class="my-2">Detalhes</h3>
             <div class="row justify-content-between">
@@ -57,11 +57,11 @@
                     <tbody>
                         <tr>
                             <td><strong>Data Fabricação: </strong></td>
-                            <td>{{donation.manufacturyDate}}</td>
+                            <td>{{donation.manufacturyDate | date:'dd/MM/yyyy'}}</td>
                         </tr>
                         <tr>
                             <td><strong>Data Validade: </strong></td>
-                            <td>{{donation.shelfLife}}</td>
+                            <td>{{donation.shelfLife | date:'dd/MM/yyyy'}}</td>
                         </tr>
                         <tr>
                             <td><strong>Número Lote: </strong></td>

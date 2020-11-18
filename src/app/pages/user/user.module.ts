@@ -6,20 +6,34 @@ import { DetailUserComponent } from './detail-user/detail-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { UserService } from './user.service';
 import { UserRoutes } from './user.routing';
-import { FormUserComponent } from './form-user/form-user.component';
+import { CoreModule } from 'src/app/core/core.module';
+import { ProfileComponent } from './profile/profile.component';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    FontAwesomeModule,
     UserRoutes,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule,
+    NgxViacepModule,
+    TabsModule.forRoot(),
+    NgxMaskModule.forRoot(maskConfig),
   ],
   declarations: [
     UserComponent,
     DetailUserComponent,
     ListUsersComponent,
-    FormUserComponent
+    ProfileComponent
   ],
   providers: [
     UserService

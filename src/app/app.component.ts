@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,16 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   styleUrls: ['./app.component.css'],
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'farmacia-social-frontend';
+  constructor(
+    private userService: AuthService
+    ){
+
+    }
+
+    ngOnInit(){
+      //this.userService.populate();
+    }
 }
+
