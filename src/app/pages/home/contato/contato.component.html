@@ -52,7 +52,8 @@
                         <div class="form-group">
 
                             <fieldset class="form-group">
-                                <input formControlName="telefone" placeholder="Telefone" class="form-control form-control-sm" type="text" maxlength="15" />
+                                <input formControlName="telefone"
+                                mask="{{phoneMask}}" placeholder="Telefone" class="form-control form-control-sm" type="text" maxlength="15" />
                             </fieldset>
 
 
@@ -61,14 +62,14 @@
                     </div>
                 </div>
                 <div>
-                    <select name="form[assunto]" id="assunto" class="select-form form-control" required autofocus>
+                    <select formControlName="assunto" id="assunto" class="select-form form-control"  required autofocus>
               <option selected>Selecione um assunto</option>
-              <option value="1">Comercial</option>
-              <option value="2">Dúvidas</option>
-              <option value="3">Parcerias</option>
-              <option value="4">Sugestão</option>
-              <option value="5">Reclamação</option>
-              <option value="6">Suporte</option>
+              <option value="Comercial">Comercial</option>
+              <option value="Duvidas">Dúvidas</option>
+              <option value="Parcerias">Parcerias</option>
+              <option value="Sugestao">Sugestão</option>
+              <option value="Reclamação">Reclamação</option>
+              <option value="Suporte">Suporte</option>
             </select>
                 </div>
                 <div class="form-group" data-for="message">

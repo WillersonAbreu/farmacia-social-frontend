@@ -57,9 +57,6 @@ import { ProfileComponent } from '../user/profile/profile.component';
     ShowcaseComponent,
     AboutComponent,
     QuestionComponent,
-    ProfileComponent,
-    ContatoComponent,
-    PedidosComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ContatoComponent

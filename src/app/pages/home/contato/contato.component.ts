@@ -63,7 +63,7 @@ export class ContatoComponent implements OnInit {
     );
 
   }
-
+  phoneMask: string = '(00) 00000-0000';
 
 
 }
