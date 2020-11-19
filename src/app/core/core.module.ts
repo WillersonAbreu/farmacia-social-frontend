@@ -10,7 +10,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { StyledButtonComponent } from './components/styled-button/styled-button.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { HttpTokenInterceptor } from './interceptors/http-token.interceptor';
@@ -29,8 +28,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
     HeaderComponent,
     StyledButtonComponent,
     FooterComponent,
-    CarouselComponent,
-    SearchBarComponent
+    CarouselComponent
 
   ],
 
@@ -38,8 +36,7 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
     HeaderComponent,
     StyledButtonComponent,
     FooterComponent,
-    CarouselComponent,
-    SearchBarComponent
+    CarouselComponent
   ],
   providers: [
     AuthGuard,

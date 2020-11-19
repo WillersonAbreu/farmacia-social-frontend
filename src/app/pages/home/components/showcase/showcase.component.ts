@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { SearchBarComponent } from 'src/app/core/components/search-bar/search-bar.component';
 import { DonationsService } from 'src/app/pages/donations/donations.service';
 import Swal from 'sweetalert2';
 
+// FontAwsome Icons
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-showcase',
   templateUrl: './showcase.component.html',
@@ -10,7 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class ShowcaseComponent implements OnInit {
 
-  @ViewChild(SearchBarComponent) filterReference;
+  faSearch = faSearch;
+
 
   donations = [
     {
@@ -63,6 +65,14 @@ export class ShowcaseComponent implements OnInit {
   ngOnInit() {
     this.getAll(this.pageNumber);
     //this.getAll();
+  }
+
+  onChange(value: string) {
+    this.filter = value;
+  }
+
+  submit() {
+    this.getAll(this.pageNumber);
   }
 
   // getAll() {

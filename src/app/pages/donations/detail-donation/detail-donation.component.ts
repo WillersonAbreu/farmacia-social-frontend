@@ -87,8 +87,8 @@ export class DetailDonationComponent implements OnInit {
       confirmButtonText: `Confirmar Reserva`,
       denyButtonText: `Cancelar`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        Swal.showLoading();
         this.ordersService.store(data).subscribe(
           data => {
             console.log(data);
@@ -102,7 +102,10 @@ export class DetailDonationComponent implements OnInit {
             this.getOne();
 
           },
-          erro => console.log(erro)
+          erro => {
+            console.log(erro),
+              Swal.hideLoading();
+          }
         );
 
       } else if (result.isDenied) {
