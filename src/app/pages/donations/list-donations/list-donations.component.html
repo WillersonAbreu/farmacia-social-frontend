@@ -13,6 +13,7 @@
             <th scope="col">Embalagem</th>
             <th scope="col">Tarja</th>
             <th scope="col">Doador</th>
+            <th scope="col">Status</th>
             <th scope="col" class=" text-center">Ações</th>
         </tr>
     </thead>
@@ -31,6 +32,7 @@
             <td>{{donation.packing}}</td>
             <td>{{donation.stripe}}</td>
             <td>{{donation.user.name}}</td>
+            <td>{{donation.status.status_string}}</td>
             <td class="d-flex justify-content-center ">
                 <a [routerLink]="['/doacoes', donation.id]" class="btn btn-info mr-2">Exibir</a>
                 <a [routerLink]="['/doacoes', donation.id, 'editar']" class="btn btn-primary mr-2">Atualizar</a>
