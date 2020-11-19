@@ -215,13 +215,13 @@ export class SignupPharmacyComponent implements OnInit {
 }
 
 // just an interface for type safety.
-interface marker {
+export interface marker {
   latitude: number;
   longitude: number;
   label?: string;
 }
 
-interface IResponse {
+export interface IResponse {
   results: any[],
   status: string
 }

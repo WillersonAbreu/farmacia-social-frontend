@@ -12,6 +12,8 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { AgmCoreModule } from '@agm/core';
+import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -28,6 +30,10 @@ const maskConfig: Partial<IConfig> = {
     NgxViacepModule,
     TabsModule.forRoot(),
     NgxMaskModule.forRoot(maskConfig),
+    AgmCoreModule.forRoot({
+      apiKey: GOOGLE_MAPS_API_KEY,
+      libraries: ['places']
+    })
   ],
   declarations: [
     UserComponent,

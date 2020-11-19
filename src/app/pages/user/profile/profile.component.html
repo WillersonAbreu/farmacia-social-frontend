@@ -3,70 +3,162 @@
 <section style="margin-top: 90px;">
   <tabset [justified]="true">
     <tab heading="Meu cadastro">
-      <form [formGroup]="form" (ngSubmit)="submit()" class="centralize col-md-6 col-lg-6">
-        <div>
-
-          <div class="card-body" id="cadastro-perfil">
-            <div class="form-group">
-              <label class="font-weight-bold">Dados da conta</label>
-              <br>
-              <label for="exampleInputName">Nome</label>
-              <input formControlName="name" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
-                placeholder="Nome completo">
-                <div class="error-message" *ngIf="!form.controls['name'].valid">{{form.controls['name'].errors}}</div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail">E-mail</label>
-              <input formControlName="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                placeholder="E-mail">
-                <div class="error-message" *ngIf="!form.controls['email'].valid">{{form.controls['email'].errors}}</div>
-              <small id="emailHelp" class="form-text text-muted">Não compartilharmos seus dados com
-                terceiros.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPhone">Telefone</label>
-              <input mask="{{phoneMask}}" formControlName="phone" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                placeholder="Telefone">
-                <div class="error-message" *ngIf="!form.controls['phone'].valid">{{form.controls['phone'].errors}}</div>
-            </div>
-            <div class="input-group flex-row">
-              <input formControlName="password" placeholder="Senha" class="form-control" type="{{showPassword ? 'text' : 'password'}}" />
-              <div class="input-group-append btn-eye" (click)="handlePasswordInput()">
-                <fa-icon class="input-group-text" [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
+      <ng-container *ngIf="userType === 1; else elseTemplate">
+        <form [formGroup]="form" (ngSubmit)="userSubmit()" class="centralize col-md-6 col-lg-6">
+          <div>
+            <div class="card-body" id="cadastro-perfil">
+              <div class="form-group">
+                <label class="font-weight-bold">Dados da conta</label>
+                <br>
+                <label for="exampleInputName">Nome</label>
+                <input formControlName="name" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+                  placeholder="Nome completo">
+                  <div class="error-message" *ngIf="!form.controls['name'].valid">{{form.controls['name'].errors}}</div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputCPF">CPF</label>
-              <input mask="{{ cpfMask }}" formControlName="cpf" class="form-control" id="exampleCPF" placeholder="CPF">
-              <div class="error-message" *ngIf="!form.controls['cpf'].valid">{{form.controls['cpf'].errors}}</div>
-            </div>
-
-            <label class="font-weight-bold">Endereço</label>
-            <div class="form-group">
-              <label for="inputZip">CEP</label>
-              <input mask="{{cepMask}}" (blur)="getAddressData($event.target)" formControlName="cep" type="text" class="form-control"
-                id="inputZip">
-                <div class="error-message" *ngIf="!form.controls['cep'].valid">{{form.controls['cep'].errors}}</div>
-            </div>
-            <div class="form-group">
-              <div class="form-group row">
-                <div class="form-group col-md-9">
-                  <label for="rua">Rua*</label>
-                  <input formControlName="address" type="text" class="form-control" id="inputAddress2" placeholder="">
-                  <div class="error-message" *ngIf="!form.controls['address'].valid">{{form.controls['address'].errors}}</div>
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="inputAddress2">Número</label>
-                  <input (blur)="setNumberOnAddress($event.target)" formControlName="number" type="text"
-                    class="form-control" id="inputAddress2" placeholder="">
-                    <div class="error-message" *ngIf="!form.controls['number'].valid">{{form.controls['number'].errors}}</div>
+              <div class="form-group">
+                <label for="exampleInputEmail">E-mail</label>
+                <input formControlName="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                  placeholder="E-mail">
+                  <div class="error-message" *ngIf="!form.controls['email'].valid">{{form.controls['email'].errors}}</div>
+                <small id="emailHelp" class="form-text text-muted">Não compartilharmos seus dados com
+                  terceiros.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPhone">Telefone</label>
+                <input mask="{{phoneMask}}" formControlName="phone" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                  placeholder="Telefone">
+                  <div class="error-message" *ngIf="!form.controls['phone'].valid">{{form.controls['phone'].errors}}</div>
+              </div>
+              <div class="input-group flex-row">
+                <input formControlName="password" placeholder="Senha" class="form-control" type="{{showPassword ? 'text' : 'password'}}" />
+                <div class="input-group-append btn-eye" (click)="handlePasswordInput()">
+                  <fa-icon class="input-group-text" [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
                 </div>
               </div>
+              <div class="form-group">
+                <label for="exampleInputCPF">CPF</label>
+                <input mask="{{ cpfMask }}" formControlName="cpf" class="form-control" id="exampleCPF" placeholder="CPF">
+                <div class="error-message" *ngIf="!form.controls['cpf'].valid">{{form.controls['cpf'].errors}}</div>
+              </div>
+
+              <label class="font-weight-bold">Endereço</label>
+              <div class="form-group">
+                <label for="inputZip">CEP</label>
+                <input mask="{{cepMask}}" (blur)="getAddressData($event.target)" formControlName="cep" type="text" class="form-control"
+                  id="inputZip">
+                  <div class="error-message" *ngIf="!form.controls['cep'].valid">{{form.controls['cep'].errors}}</div>
+              </div>
+              <div class="form-group">
+                <div class="form-group row">
+                  <div class="form-group col-md-9">
+                    <label for="rua">Rua*</label>
+                    <input formControlName="address" type="text" class="form-control" id="inputAddress2" placeholder="">
+                    <div class="error-message" *ngIf="!form.controls['address'].valid">{{form.controls['address'].errors}}</div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="inputAddress2">Número</label>
+                    <input (blur)="setNumberOnAddress($event.target)" formControlName="number" type="text"
+                      class="form-control" id="inputAddress2" placeholder="">
+                      <div class="error-message" *ngIf="!form.controls['number'].valid">{{form.controls['number'].errors}}</div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
           </div>
-        </div>
-      </form>
+        </form>
+      </ng-container>
+      <ng-template #elseTemplate>
+
+        <form [formGroup]="pharmacyForm" (ngSubmit)="pharmacySubmit()" class="form-cadastro-farmacia col-10 col-sm-10 col-md-8 col-lg-6">
+          <label>Nome Fantasia</label>
+          <fieldset class="form-group">
+            <input formControlName="fantasyName" placeholder="Nome" class="form-control form-control-sm" type="text" />
+            <div class="error-message" *ngIf="!pharmacyForm.controls['fantasyName'].valid">{{pharmacyForm.controls['fantasyName'].errors}}</div>
+          </fieldset>
+
+          <label>CNPJ</label>
+          <fieldset class="form-group">
+            <input formControlName="cnpj" mask={{cnpjMask}} placeholder="CNPJ" class="form-control form-control-sm" type="text" />
+            <div class="error-message" *ngIf="!pharmacyForm.controls['cnpj'].valid">{{pharmacyForm.controls['cnpj'].errors}}</div>
+          </fieldset>
+
+          <label>Nome do Farmacêutico</label>
+          <fieldset class="form-group">
+            <input formControlName="pharmaceutical" placeholder="Farmacêutico" class="form-control form-control-sm" type="text" />
+            <div class="error-message" *ngIf="!pharmacyForm.controls['pharmaceutical'].valid">{{pharmacyForm.controls['pharmaceutical'].errors}}</div>
+          </fieldset>
+
+          <label>Email</label>
+          <fieldset class="form-group">
+            <input formControlName="email" placeholder="Email" class="form-control form-control-sm" type="text" />
+            <div class="error-message" *ngIf="!pharmacyForm.controls['email'].valid">{{pharmacyForm.controls['email'].errors}}</div>
+          </fieldset>
+
+          <label>Telefone Celular</label>
+          <fieldset class="form-group">
+            <input formControlName="phone" mask="{{phoneMask}}" placeholder="Telefone" class="form-control form-control-sm" maxlength="15" type="text" />
+            <div class="error-message" *ngIf="!pharmacyForm.controls['phone'].valid">{{pharmacyForm.controls['phone'].errors}}</div>
+          </fieldset>
+
+          <label>Senha</label>
+          <div class="input-group flex-row">
+            <input formControlName="password" placeholder="Senha" class="form-control form-control-sm" type="{{showPassword ? 'text' : 'password'}}" />
+            <div class="input-group-append sm btn-eye" (click)="handlePasswordInput()">
+              <fa-icon class="input-group-text" [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
+            </div>
+          </div>
+          <div class="error-message" *ngIf="!pharmacyForm.controls['password'].valid">{{pharmacyForm.controls['password'].errors}}</div>
+
+          <label class="font-weight-bold">Endereço</label>
+          <div class="form-group">
+            <label for="inputZip">CEP</label>
+            <input mask="{{cepMask}}" (blur)="getAddressData($event.target)" formControlName="cep" type="text" class="form-control"
+              id="inputZip">
+              <div class="error-message" *ngIf="!pharmacyForm.controls['cep'].valid">{{pharmacyForm.controls['cep'].errors}}</div>
+          </div>
+          <div class="form-group">
+            <div class="form-group row">
+              <div class="form-group col-md-9">
+                <label for="rua">Rua*</label>
+                <input formControlName="address" type="text" class="form-control sm" id="inputAddress2" placeholder="">
+                <div class="error-message" *ngIf="!pharmacyForm.controls['address'].valid">{{pharmacyForm.controls['address'].errors}}</div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputAddress2">Número</label>
+                <input (blur)="setNumberOnPharmacyAddress($event.target)" formControlName="number" type="text"
+                  class="form-control sm" id="inputAddress2" placeholder="">
+                  <div class="error-message" *ngIf="!pharmacyForm.controls['number'].valid">{{pharmacyForm.controls['number'].errors}}</div>
+              </div>
+            </div>
+          </div>
+
+          <label>Confirme no mapa se a localização está correta, se não estive selecione o local certo.</label>
+          <div class="error-message" *ngIf="!pharmacyForm.controls['latitude'].valid">{{pharmacyForm.controls['latitude'].errors}}</div>
+
+          <agm-map
+            [latitude]="latitude"
+            [longitude]="longitude"
+            [zoom]="zoom"
+            [disableDefaultUI]="false"
+            (mapClick)="mapClicked($event)"
+            [mapDraggable]="true"
+          >
+            <agm-marker
+              [latitude]="latitude"
+              [longitude]="longitude"
+              [markerDraggable]="false"
+              (dragEnd)="markerDragEnd($event)"
+            >
+            </agm-marker>
+          </agm-map>
+
+          <button class="btn btn-block btn-orange" type="submit">
+            Salvar
+          </button>
+        </form>
+
+      </ng-template>
     </tab>
     <tab heading="Meus pedidos">
       <table class="table table-striped">
