@@ -176,3 +176,17 @@ export const pharmacySchemaValidator = () => Yup.object().shape({
   latitude: Yup.string().required('É necessário selecionar a localização no mapa'),
   longitude: Yup.string().required('É necessário selecionar a localização no mapa')
 });
+
+export const updatePharmacySchemaValidator = () => Yup.object().shape({
+  fantasyName: Yup.string().required('O campo nome fantasia é necessário para realizar o registro'),
+  email:  Yup.string().email('É necessário um email válido').required('O campo email é necessário para realizar o registro'),
+  phone:  Yup.string().phone().required('O campo celular é necessário para realizar o registro'),
+  password:  Yup.string(),
+  cnpj: Yup.string().CNPJ('CNPJ inválido').required('O campo é CNPJ necessário para realizar o registro'),
+  pharmaceutical: Yup.string().required('O campo nome do farmacêutico é necessário para realizar o registro'),
+  cep:  Yup.string().CEP().required('O campo é CEP necessário para realizar o registro'),
+  number:  Yup.string().required('O campo é número necessário para realizar o registro'),
+  address:  Yup.string().required('O campo é endereço necessário para realizar o registro'),
+  latitude: Yup.string().required('É necessário selecionar a localização no mapa'),
+  longitude: Yup.string().required('É necessário selecionar a localização no mapa')
+});

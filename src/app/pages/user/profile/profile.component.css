@@ -23,3 +23,90 @@
   font-size: 0.9rem;
   margin-bottom: 2vh;
 }
+
+agm-map {
+  height: 300px;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 10vh auto 5vh auto;
+  background-color: white;
+  width: 40vw;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+}
+
+.form-wrapper > span {
+  color: #2a9d8f;
+  margin: 0 auto;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.form-wrapper > p {
+  text-align: center;
+}
+
+.form-cadastro-farmacia {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 1vh;
+  color: #7b7b7b;
+}
+
+.form-cadastro-usuario > label {
+  margin: 0;
+}
+
+.form-cadastro-usuario > input {
+  margin: 0 0 2vh 0;
+}
+
+.form-cadastro-usuario > button {
+  margin: 1vh auto;
+  width: 50%;
+}
+
+.input-wrapper {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-row-gap: 2vh;
+}
+
+.input-wrapper > div {
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 90%;
+}
+
+.btn-eye:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 2vh;
+}
+
+@media (min-width: 230px) and (max-width: 599px) {
+  .form-wrapper {
+    width: 90vw;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1000px) {
+  .form-wrapper {
+    width: 60vw;
+  }
+}
