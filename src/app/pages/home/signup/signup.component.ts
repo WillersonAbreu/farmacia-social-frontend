@@ -67,6 +67,7 @@ export class SignupComponent implements OnInit {
       city: [''],
       address: [''],
     });
+    this.getUser();
   }
 
 
@@ -133,34 +134,49 @@ export class SignupComponent implements OnInit {
       user.cpf = formatCpf(user.cpf);
       user.phone = formatPhone(user.phone);
 
-      // cadastrar
-      this.authService.register(user).subscribe(
-        data => {
-          Swal.fire({
-            title: 'O cadastro foi um sucesso!',
-            text: 'Verifica sua caixa de email e valide sua conta.',
-            confirmButtonText: `OK`,
-          });
-          this.router.navigateByUrl('/login');
-        },
-        erro => {
-          console.log(erro);
-          Swal.fire({
-            icon: 'error',
-            title: erro.error.message,
-            timer: 5000
+      //atualizar
+      if (this.id) {
+        this.service.update(this.id, user).subscribe(
+          data => {
+            Swal.fire({
+              title: 'Dados do usuário atualizados com sucesso!',
+              confirmButtonText: `OK`,
+            });
+          },
+          erro => console.log(erro)
+        );
+      } else {
+        // cadastrar
+        this.authService.register(user).subscribe(
+          data => {
+            Swal.fire({
+              title: 'O cadastro foi um sucesso!',
+              text: 'Verifica sua caixa de email e valide sua conta.',
+              confirmButtonText: `OK`,
+            });
+            this.router.navigateByUrl('/login');
+          },
+          erro => {
+            console.log(erro);
+            Swal.fire({
+              icon: 'error',
+              title: erro.error.message,
+              timer: 5000
+            });
+          }
+        );
+
+      }
+
+    })
+      .catch(err => {
+        Swal.hideLoading();
+        if (err instanceof Yup.ValidationError) {
+          err.inner.forEach((error) => {
+            this.form.controls[error.path].setErrors(error.message);
           });
         }
-      );
-    })
-    .catch(err => {
-      Swal.hideLoading();
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          this.form.controls[error.path].setErrors(error.message);
-        });
-      }
-    });
+      });
   }
 }
 

@@ -39,9 +39,9 @@ export class DetailDonationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => {
+    //   return false;
+    // };
     this.getOne();
 
     const reduxUser = this.store.select('user');
@@ -98,7 +98,8 @@ export class DetailDonationComponent implements OnInit {
               icon: 'success',
               confirmButtonText: `OK`,
             });
-            this.router.navigate(['/doacoes', this.doacaoSelecionada],);
+            //  this.router.navigate(['/doacoes', this.doacaoSelecionada],);
+            this.getOne();
 
           },
           erro => console.log(erro)

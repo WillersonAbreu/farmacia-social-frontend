@@ -14,6 +14,8 @@ export class DonationsService extends BaseService {
     let params = new HttpParams();
     params = params.append('page', pageNumber.toString());
     params = params.append('size', pageSize.toString());
+    params = params.append('statusId', "1");
+    params = params.append('isActive', "1");
     params = params.append('title', filter);
     params = params.append('description', filter);
 
