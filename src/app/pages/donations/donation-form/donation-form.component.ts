@@ -44,7 +44,7 @@ export class DonationFormComponent implements OnInit {
       batchCode: ['', Validators.required],
       userId: ['', Validators.required],
       pharmacyId: ['', Validators.required],
-      statusId: ['', Validators.required],
+      //  statusId: ['', Validators.required],
     });
     this.getDonation();
   }
