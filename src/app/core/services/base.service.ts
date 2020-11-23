@@ -28,7 +28,7 @@ export abstract class BaseService {
 
   public getOne(id): Observable<any> {
     const url = this.baseURL + "/" + id;
-    return this.api.get(url)
+    return this.api.get(url);
   }
 
   public store(entidade): Observable<any> {

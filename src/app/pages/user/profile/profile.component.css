@@ -99,6 +99,11 @@ agm-map {
   margin-bottom: 2vh;
 }
 
+.pointer:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
 @media (min-width: 230px) and (max-width: 599px) {
   .form-wrapper {
     width: 90vw;

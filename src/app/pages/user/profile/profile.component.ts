@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {  Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
 import { Endereco, ErroCep, NgxViacepService } from '@brunoc/ngx-viacep';
 import Swal from 'sweetalert2';
@@ -16,6 +15,10 @@ import { GeoLocationService } from 'src/app/core/services/geoLocationService.ser
 
 // Maps
 import { MouseEvent } from "@agm/core";
+import { ReservedDonationsServiceService } from 'src/app/core/services/reservedDonationsService.service';
+import { DonationsService } from '../../donations/donations.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { TemplateRef } from '@angular/core';
 
 // Call the custom methods to validate inputs
 customYupCepValidator();
@@ -34,9 +37,12 @@ export class ProfileComponent implements OnInit {
   form: FormGroup;
   pharmacyForm: FormGroup;
   id: number;
+  reservedDonationsList: [];
+  donationsList: [];
   userSchema = updateUserSchemaValidator();
   pharmacySchema = updatePharmacySchemaValidator();
   userType: number;
+  selectedDoantion: any = {};
 
   //Input masks
   phoneMask: string = '(00) 00000-0000';
@@ -51,18 +57,20 @@ export class ProfileComponent implements OnInit {
   defaultLongitude: number;
   latitude: number;
   longitude: number;
+  modalRef: BsModalRef;
+
 
   constructor(
     private viacep: NgxViacepService,
-    private authService: AuthService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private service: UserService,
     private pharmacyService: PharmacyService,
+    private reservedDonationService: ReservedDonationsServiceService,
+    private donationsService: DonationsService,
     private geoLocationService: GeoLocationService,
-    private store: Store<{ user: IUserType }>
-
+    private store: Store<{ user: IUserType }>,
+    private modalService: BsModalService
   ) {
     const reduxUser = this.store.select('user');
     reduxUser.subscribe(
@@ -70,7 +78,7 @@ export class ProfileComponent implements OnInit {
         this.id = res.id,
         this.userType = res.roleId
       },
-      err => console.log(err)
+      err => err
     )
   }
 
@@ -138,9 +146,20 @@ export class ProfileComponent implements OnInit {
       );
     }
 
+    // Get the list of reserved donations
+    const myReservedDonations = this.reservedDonationService.findAllById(this.id);
+    myReservedDonations.subscribe(reservedDonations => {
+      this.reservedDonationsList = reservedDonations;
+    });
+
+    // Get the list my donations
+    const myDonations = this.donationsService.findAllById(this.id);
+    myDonations.subscribe(donations => {
+      this.donationsList = donations;
+    });
+
     this.latitude = -22.578522274791556;
     this.longitude = -44.961761303964614;
-
   }
 
   handlePasswordInput(): boolean {
@@ -212,7 +231,7 @@ export class ProfileComponent implements OnInit {
             }
           },
           error => {
-            console.log(error);
+            return error;
           }
         );
     } else {
@@ -245,7 +264,18 @@ export class ProfileComponent implements OnInit {
   }
 
   markerDragEnd($event: MouseEvent) {
-    console.log("dragEnd", $event);
+    return null;
+  }
+
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template,
+      Object.assign({}, {class: 'modal-lg'})
+    );
+  }
+
+  setModalData(donation){
+    this.selectedDoantion = donation;
   }
 
   userSubmit() {
@@ -282,13 +312,10 @@ export class ProfileComponent implements OnInit {
             });
             this.router.navigate(['usuarios/meu-perfil']);
           },
-          erro => console.log(erro)
+          erro => erro
         );
       })
       .catch(err => {
-        console.log(user);
-        console.log(err);
-
         Swal.hideLoading();
         if (err instanceof Yup.ValidationError) {
           err.inner.forEach((error) => {

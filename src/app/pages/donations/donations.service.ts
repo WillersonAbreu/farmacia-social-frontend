@@ -22,5 +22,9 @@ export class DonationsService extends BaseService {
     return this.api.get(`${this.baseURL}/pageable`, { params });
   }
 
+  public findAllById(id): Observable<any> {
+    return this.api.get(`${this.baseURL}/user/${id}`, this.httpOptions);
+  }
+
 
 }
