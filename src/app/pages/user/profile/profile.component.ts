@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
@@ -79,7 +79,7 @@ export class ProfileComponent implements OnInit {
         this.userType = res.roleId
       },
       err => err
-    )
+    );
   }
 
   ngOnInit() {
@@ -146,6 +146,13 @@ export class ProfileComponent implements OnInit {
       );
     }
 
+    this.getAllDonations();
+
+    this.latitude = -22.578522274791556;
+    this.longitude = -44.961761303964614;
+  }
+
+  @Output() getAllDonations(){
     // Get the list of reserved donations
     const myReservedDonations = this.reservedDonationService.findAllById(this.id);
     myReservedDonations.subscribe(reservedDonations => {
@@ -157,9 +164,6 @@ export class ProfileComponent implements OnInit {
     myDonations.subscribe(donations => {
       this.donationsList = donations;
     });
-
-    this.latitude = -22.578522274791556;
-    this.longitude = -44.961761303964614;
   }
 
   handlePasswordInput(): boolean {

@@ -229,6 +229,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-donation-form [donationData]="selectedDoantion" ></app-donation-form>
+    <app-donation-form (refreshList)="getAllDonations()" [donationData]="selectedDoantion" ></app-donation-form>
   </div>
 </ng-template>

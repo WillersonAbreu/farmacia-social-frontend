@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faCloudUploadAlt, faPills, faPrescriptionBottle } from '@fortawesome/free-solid-svg-icons';
 import { DonationStatusService } from 'src/app/core/services/donationStatusService.service';
@@ -19,6 +19,7 @@ export class DonationFormComponent implements OnInit {
   imageBase64Front;
   imageBase64Back;
   @Input() donationData: any;
+  @Output() refreshList = new EventEmitter<boolean>();
 
 
   faCloudUploadAlt = faCloudUploadAlt;
@@ -91,14 +92,17 @@ export class DonationFormComponent implements OnInit {
 
   submit() {
     const donation = this.form.value;
-    console.log(donation);
     donation.pictureFile = this.imageBase64Front;
     donation.pictureFileBack = this.imageBase64Back;
 
     if (this.id) {
       // atualizar
       this.service.update(this.id, donation).subscribe(
-        data => Swal.fire({icon: 'success', title: 'Anúncio atualizado', text: data.message}),
+        data => {
+          this.refreshList.emit(true);
+          Swal.fire({icon: 'success', title: 'Anúncio atualizado', text: data.message});
+          // this.refreshList();
+        },
         erro => console.log(erro)
       );
     } else {
