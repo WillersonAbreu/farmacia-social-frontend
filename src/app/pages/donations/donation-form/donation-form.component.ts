@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // FontAwsome Icons
 import { faCloudUploadAlt, faPrescriptionBottle, faPills } from '@fortawesome/free-solid-svg-icons';
+import { PharmacyService } from 'src/app/core/services/pharmacyService.service';
 import { DonationsService } from '../donations.service';
 
 
@@ -17,17 +18,31 @@ export class DonationFormComponent implements OnInit {
   id: number;
   imageBase64Front;
   imageBase64Back;
-
+  pharmacyList: any[];
+  //statusList: any[];
   faCloudUploadAlt = faCloudUploadAlt;
   faPrescriptionBottle = faPrescriptionBottle;
   faPills = faPills
 
   constructor(
     private formBuilder: FormBuilder,
+    private pharmacyService: PharmacyService,
     private route: ActivatedRoute,
     private router: Router,
     private service: DonationsService
   ) { }
+
+    getPharmacy(){
+      this.pharmacyService.getAll()
+      .subscribe(
+      farmacias=>this.pharmacyList = farmacias
+        
+        )
+      
+
+
+    }
+
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -47,6 +62,7 @@ export class DonationFormComponent implements OnInit {
       //  statusId: ['', Validators.required],
     });
     this.getDonation();
+    this.getPharmacy();
   }
 
   getDonation(): void {
@@ -77,6 +93,7 @@ export class DonationFormComponent implements OnInit {
       );
     } else {
       // cadastrar
+      donation.statusId = 1;
       this.service.store(donation).subscribe(
         data => this.router.navigate(['doacoes']),
         erro => console.log(erro)
