@@ -18,7 +18,6 @@ export class DonationsService extends BaseService {
     params = params.append('isActive', "1");
     params = params.append('title', filter);
     // params = params.append('description', filter);
-
     return this.api.get(`${this.baseURL}/pageable`, { params });
   }
 

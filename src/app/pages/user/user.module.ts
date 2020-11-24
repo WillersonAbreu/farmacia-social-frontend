@@ -14,6 +14,8 @@ import { AgmCoreModule } from '@agm/core';
 import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DonationFormComponent } from './profile/components/donation-form/donation-form.component';
+import { DonationDetailComponent } from './profile/components/donation-detail/donation-detail.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -29,6 +31,7 @@ const maskConfig: Partial<IConfig> = {
     CoreModule,
     NgxViacepModule,
     TabsModule.forRoot(),
+    CarouselModule.forRoot(),
     ModalModule.forRoot(),
     NgxMaskModule.forRoot(maskConfig),
     AgmCoreModule.forRoot({
@@ -39,7 +42,8 @@ const maskConfig: Partial<IConfig> = {
   declarations: [
     UserComponent,
     ProfileComponent,
-    DonationFormComponent
+    DonationFormComponent,
+    DonationDetailComponent
   ],
   providers: [
     UserService

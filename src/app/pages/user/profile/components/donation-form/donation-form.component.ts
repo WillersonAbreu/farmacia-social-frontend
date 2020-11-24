@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { faCloudUploadAlt, faPills, faPrescriptionBottle } from '@fortawesome/free-solid-svg-icons';
@@ -25,6 +26,8 @@ export class DonationFormComponent implements OnInit {
   faCloudUploadAlt = faCloudUploadAlt;
   faPrescriptionBottle = faPrescriptionBottle;
   faPills = faPills
+
+  maskDtNascimento = 'd0/M0/Y000';
 
   constructor(
     private service: DonationsService,
@@ -66,6 +69,7 @@ export class DonationFormComponent implements OnInit {
 
   getDonation(): void {
     this.id = this.donationData.id;
+
     this.form.patchValue(this.donationData);
     this.imageBase64Front = this.donationData.pictureFile;
     this.imageBase64Back = this.donationData.pictureFileBack;

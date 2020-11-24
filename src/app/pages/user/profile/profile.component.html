@@ -175,7 +175,7 @@
           </tr>
         </thead>
         <tbody *ngIf="donationsList" >
-          <tr *ngFor="let donation of reservedDonationsList" >
+          <tr *ngFor="let donation of reservedDonationsList" (click)="setModalData(donation); openModal(templateOrders, true)" class="pointer" >
             <th> {{donation.medicineDonation.status.status_string}} </th>
             <td> {{donation.medicineDonation.title}} </td>
             <td>
@@ -183,7 +183,7 @@
             </td>
             <td> {{donation.medicineDonation.packing}} </td>
             <td> {{donation.medicineDonation.dosage}} </td>
-            <td> {{donation.medicineDonation.shelfLife}} </td>
+            <td> {{donation.medicineDonation.shelfLife | date:'dd/MM/yyyy'}} </td>
             <td> {{donation.medicineDonation.pharmacy.address}} </td>
           </tr>
         </tbody>
@@ -211,7 +211,7 @@
             </td>
             <td> {{donation.packing}} </td>
             <td> {{donation.dosage}} </td>
-            <td> {{donation.shelfLife}} </td>
+            <td> {{donation.shelfLife | date:'dd/MM/yyyy'}} </td>
             <td> {{donation.pharmacy.address}} </td>
           </tr>
         </tbody>
@@ -223,12 +223,27 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
+    <h4 class="modal-title pull-left">{{selectedDoantion.title}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <app-donation-form (refreshList)="getAllDonations()" [donationData]="selectedDoantion" ></app-donation-form>
+  </div>
+</ng-template>
+
+<ng-template #templateOrders>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{selectedDoantion.medicineDonation.title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-donation-detail
+      (refreshList)="getAllDonations()"
+      [donationData]="this.selectedDoantion">
+    </app-donation-detail>
   </div>
 </ng-template>

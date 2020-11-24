@@ -272,9 +272,9 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, isReservedDonation?: boolean) {
     this.modalRef = this.modalService.show(template,
-      Object.assign({}, {class: 'modal-lg'})
+      Object.assign({}, {class: isReservedDonation ? 'modal-xl' : 'modal-lg' })
     );
   }
 

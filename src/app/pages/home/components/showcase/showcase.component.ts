@@ -86,6 +86,8 @@ export class ShowcaseComponent implements OnInit {
     // this.loading();
     this.service.getPagableAndSorting(pageNumber, this.pageSize, this.filter).subscribe(
       (data) => {
+        console.log(data.content);
+
         this.donations = data.content;
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;

@@ -1,0 +1,64 @@
+<div class="corpoTela container" *ngIf="donationData.medicineDonation">
+  <div class="row">
+    <section class="imagem col-sm-12 col-md-6">
+      <carousel>
+        <slide class="carousel-slide-item">
+          <img class="carousel-images" src="{{donationData.medicineDonation.pictureFile}}" alt="first slide" height="300">
+        </slide>
+        <slide class="carousel-slide-item">
+          <img class="carousel-images " src="{{donationData.medicineDonation.pictureFileBack}}"
+           alt="second slide" height="300">
+        </slide>
+      </carousel>
+    </section>
+    <section class="conteudo col-sm-12 col-md-6 d-flex-column">
+        <h2 class="text-weight-bold text-center">{{donationData.medicineDonation.title}}</h2>
+        <h3>Descrição</h3>
+        <p>{{donationData.medicineDonation.description}}</p>
+        <button class="btn btn-orange logo" type="button" (click)="submitReserve()">
+          {{ donationData.medicineDonation.statusId == '1' ? 'Eu quero!' : 'Cancelar o pedido da medicação'}}
+        </button>
+        <h3 class="my-2">Detalhes</h3>
+        <div class="row justify-content-between">
+          <table class="table table-hover col-sm-12 col-md-6 m-0">
+            <tbody>
+              <tr class="justify-content-between ">
+                <td><strong> Tarja: </strong></td>
+                <td>
+                  <div [style.background-color]="donationData.medicineDonation.stripe" style="height: 22px; width: 100%"></div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Embalagem: </strong></td>
+                <td>{{donationData.medicineDonation.packing}}</td>
+              </tr>
+              <tr>
+                <td><strong>Quantidade: </strong></td>
+                <td>{{donationData.medicineDonation.amount}} un</td>
+              </tr>
+              <tr>
+                <td><strong>Dosagem: </strong></td>
+                <td>{{donationData.medicineDonation.dosage}} mg</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-hover col-sm-12 col-md-6 m-0">
+            <tbody>
+              <tr>
+                <td><strong>Data Fabricação: </strong></td>
+                <td>{{donationData.medicineDonation.manufacturyDate | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td><strong>Data Validade: </strong></td>
+                <td>{{donationData.medicineDonation.shelfLife | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td><strong>Número Lote: </strong></td>
+                <td>{{donationData.medicineDonation.batchCode}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </section>
+  </div>
+</div>
