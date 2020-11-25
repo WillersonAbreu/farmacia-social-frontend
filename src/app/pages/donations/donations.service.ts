@@ -25,5 +25,11 @@ export class DonationsService extends BaseService {
     return this.api.get(`${this.baseURL}/user/${id}`, this.httpOptions);
   }
 
+  public findAllDoneDonationsByPharmacyId(id): Observable<any> {
+    return this.api.get(`${this.baseURL}/done/pharmacy/${id}`, this.httpOptions);
+  }
 
+  public findAllPendentDonationsByPharmacyId(id): Observable<any> {
+    return this.api.get(`${this.baseURL}/pendent/pharmacy/${id}`, this.httpOptions);
+  }
 }

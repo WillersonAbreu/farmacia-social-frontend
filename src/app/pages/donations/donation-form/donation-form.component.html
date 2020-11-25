@@ -72,30 +72,29 @@
                 <label for="formDescricao">Tarja</label>
                 <div class="d-flex justify-content-around">
                     <div class="form-check d-flex">
-
                         <fieldset class="form-group">
-                            <input formControlName="stripe" id="tarjaVerde" value="verde" checked class="form-check-input" required type="radio" />
+                            <input formControlName="stripe" id="tarjaVerde" value="green" checked class="form-check-input" required type="radio" />
                         </fieldset>
                         <span class="badge badge-success" style="width: 30px; height: 24px">&nbsp;</span>
                     </div>
                     <div class="form-check d-flex">
 
                         <fieldset class="form-group">
-                            <input formControlName="stripe" id="tarjaAmarela" value="amarela" class="form-check-input" required type="radio" />
+                            <input formControlName="stripe" id="tarjaAmarela" value="yellow" class="form-check-input" required type="radio" />
                         </fieldset>
                         <span class="badge badge-warning" style="width: 30px; height: 24px">&nbsp;</span>
                     </div>
                     <div class="form-check d-flex">
 
                         <fieldset class="form-group">
-                            <input formControlName="stripe" id="tarjaVermelha" value="vermelha" class="form-check-input" required type="radio" />
+                            <input formControlName="stripe" id="tarjaVermelha" value="red" class="form-check-input" required type="radio" />
                         </fieldset>
                         <span class="badge badge-danger" style="width: 30px; height: 24px">&nbsp;</span>
                     </div>
                     <div class="form-check d-flex">
 
                         <fieldset class="form-group">
-                            <input formControlName="stripe" id="tarjaPreta" value="preta" class="form-check-input" required type="radio" />
+                            <input formControlName="stripe" id="tarjaPreta" value="black" class="form-check-input" required type="radio" />
                         </fieldset>
                         <span class="badge badge-dark" style="width: 30px; height: 24px">&nbsp;</span>
                     </div>
@@ -185,7 +184,6 @@
                         <option
                           *ngFor="let pharmacy of pharmacyList"
                           value="{{pharmacy.id}}"
-                          
                         >
                           {{ pharmacy.fantasyName }} - {{ pharmacy.address}}
                         </option>

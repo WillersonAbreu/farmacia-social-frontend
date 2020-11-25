@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 
 // FontAwsome Icons
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+import { IUserType } from 'src/app/core/store/user/user.actions';
 @Component({
   selector: 'app-showcase',
   templateUrl: './showcase.component.html',
@@ -12,55 +14,18 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export class ShowcaseComponent implements OnInit {
 
   faSearch = faSearch;
-
-
-  donations = [
-    {
-      id: 1,
-      title: "Amoxicilina",
-      pictureFile: "https://static.tuasaude.com/img/posts/2014/07/7f497048a7a864e6190b53caf18bc07f-640_427.jpeg",
-      description: "Extrato de Amoxicilina",
-      stripe: "verde",
-      amount: 1,
-      dosage: 500,
-      shelfLife: "2020-10-10",
-      manufacturyDate: "2020-10-10",
-      statusId: "publicado",
-    },
-    {
-      id: 2,
-      title: "Doril",
-      pictureFile: "https://th.bing.com/th/id/OIP.iniFTNfFYpmyFgyuVO0KawHaHa?pid=Api&rs=1",
-      description: "Tomou Doril? A dor sumiu",
-      stripe: "amarela",
-      amount: 2,
-      dosage: 250,
-      shelfLife: "2020-10-20",
-      manufacturyDate: "2020-10-10",
-      statusId: "publicado",
-    },
-    {
-      id: 3,
-      title: "Benzetacil",
-      pictureFile: "https://th.bing.com/th/id/OIP.B4qyfAw4rbLk-Q4g9ZyuYQAAAA?pid=Api&rs=1",
-      description: "Benzetacil Nutella em cartela",
-      stripe: "vermelha",
-      amount: 4,
-      dosage: 1000,
-      shelfLife: "2020-10-30",
-      manufacturyDate: "2020-10-10",
-      statusId: "publicado",
-    },
-  ];
-
+  donations = [];
   totalPages = 0;
   totalElements = 0;
   pageNumber = 0;
   pageSize = 5;
   pageIndexes: Array<number> = [];
   filter = '';
+  loggedUserId: number;
 
-  constructor(private service: DonationsService) { }
+  constructor(private service: DonationsService, private store: Store<{ user: IUserType }>) {
+    this.store.select('user').subscribe(user => this.loggedUserId = user.id);
+  }
 
   ngOnInit() {
     this.getAll(this.pageNumber);
@@ -86,9 +51,17 @@ export class ShowcaseComponent implements OnInit {
     // this.loading();
     this.service.getPagableAndSorting(pageNumber, this.pageSize, this.filter).subscribe(
       (data) => {
-        console.log(data.content);
+        if(data.content.length > 0) {
+          const filteredDonations = [];
 
-        this.donations = data.content;
+          data.content.map(donation => {
+            if(donation.userId != this.loggedUserId){
+              filteredDonations.push(donation);
+            }
+          });
+
+          this.donations = filteredDonations;
+        }
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
         this.pageNumber = data.number;

@@ -39,6 +39,8 @@ export class ProfileComponent implements OnInit {
   id: number;
   reservedDonationsList: [];
   donationsList: [];
+  pendentDonations: [];
+  doneDonations: [];
   userSchema = updateUserSchemaValidator();
   pharmacySchema = updatePharmacySchemaValidator();
   userType: number;
@@ -95,17 +97,18 @@ export class ProfileComponent implements OnInit {
     });
 
     this.pharmacyForm = this.formBuilder.group({
-      fantasyName: [''],
-      email: [''],
-      phone: [''],
-      password: [''],
-      cnpj: [''],
-      pharmaceutical: [''],
-      cep: [''],
       address: [''],
-      number: [''],
+      cep: [''],
+      cnpj: [''],
+      email: [''],
+      fantasyName: [''],
       latitude: [''],
-      longitude: ['']
+      longitude: [''],
+      pharmaceutical: [''],
+      phone: [''],
+      region: [''],
+      password: [''],
+      number: ['']
     });
 
     if(this.userType === 1){
@@ -129,6 +132,7 @@ export class ProfileComponent implements OnInit {
     }else{
       this.pharmacyService.getOne(this.id).subscribe(
         userData => {
+          console.log(userData);
           this.pharmacyForm.patchValue(userData);
           let address = userData.address;
           let target = { value: ''};
@@ -153,6 +157,8 @@ export class ProfileComponent implements OnInit {
   }
 
   @Output() getAllDonations(){
+    //Get the list of done donations
+
     // Get the list of reserved donations
     const myReservedDonations = this.reservedDonationService.findAllById(this.id);
     myReservedDonations.subscribe(reservedDonations => {
@@ -276,6 +282,10 @@ export class ProfileComponent implements OnInit {
     this.modalRef = this.modalService.show(template,
       Object.assign({}, {class: isReservedDonation ? 'modal-xl' : 'modal-lg' })
     );
+  }
+
+  closeModal() {
+    this.modalRef.hide();
   }
 
   setModalData(donation){

@@ -91,7 +91,6 @@ export class DetailDonationComponent implements OnInit {
         Swal.showLoading();
         this.ordersService.store(data).subscribe(
           data => {
-            console.log(data);
             Swal.fire({
               title: 'A reserva foi realizada com um sucesso!',
               text: 'Lembre-se de levar a receita para poder retirar o medicamento!',
@@ -100,7 +99,6 @@ export class DetailDonationComponent implements OnInit {
             });
             //  this.router.navigate(['/doacoes', this.doacaoSelecionada],);
             this.getOne();
-
           },
           erro => {
             console.log(erro),

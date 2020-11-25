@@ -1,7 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 // FontAwsome Icons
-import { faHome, faInfoCircle, faQuestion, faHeadset, faUserCircle, faSignInAlt, faUserPlus, faPrescriptionBottleAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome,
+  faInfoCircle,
+  faQuestion,
+  faHeadset,
+  faUserCircle,
+  faSignInAlt,
+  faUserPlus,
+  faPrescriptionBottleAlt,
+  faSignOutAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { JwtService } from '../../services/jwt.service';
 import { AuthService } from '../../services/auth.service';
@@ -15,16 +31,17 @@ import { IUserType } from '../../store/user/user.actions';
   styleUrls: ['./header.component.css'],
   animations: [
     //Define animation here
-    trigger("animation", [
-      state("hide", style({ height: '0px' })),
-      state("show", style({ height: '250px' })),
+    trigger('animation', [
+      state('hide', style({ height: '0px' })),
+      state('show', style({ height: '250px' })),
 
-      transition('hide <=> show', animate('300ms ease-in'))
-    ])
-  ]
+      transition('hide <=> show', animate('300ms ease-in')),
+    ]),
+  ],
 })
 export class HeaderComponent implements OnInit {
   public isAuthenticated: boolean = false;
+  public userType: number;
 
   constructor(
     private route: Router,
@@ -34,17 +51,20 @@ export class HeaderComponent implements OnInit {
   ) {
     const reduxUser = this.store.select('user');
     reduxUser.subscribe(
-      res => this.isAuthenticated = res.isAuthenticated,
-      err => console.log(err)
-    )
+      (res) => {
+        this.isAuthenticated = res.isAuthenticated
+        this.userType = res.roleId;
+      },
+      (err) => console.log(err)
+    );
   }
 
   public isMenuCollapsed = true;
 
-  state: string = "hide";
+  state: string = 'hide';
 
   animateMe() {
-    this.state = (this.state === 'hide' ? 'show' : 'hide');
+    this.state = this.state === 'hide' ? 'show' : 'hide';
   }
 
   faHome = faHome;
@@ -55,7 +75,7 @@ export class HeaderComponent implements OnInit {
   faSignInAlt = faSignInAlt;
   faUserPlus = faUserPlus;
   faPrescriptionBottleAlt = faPrescriptionBottleAlt;
-  faSignOutAlt = faSignOutAlt
+  faSignOutAlt = faSignOutAlt;
 
   logout(): void {
     Swal.fire({
@@ -66,17 +86,17 @@ export class HeaderComponent implements OnInit {
       cancelButtonColor: 'red',
       showCancelButton: true,
       confirmButtonText: 'Sim',
-    }).then(_yes => {
-      this.authService.purgeAuth();
-      this.jwtService.destroyToken();
-      this.route.navigate(['/']);
-    }).catch(_no => {
-      return;
+    }).then((result) => {
+      console.log('Sim', result);
+      if(result.isConfirmed){
+        this.authService.purgeAuth();
+        this.jwtService.destroyToken();
+        this.route.navigate(['/']);
+      }else{
+        return;
+      }
     });
-
-
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

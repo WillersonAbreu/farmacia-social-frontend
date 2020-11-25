@@ -32,35 +32,34 @@ export class DonationDetailComponent implements OnInit {
   }
 
   submitReserve() {
+
     Swal.fire({
-      title: 'Você quer mesmo realizar a reserva do medicamento?',
-      text: 'Lembre-se, só poderá retirar o medicamento caso tenha posse de uma receita médica válida!',
+      title: 'Você quer mesmo cancelar a reserva do medicamento?',
       icon: 'warning',
       showDenyButton: true,
-      confirmButtonText: `Confirmar Reserva`,
-      denyButtonText: `Cancelar`,
+      confirmButtonText: `Cancelar Reserva`,
+      denyButtonText: `Desistir`,
     }).then((result) => {
-      // if (result.isConfirmed) {
-      //   Swal.showLoading();
-      //   this.ordersService.store(data).subscribe(
-      //     data => {
-      //       console.log(data);
-      //       Swal.fire({
-      //         title: 'A reserva foi realizada com um sucesso!',
-      //         text: 'Lembre-se de levar a receita para poder retirar o medicamento!',
-      //         icon: 'success',
-      //         confirmButtonText: `OK`,
-      //       });
-      //       this.getOne();
-      //     },
-      //     erro => {
-      //       console.log(erro),
-      //       Swal.hideLoading();
-      //     }
-      //   );
-      // } else if (result.isDenied) {
-      //   Swal.fire('Medicamento não reservado', '', 'info')
-      // }
+      if (result.isConfirmed) {
+        Swal.showLoading();
+        this.ordersService.delete(this.donationData.id).subscribe(
+          data => {
+            console.log(data);
+            Swal.fire({
+              title: 'A reserva foi cancelada com um sucesso!',
+              icon: 'success',
+              confirmButtonText: `OK`,
+            });
+            this.refreshList.emit(true);
+          },
+          erro => {
+            console.log(erro),
+            Swal.hideLoading();
+          }
+        );
+      } else if (result.isDenied) {
+        Swal.fire('Medicamento não reservado', '', 'info')
+      }
     });
   }
 

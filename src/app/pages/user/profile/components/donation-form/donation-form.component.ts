@@ -94,6 +94,43 @@ export class DonationFormComponent implements OnInit {
     };
   }
 
+  deleteConfirm(id: number, nome: string) {
+    Swal.fire({
+      title: 'Você tem certeza que quer deletar a doação de ' + nome + '?',
+      text: 'Essa alteração é irrevesível!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'OK',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.delete(id, nome);
+      }
+    });
+  }
+
+  delete(id: number, nome) {
+    this.service.delete(id).subscribe(
+      data => {
+        Swal.fire(
+          'Deletada com sucesso!',
+          'A doação ' + nome + ' foi deletada com exito!',
+          'success'
+        );
+        this.refreshList.emit(true);
+      },
+      erro => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Aconteceu um erro ao deletar a doação',
+          text: erro + '',
+        });
+      }
+    );
+  }
+
   submit() {
     const donation = this.form.value;
     donation.pictureFile = this.imageBase64Front;

@@ -66,7 +66,7 @@
           </li>
         </ng-template>
       </ul>
-      <app-styled-button routerLink="/doacoes/cadastro" [buttonTitle]="'DOAR'">
+      <app-styled-button *ngIf="userType == 1" routerLink="/doacoes/cadastro" [buttonTitle]="'DOAR'">
       </app-styled-button>
     </div>
   </nav>
