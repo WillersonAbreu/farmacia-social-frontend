@@ -22,6 +22,7 @@ export class PharmacyDonationDetailComponent implements OnInit {
   statusList: any[];
   imageBase64Front;
   imageBase64Back;
+  actionType: string;
   @Input() isDoneDonations: boolean;
   @Input() donationData: any;
   @Output() refreshList = new EventEmitter<boolean>();
@@ -36,7 +37,8 @@ export class PharmacyDonationDetailComponent implements OnInit {
     private service: DonationsService,
     private pharmacyService: PharmacyService,
     private statusService: DonationStatusService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+
   ) {}
 
   ngOnInit() {
@@ -56,6 +58,9 @@ export class PharmacyDonationDetailComponent implements OnInit {
       pharmacyId: [''],
       statusId: [''],
     });
+
+    console.log('Testeee 1', this.donationData);
+
     this.getDonation();
 
     this.pharmacyService.getAll().subscribe(
@@ -77,9 +82,13 @@ export class PharmacyDonationDetailComponent implements OnInit {
     this.imageBase64Back = this.donationData.pictureFileBack;
   }
 
+  setActionType(event) {
+    console.log(event.target.value);
+    this.actionType = event.target.value;
+  }
+
   onDone() {
-    // this.form.controls.dosage.setValue(Number(this.form.controls.dosage.value));
-    this.form.controls.statusId.setValue(5);
+    this.donationData.statusId = 5;
 
     this.submit();
   }
@@ -102,11 +111,19 @@ export class PharmacyDonationDetailComponent implements OnInit {
     const donation = this.form.value;
     donation.pictureFile = this.imageBase64Front;
     donation.pictureFileBack = this.imageBase64Back;
-    donation.userId = Number(this.donationData.userId);
+
+    if (this.actionType === 'reprove'){
+      donation.statusId = 4;
+    }else if(this.actionType === 'done'){
+      donation.statusId = 5;
+    }else if(this.actionType === 'cancel'){
+      donation.statusId = 6;
+    }
 
     if (this.id) {
+      console.log('Testeee 2', donation);
       // atualizar
-      this.service.update(donation.userId, donation).subscribe(
+      this.service.update(this.donationData.id, donation).subscribe(
         (data) => {
           this.refreshList.emit(true);
           Swal.fire({
@@ -119,9 +136,6 @@ export class PharmacyDonationDetailComponent implements OnInit {
           console.log(this.donationData);
         }
       );
-    } else {
-      // cadastrar
-      return;
     }
   }
 }

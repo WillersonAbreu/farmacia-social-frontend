@@ -9,10 +9,9 @@ import { IUserType } from 'src/app/core/store/user/user.actions';
 @Component({
   selector: 'app-showcase',
   templateUrl: './showcase.component.html',
-  styleUrls: ['./showcase.component.css']
+  styleUrls: ['./showcase.component.css'],
 })
 export class ShowcaseComponent implements OnInit {
-
   faSearch = faSearch;
   donations = [];
   totalPages = 0;
@@ -23,8 +22,13 @@ export class ShowcaseComponent implements OnInit {
   filter = '';
   loggedUserId: number;
 
-  constructor(private service: DonationsService, private store: Store<{ user: IUserType }>) {
-    this.store.select('user').subscribe(user => this.loggedUserId = user.id);
+  constructor(
+    private service: DonationsService,
+    private store: Store<{ user: IUserType }>
+  ) {
+    this.store
+      .select('user')
+      .subscribe((user) => (this.loggedUserId = user.id));
   }
 
   ngOnInit() {
@@ -49,30 +53,31 @@ export class ShowcaseComponent implements OnInit {
   // }
   getAll(pageNumber: number) {
     // this.loading();
-    this.service.getPagableAndSorting(pageNumber, this.pageSize, this.filter).subscribe(
-      (data) => {
-        if(data.content.length > 0) {
-          const filteredDonations = [];
+    this.service
+      .getPagableAndSorting(pageNumber, this.pageSize, this.filter)
+      .subscribe(
+        (data) => {
+          if (data.content.length > 0) {
+            // const filteredDonations = [];
 
-          data.content.map(donation => {
-            if(donation.userId != this.loggedUserId){
-              filteredDonations.push(donation);
-            }
-          });
+            // data.content.map(donation => {
+            //   if(donation.userId != this.loggedUserId){
+            //     filteredDonations.push(donation);
+            //   }
+            // });
 
-          this.donations = filteredDonations;
-        }
-        this.totalPages = data.totalPages;
-        this.totalElements = data.totalElements;
-        this.pageNumber = data.number;
-        this.pageIndexes = Array(this.totalPages)
-          .fill(0)
-          .map((x, i) => i);
-        Swal.close();
-
-      },
-      (err) => console.log(err)
-    );
+            this.donations = data.content;
+          }
+          this.totalPages = data.totalPages;
+          this.totalElements = data.totalElements;
+          this.pageNumber = data.number;
+          this.pageIndexes = Array(this.totalPages)
+            .fill(0)
+            .map((x, i) => i);
+          Swal.close();
+        },
+        (err) => console.log(err)
+      );
   }
 
   loading() {
@@ -81,7 +86,7 @@ export class ShowcaseComponent implements OnInit {
       text: 'Estamos trabalhando ao máximo.',
       onBeforeOpen: () => {
         Swal.showLoading();
-      }
+      },
     });
   }
 
@@ -93,5 +98,4 @@ export class ShowcaseComponent implements OnInit {
     //event.page = Index of the new page
     //event.pageCount = Total number of pages
   }
-
 }

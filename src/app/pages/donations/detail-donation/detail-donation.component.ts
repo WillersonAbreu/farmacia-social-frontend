@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // FontAwsome Icons
-import { faCloudUploadAlt, faPrescriptionBottle, faPills } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCloudUploadAlt,
+  faPrescriptionBottle,
+  faPills,
+} from '@fortawesome/free-solid-svg-icons';
 import { DonationsService } from '../donations.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Store } from '@ngrx/store';
@@ -13,21 +17,19 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-detail-donation',
   templateUrl: './detail-donation.component.html',
-  styleUrls: ['./detail-donation.component.css']
+  styleUrls: ['./detail-donation.component.css'],
 })
 export class DetailDonationComponent implements OnInit {
-
-  donation: {};
+  donation: IDonation;
   doacaoSelecionada = 0;
   currentUser;
   id = 0;
-  statusId = 0;
-  url = "/doacoes/";
+  statusId: number = 0;
+  url = '/doacoes/';
 
   faCloudUploadAlt = faCloudUploadAlt;
   faPrescriptionBottle = faPrescriptionBottle;
-  faPills = faPills
-
+  faPills = faPills;
 
   constructor(
     private service: DonationsService,
@@ -35,8 +37,7 @@ export class DetailDonationComponent implements OnInit {
     private router: Router,
     private ordersService: OrdersService,
     private store: Store<{ user: IUserType }>
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     // this.router.routeReuseStrategy.shouldReuseRoute = () => {
@@ -46,34 +47,33 @@ export class DetailDonationComponent implements OnInit {
 
     const reduxUser = this.store.select('user');
     reduxUser.subscribe(
-      res => {
-        this.id = res.id,
-          console.log("o id é: " + this.id)
+      (res) => {
+        (this.id = res.id), console.log('o id é: ' + this.id);
       },
-      err => console.log(err)
-    )
+      (err) => console.log(err)
+    );
   }
 
   getOne() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
       this.doacaoSelecionada = id;
       this.service.getOne(id).subscribe(
-        data => {
-          this.donation = data,
-            this.statusId = data.statusId,
-            console.log("o status é: " + this.statusId)
+        (data) => {
+          console.log('Dataaaa', data);
+          (this.donation = data),
+            (this.statusId = data.statusId),
+            console.log('o status é: ' + this.statusId);
         },
-        erro => console.log(erro)
+        (erro) => console.log(erro)
       );
     });
   }
 
   submitReserve() {
-
     const data = {
-      "userId": this.id,
-      "medicineDonationId": this.doacaoSelecionada
+      userId: this.id,
+      medicineDonationId: this.doacaoSelecionada,
     };
 
     console.log(data);
@@ -81,7 +81,8 @@ export class DetailDonationComponent implements OnInit {
 
     Swal.fire({
       title: 'Você quer mesmo realizar a reserva do medicamento?',
-      text: 'Lembre-se, só poderá retirar o medicamento caso tenha posse de uma receita médica válida!',
+      text:
+        'Lembre-se, só poderá retirar o medicamento caso tenha posse de uma receita médica válida!',
       icon: 'warning',
       showDenyButton: true,
       confirmButtonText: `Confirmar Reserva`,
@@ -90,28 +91,48 @@ export class DetailDonationComponent implements OnInit {
       if (result.isConfirmed) {
         Swal.showLoading();
         this.ordersService.store(data).subscribe(
-          data => {
+          (data) => {
             Swal.fire({
               title: 'A reserva foi realizada com um sucesso!',
-              text: 'Lembre-se de levar a receita para poder retirar o medicamento!',
+              text:
+                'Lembre-se de levar a receita para poder retirar o medicamento!',
               icon: 'success',
               confirmButtonText: `OK`,
             });
             //  this.router.navigate(['/doacoes', this.doacaoSelecionada],);
             this.getOne();
           },
-          erro => {
-            console.log(erro),
-              Swal.hideLoading();
+          (erro) => {
+            console.log(erro), Swal.hideLoading();
           }
         );
-
       } else if (result.isDenied) {
-        Swal.fire('Medicamento não reservado', '', 'info')
+        Swal.fire('Medicamento não reservado', '', 'info');
       }
-    })
-
-
+    });
   }
+}
 
+interface IDonation {
+  amount: number;
+  batchCode: number | string;
+  createdAt: number;
+  description: string;
+  dosage: number | string;
+  id: number;
+  isActive: boolean;
+  manufacturyDate: string;
+  packing: string;
+  pharmacy: {};
+  pharmacyId: number;
+  pictureFile: string;
+  pictureFileBack: string;
+  reservedDonation: null;
+  shelfLife: string;
+  status: {};
+  statusId: number;
+  stripe: string;
+  title: string;
+  user: {};
+  userId: number;
 }

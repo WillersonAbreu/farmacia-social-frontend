@@ -1,102 +1,199 @@
 <div class="container">
   <div class="form-wrapper">
-    <div class="logo" style="display: flex; justify-content: center; align-items: center">
-      <a class="farmaciaSocial" href="/" style="text-decoration: none; padding: 0px">
-        <img src="../../../assets/images/logo.png" height="50px" class="d-inline-block align-top" />
+    <div
+      class="logo"
+      style="display: flex; justify-content: center; align-items: center"
+    >
+      <a
+        class="farmaciaSocial"
+        href="/"
+        style="text-decoration: none; padding: 0px"
+      >
+        <img
+          src="../../../assets/images/logo.png"
+          height="50px"
+          class="d-inline-block align-top"
+        />
         <span style="color: #f4a261"> Farmácia </span>
         <span style="color: #2a9d8f">Social</span>
       </a>
     </div>
 
-  <span>Cadastre sua farmácia. É gratis!</span>
-  <form [formGroup]="form" (ngSubmit)="submit()" class="form-cadastro-farmacia">
-    <label>Nome Fantasia</label>
-    <fieldset class="form-group">
-      <input formControlName="fantasyName" placeholder="Nome" class="form-control form-control-sm" type="text" />
-      <div class="error-message" *ngIf="!form.controls['fantasyName'].valid">{{form.controls['fantasyName'].errors}}</div>
-    </fieldset>
-
-    <label>CNPJ</label>
-    <fieldset class="form-group">
-      <input formControlName="cnpj" mask={{cnpjMask}} placeholder="CNPJ" class="form-control form-control-sm" type="text" />
-      <div class="error-message" *ngIf="!form.controls['cnpj'].valid">{{form.controls['cnpj'].errors}}</div>
-    </fieldset>
-
-    <label>Nome do Farmacêutico</label>
-    <fieldset class="form-group">
-      <input formControlName="pharmaceutical" placeholder="Farmacêutico" class="form-control form-control-sm" type="text" />
-      <div class="error-message" *ngIf="!form.controls['pharmaceutical'].valid">{{form.controls['pharmaceutical'].errors}}</div>
-    </fieldset>
-
-    <label>Email</label>
-    <fieldset class="form-group">
-      <input formControlName="email" placeholder="Email" class="form-control form-control-sm" type="text" />
-      <div class="error-message" *ngIf="!form.controls['email'].valid">{{form.controls['email'].errors}}</div>
-    </fieldset>
-
-    <label>Telefone Celular</label>
-    <fieldset class="form-group">
-      <input formControlName="phone" mask="{{phoneMask}}" placeholder="Telefone" class="form-control form-control-sm" maxlength="15" type="text" />
-      <div class="error-message" *ngIf="!form.controls['phone'].valid">{{form.controls['phone'].errors}}</div>
-    </fieldset>
-
-    <label>Senha</label>
-    <div class="input-group flex-row">
-      <input formControlName="password" placeholder="Senha" class="form-control form-control-sm" type="{{showPassword ? 'text' : 'password'}}" />
-      <div class="input-group-append sm btn-eye" (click)="handlePasswordInput()">
-        <fa-icon class="input-group-text" [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
-      </div>
-    </div>
-    <div class="error-message" *ngIf="!form.controls['password'].valid">{{form.controls['password'].errors}}</div>
-
-    <label>CEP</label>
-    <fieldset class="form-group">
-      <input formControlName="cep" (blur)="getAddressData($event.target)" mask="{{cepMask}}" placeholder="CEP" class="form-control form-control-sm" type="text" maxlength="9" />
-      <div class="error-message" *ngIf="!form.controls['cep'].valid">{{form.controls['cep'].errors}}</div>
-    </fieldset>
-
-    <label>Endereço Completo</label>
-    <fieldset class="form-group">
-      <input formControlName="address" placeholder="Endereço" class="form-control form-control-sm" type="text" />
-      <div class="error-message" *ngIf="!form.controls['address'].valid">{{form.controls['address'].errors}}</div>
-    </fieldset>
-
-    <label>Número</label>
-    <fieldset class="form-group">
-      <input (blur)="setNumberOnAddress($event.target)" formControlName="number" placeholder="Número da residência" class="form-control form-control-sm" type="number" />
-      <div class="error-message" *ngIf="!form.controls['number'].valid">{{form.controls['number'].errors}}</div>
-    </fieldset>
-
-    <label>Confirme no mapa se a localização está correta, se não estive selecione o local certo.</label>
-    <div class="error-message" *ngIf="!form.controls['latitude'].valid">{{form.controls['latitude'].errors}}</div>
-
-    <agm-map
-      [latitude]="latitude"
-      [longitude]="longitude"
-      [zoom]="zoom"
-      [disableDefaultUI]="false"
-      (mapClick)="mapClicked($event)"
-      [mapDraggable]="true"
+    <span>Cadastre sua farmácia. É gratis!</span>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+      class="form-cadastro-farmacia"
     >
-      <agm-marker
+      <label>Nome Fantasia</label>
+      <fieldset class="form-group">
+        <input
+          formControlName="fantasyName"
+          placeholder="Nome"
+          class="form-control form-control-sm"
+          type="text"
+        />
+        <div class="error-message" *ngIf="!form.controls['fantasyName'].valid">
+          {{ form.controls['fantasyName'].errors }}
+        </div>
+      </fieldset>
+
+      <label>CNPJ</label>
+      <fieldset class="form-group">
+        <input
+          formControlName="cnpj"
+          mask="{{ cnpjMask }}"
+          placeholder="CNPJ"
+          class="form-control form-control-sm"
+          type="text"
+        />
+        <div class="error-message" *ngIf="!form.controls['cnpj'].valid">
+          {{ form.controls['cnpj'].errors }}
+        </div>
+      </fieldset>
+
+      <label>Nome do Farmacêutico</label>
+      <fieldset class="form-group">
+        <input
+          formControlName="pharmaceutical"
+          placeholder="Farmacêutico"
+          class="form-control form-control-sm"
+          type="text"
+        />
+        <div
+          class="error-message"
+          *ngIf="!form.controls['pharmaceutical'].valid"
+        >
+          {{ form.controls['pharmaceutical'].errors }}
+        </div>
+      </fieldset>
+
+      <label>Email</label>
+      <fieldset class="form-group">
+        <input
+          formControlName="email"
+          placeholder="Email"
+          class="form-control form-control-sm"
+          type="text"
+        />
+        <div class="error-message" *ngIf="!form.controls['email'].valid">
+          {{ form.controls['email'].errors }}
+        </div>
+      </fieldset>
+
+      <label>Telefone Celular</label>
+      <fieldset class="form-group">
+        <input
+          formControlName="phone"
+          mask="{{ phoneMask }}"
+          placeholder="Telefone"
+          class="form-control form-control-sm"
+          maxlength="15"
+          type="text"
+        />
+        <div class="error-message" *ngIf="!form.controls['phone'].valid">
+          {{ form.controls['phone'].errors }}
+        </div>
+      </fieldset>
+
+      <label>Senha</label>
+      <div class="input-group flex-row">
+        <input
+          formControlName="password"
+          placeholder="Senha"
+          class="form-control form-control-sm"
+          type="{{ showPassword ? 'text' : 'password' }}"
+        />
+        <div
+          class="input-group-append sm btn-eye"
+          (click)="handlePasswordInput()"
+        >
+          <fa-icon
+            class="input-group-text"
+            [icon]="showPassword ? faEyeSlash : faEye"
+          ></fa-icon>
+        </div>
+      </div>
+      <div class="error-message" *ngIf="!form.controls['password'].valid">
+        {{ form.controls['password'].errors }}
+      </div>
+
+      <label>CEP</label>
+      <fieldset class="form-group">
+        <input
+          formControlName="cep"
+          (blur)="getAddressData($event.target)"
+          mask="{{ cepMask }}"
+          placeholder="CEP"
+          class="form-control form-control-sm"
+          type="text"
+          maxlength="9"
+        />
+        <div class="error-message" *ngIf="!form.controls['cep'].valid">
+          {{ form.controls['cep'].errors }}
+        </div>
+      </fieldset>
+
+      <label>Endereço Completo</label>
+      <fieldset class="form-group">
+        <input
+          formControlName="address"
+          placeholder="Endereço"
+          class="form-control form-control-sm"
+          type="text"
+        />
+        <div class="error-message" *ngIf="!form.controls['address'].valid">
+          {{ form.controls['address'].errors }}
+        </div>
+      </fieldset>
+
+      <label>Número</label>
+      <fieldset class="form-group">
+        <input
+          (blur)="setNumberOnAddress($event.target)"
+          formControlName="number"
+          placeholder="Número da residência"
+          class="form-control form-control-sm"
+          type="number"
+        />
+        <div class="error-message" *ngIf="!form.controls['number'].valid">
+          {{ form.controls['number'].errors }}
+        </div>
+      </fieldset>
+
+      <label
+        >Confirme no mapa se a localização está correta, se não estive selecione
+        o local certo.</label
+      >
+      <div class="error-message" *ngIf="!form.controls['latitude'].valid">
+        {{ form.controls['latitude'].errors }}
+      </div>
+
+      <agm-map
         [latitude]="latitude"
         [longitude]="longitude"
-        [markerDraggable]="false"
-        (dragEnd)="markerDragEnd($event)"
+        [zoom]="zoom"
+        [disableDefaultUI]="false"
+        (mapClick)="mapClicked($event)"
+        [mapDraggable]="true"
       >
-    	</agm-marker>
-    </agm-map>
+        <agm-marker
+          [latitude]="latitude"
+          [longitude]="longitude"
+          [markerDraggable]="false"
+          (dragEnd)="markerDragEnd($event)"
+        >
+        </agm-marker>
+      </agm-map>
 
-    <button class="btn btn-block btn-orange" type="submit">
-      Registrar
-    </button>
-  </form>
+      <button class="btn btn-block btn-orange" type="submit">Registrar</button>
+    </form>
 
-  <p>
-    Ao se registrar, você concorda com os
-    <strong><a href="#1">Termos de Uso</a></strong> e com a
-    <strong> <a href="#2">Política de Privacidade</a> </strong>, do site
-    Farmácia Social
-  </p>
+    <p>
+      Ao se registrar, você concorda com os
+      <strong><a href="#1">Termos de Uso</a></strong> e com a
+      <strong> <a href="#2">Política de Privacidade</a> </strong>, do site
+      Farmácia Social
+    </p>
   </div>
 </div>

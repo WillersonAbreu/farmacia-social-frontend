@@ -3,7 +3,6 @@ import { AuthGuard } from 'src/app/core/services/auth-guard.service';
 import { DetailDonationComponent } from './detail-donation/detail-donation.component';
 import { DonationFormComponent } from './donation-form/donation-form.component';
 import { DonationsComponent } from './donations.component';
-import { PedidosComponent } from './pedidos/pedidos.component';
 
 const routes: Routes = [
   {
@@ -14,7 +13,6 @@ const routes: Routes = [
       { path: 'cadastro', component: DonationFormComponent },
       { path: ':id', component: DetailDonationComponent },
       { path: ':id/editar', component: DonationFormComponent },
-      { path: 'pedidos', component: PedidosComponent },
     ]
   },
 ];

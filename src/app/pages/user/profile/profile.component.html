@@ -444,7 +444,7 @@
       </ng-template>
     </tab>
 
-    <tab heading="{{ userType == 1 ? 'Minhas doações' : 'Pedidos Entregues' }}">
+    <tab heading="{{ userType == 1 ? 'Minhas doações' : 'Pedidos Finalizados' }}">
       <ng-container *ngIf="userType == 1; else doneDonationsTemplate">
         <table class="table table-striped">
           <thead>

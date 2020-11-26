@@ -10,7 +10,6 @@ import { DonationFormComponent } from './donation-form/donation-form.component';
 import { DonationsService } from './donations.service';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { PedidosComponent } from './pedidos/pedidos.component';
 @NgModule({
   imports: [
     TabsModule.forRoot(),
@@ -26,7 +25,6 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     DonationsComponent,
     DetailDonationComponent,
     DonationFormComponent,
-    PedidosComponent
   ],
   providers: [
     DonationsService

@@ -28,8 +28,6 @@ import { ConfirmRegisterComponent } from './confirm-register/confirm-register.co
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { PaginatorModule } from 'primeng/paginator';
-import { PedidosComponent } from '../donations/pedidos/pedidos.component';
-import { ProfileComponent } from '../user/profile/profile.component';
 @NgModule({
   imports: [
     CommonModule,

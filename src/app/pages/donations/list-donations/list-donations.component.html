@@ -1,44 +1,63 @@
 <div class="d-flex justify-content-between bg-light p-2 mb-2">
-    <h3> Lista de doações </h3>
-    <a class="btn btn-primary" routerLink="/doacoes/cadastro">Nova doação</a>
+  <h3>Lista de doações</h3>
+  <a class="btn btn-primary" routerLink="/doacoes/cadastro">Nova doação</a>
 </div>
 
-<table class="table table-striped thead-dark display" style="width:100%">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Dosagem</th>
-            <th scope="col">Embalagem</th>
-            <th scope="col">Tarja</th>
-            <th scope="col">Doador</th>
-            <th scope="col">Status</th>
-            <th scope="col" class=" text-center">Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let donation of donations">
-            <th scope="row"> {{donation.id}}</th>
-            <td>
-                <div class="d-flex justify-content-between ">
-                    <img class="" width="100px" height="100px" [src]="donation.pictureFile ? donation.pictureFile : 'https://leics-fire.gov.uk/wp-content/uploads/2017/04/person-placeholder-300x300.png'" [alt]="donation.name">
-                    <span>{{donation.title}}</span>
-                </div>
-
-            </td>
-            <td>{{donation.description}}</td>
-            <td>{{donation.dosage}}</td>
-            <td>{{donation.packing}}</td>
-            <td>{{donation.stripe}}</td>
-            <td>{{donation.user.name}}</td>
-            <td>{{donation.status.status_string}}</td>
-            <td class="d-flex justify-content-center ">
-                <a [routerLink]="['/doacoes', donation.id]" class="btn btn-info mr-2">Exibir</a>
-                <a [routerLink]="['/doacoes', donation.id, 'editar']" class="btn btn-primary mr-2">Atualizar</a>
-                <button (click)="deleteConfirm(donation.id, donation.title)" class="btn btn-danger"> Deletar</button>
-            </td>
-        </tr>
-
-    </tbody>
+<table class="table table-striped thead-dark display" style="width: 100%">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Dosagem</th>
+      <th scope="col">Embalagem</th>
+      <th scope="col">Tarja</th>
+      <th scope="col">Doador</th>
+      <th scope="col">Status</th>
+      <th scope="col" class="text-center">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let donation of donations">
+      <th scope="row">{{ donation.id }}</th>
+      <td>
+        <div class="d-flex justify-content-between">
+          <img
+            class=""
+            width="100px"
+            height="100px"
+            [src]="
+              donation.pictureFile
+                ? donation.pictureFile
+                : 'https://leics-fire.gov.uk/wp-content/uploads/2017/04/person-placeholder-300x300.png'
+            "
+            [alt]="donation.name"
+          />
+          <span>{{ donation.title }}</span>
+        </div>
+      </td>
+      <td>{{ donation.description }}</td>
+      <td>{{ donation.dosage }}</td>
+      <td>{{ donation.packing }}</td>
+      <td>{{ donation.stripe }}</td>
+      <td>{{ donation.user.name }}</td>
+      <td>{{ donation.status.status_string }}</td>
+      <td class="d-flex justify-content-center">
+        <a [routerLink]="['/doacoes', donation.id]" class="btn btn-info mr-2"
+          >Exibir</a
+        >
+        <a
+          [routerLink]="['/doacoes', donation.id, 'editar']"
+          class="btn btn-primary mr-2"
+          >Atualizar</a
+        >
+        <button
+          (click)="deleteConfirm(donation.id, donation.title)"
+          class="btn btn-danger"
+        >
+          Deletar
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>

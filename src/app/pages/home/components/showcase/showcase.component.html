@@ -1,74 +1,107 @@
 <section class="divSearch d-flex justify-content-center">
-    <form class="form-inline mt-2 mt-md-0">
-        <!-- <input class="searchBar form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" /> -->
-        <fieldset class="form-group">
-            <input name="search" placeholder="Buscar pelo nome ou descrição do medicamento" class="searchBar form-control mr-sm-2" required type="text" (change)="onChange($event.target.value)" />
-        </fieldset>
-        <button class="searchButton logo btn my-2 my-sm-0" type="button" (click)="submit()">
-    <fa-icon [icon]="faSearch"></fa-icon>
-</button>
-    </form>
+  <form class="form-inline mt-2 mt-md-0">
+    <!-- <input class="searchBar form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" /> -->
+    <fieldset class="form-group">
+      <input
+        name="search"
+        placeholder="Buscar pelo nome ou descrição do medicamento"
+        class="searchBar form-control mr-sm-2"
+        required
+        type="text"
+        (change)="onChange($event.target.value)"
+      />
+    </fieldset>
+    <button
+      class="searchButton logo btn my-2 my-sm-0"
+      type="button"
+      (click)="submit()"
+    >
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </button>
+  </form>
 </section>
 
 <main class="showcase">
-    <div class="my-3 justify-content-center">
-        <div class="col-11 row m-auto justify-content-between">
-            <ng-container *ngIf="donations.length > 0; else elseTemplate">
-                <div *ngFor="let donation of donations" class="d-flex flex-column mx-auto mb-4">
-                    <div class="justify-content-center formatCard d-flex flex-column mx-auto">
-                        <carousel class="card text-dark shadow">
-                            <slide class="carousel-slide-item">
-                                <img class="carousel-images " src="{{donation.pictureFile}}" alt="first slide" height="184" width="284">
-                            </slide>
-                            <!-- <slide class="carousel-slide-item"> -->
-                            <!-- <img class="carousel-images " src="{{donation.pictureFileBack}}" alt="second slide" height="184" width="284"> -->
-                            <!-- </slide> -->
-                        </carousel>
-                        <a [routerLink]="['/doacoes/', donation.id]" class="card text-dark shadow" style="width: 18rem; text-decoration: none" href="#">
-                            <!-- <img src={{donation.pictureFile}} class="card-img-top" height="184" width="274" /> -->
-                            <!-- <img src="../../../assets/images/testecover.jfif" class="card-img-top" /> -->
-                            <div class="card-body d-flex justify-content-between">
-                                <h5 class="card-title" style="font-weight: bold">{{donation.title}}</h5>
-                                <span class="badge" [ngClass]="{
-                            'badge-success': donation.stripe == 'green',
-                            'badge-warning': donation.stripe == 'yellow',
-                            'badge-danger': donation.stripe == 'red',
-                            'badge-dark': donation.stripe == 'black' }" style="width: 30px; height: 24px">&nbsp;</span>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    {{donation.description}}
-                                </p>
-                            </div>
-                            <div class="card-body d-flex justify-content-between paddingFix">
-                                <div class="d-flex align-items-center flex-column">
-                                    <strong>Quantidade</strong>
-                                    <p>{{donation.amount}}</p>
-                                </div>
-                                <div class="d-flex align-items-center flex-column">
-                                    <strong>Dosagem</strong>
-                                    <p>{{donation.dosage}} mg</p>
-                                </div>
-                            </div>
-                            <div class="card-body d-flex justify-content-between paddingFix">
-                                <div class="d-flex align-items-center flex-column">
-                                    <strong>Data Fabricação</strong>
-                                    <p>{{donation.manufacturyDate | date:'dd/MM/yyyy'}}</p>
-                                </div>
-                                <div class="d-flex align-items-center flex-column">
-                                    <strong>Data Validade</strong>
-                                    <p>{{donation.shelfLife | date:'dd/MM/yyyy'}}</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+  <div class="my-3 justify-content-center">
+    <div class="col-11 row m-auto justify-content-between">
+      <ng-container *ngIf="donations.length > 0; else elseTemplate">
+        <div
+          *ngFor="let donation of donations"
+          class="d-flex flex-column mx-auto mb-4"
+        >
+          <div
+            class="justify-content-center formatCard d-flex flex-column mx-auto"
+          >
+            <carousel class="card text-dark shadow">
+              <slide class="carousel-slide-item">
+                <img
+                  class="carousel-images"
+                  src="{{ donation.pictureFile }}"
+                  alt="first slide"
+                  height="184"
+                  width="284"
+                />
+              </slide>
+            </carousel>
+            <a
+              [routerLink]="['/doacoes/', donation.id]"
+              class="card text-dark shadow"
+              style="width: 18rem; text-decoration: none"
+              href="#"
+            >
+              <div class="card-body d-flex justify-content-between">
+                <h5 class="card-title" style="font-weight: bold">
+                  {{ donation.title }}
+                </h5>
+                <span
+                  class="badge"
+                  [ngClass]="{
+                    'badge-success': donation.stripe == 'green',
+                    'badge-warning': donation.stripe == 'yellow',
+                    'badge-danger': donation.stripe == 'red',
+                    'badge-dark': donation.stripe == 'black'
+                  }"
+                  style="width: 30px; height: 24px"
+                  >&nbsp;</span
+                >
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  {{ donation.description }}
+                </p>
+              </div>
+              <div class="card-body d-flex justify-content-between paddingFix">
+                <div class="d-flex align-items-center flex-column">
+                  <strong>Quantidade</strong>
+                  <p>{{ donation.amount }}</p>
                 </div>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <h2 style="margin: 0 auto;"> Nenhuma doação disponível no momento </h2>
-            </ng-template>
+                <div class="d-flex align-items-center flex-column">
+                  <strong>Dosagem</strong>
+                  <p>{{ donation.dosage }} mg</p>
+                </div>
+              </div>
+              <div class="card-body d-flex justify-content-between paddingFix">
+                <div class="d-flex align-items-center flex-column">
+                  <strong>Data Fabricação</strong>
+                  <p>{{ donation.manufacturyDate | date: 'dd/MM/yyyy' }}</p>
+                </div>
+                <div class="d-flex align-items-center flex-column">
+                  <strong>Data Validade</strong>
+                  <p>{{ donation.shelfLife | date: 'dd/MM/yyyy' }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <h2 style="margin: 0 auto">Nenhuma doação disponível no momento</h2>
+      </ng-template>
     </div>
-
+  </div>
 </main>
-<p-paginator [rows]="pageSize" [totalRecords]="totalElements" (onPageChange)="paginate($event)"></p-paginator>
+<p-paginator
+  [rows]="pageSize"
+  [totalRecords]="totalElements"
+  (onPageChange)="paginate($event)"
+></p-paginator>

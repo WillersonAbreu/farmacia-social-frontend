@@ -1,28 +1,4 @@
-<div class="d-flex flex-row content-between" *ngIf="!isDoneDonations">
-  <button
-    (click)="onDone()"
-    style="display: flex; margin: 1vh auto"
-    class="btn btn-success btn-lg"
-  >
-    Concluir
-  </button>
-  <button
-    (click)="onReprove()"
-    style="display: flex; margin: 1vh auto"
-    class="btn btn-warning btn-lg"
-  >
-    Reprovar
-  </button>
-  <button
-    (click)="onCancel()"
-    style="display: flex; margin: 1vh auto"
-    class="btn btn-danger btn-lg"
-  >
-    Cancelar
-  </button>
-</div>
-<hr />
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="formatForm shadow-sm">
     <div class="row">
       <div class="form-group col-sm-12 col-md-6">
@@ -308,5 +284,54 @@
         </select>
       </fieldset>
     </div>
+    <div class="form-group">
+      <fieldset class="form-group">
+        <select
+          formControlName="statusId"
+          class="form-control"
+          required
+          type="number"
+          min="1"
+          hidden
+        >
+          <option
+            *ngFor="let status of statusList"
+            value="{{ status.id }}"
+            [selected]="donationData.statusId === status.id"
+          >
+            {{ status.status_string }}
+          </option>
+        </select>
+      </fieldset>
+    </div>
+  </div>
+  <div class="d-flex flex-row content-between" *ngIf="!isDoneDonations">
+    <button
+      value="done"
+      (click)="setActionType($event)"
+      style="display: flex; margin: 1vh auto"
+      class="btn btn-success btn-lg"
+      type="submit"
+    >
+      Concluir
+    </button>
+    <button
+      value="reprove"
+      (click)="setActionType()"
+      style="display: flex; margin: 1vh auto"
+      class="btn btn-warning btn-lg"
+      type="submit"
+    >
+      Reprovar
+    </button>
+    <button
+      value="cancel"
+      (click)="setActionType()"
+      style="display: flex; margin: 1vh auto"
+      class="btn btn-danger btn-lg"
+      type="submit"
+    >
+      Cancelar
+    </button>
   </div>
 </form>
