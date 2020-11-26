@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faCloudUploadAlt, faPills, faPrescriptionBottle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCloudUploadAlt,
+  faPills,
+  faPrescriptionBottle,
+} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { IUserType } from 'src/app/core/store/user/user.actions';
 import { OrdersService } from 'src/app/pages/donations/orders.service';
@@ -8,7 +12,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-donation-detail',
   templateUrl: './donation-detail.component.html',
-  styleUrls: ['./donation-detail.component.css']
+  styleUrls: ['./donation-detail.component.css'],
 })
 export class DonationDetailComponent implements OnInit {
   currentUser;
@@ -17,22 +21,20 @@ export class DonationDetailComponent implements OnInit {
 
   faCloudUploadAlt = faCloudUploadAlt;
   faPrescriptionBottle = faPrescriptionBottle;
-  faPills = faPills
+  faPills = faPills;
   @Input() donationData: any;
   @Output() refreshList = new EventEmitter<boolean>();
 
   constructor(
     private ordersService: OrdersService,
     private store: Store<{ user: IUserType }>
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     console.log(this.donationData);
   }
 
   submitReserve() {
-
     Swal.fire({
       title: 'Você quer mesmo cancelar a reserva do medicamento?',
       icon: 'warning',
@@ -43,7 +45,7 @@ export class DonationDetailComponent implements OnInit {
       if (result.isConfirmed) {
         Swal.showLoading();
         this.ordersService.delete(this.donationData.id).subscribe(
-          data => {
+          (data) => {
             console.log(data);
             Swal.fire({
               title: 'A reserva foi cancelada com um sucesso!',
@@ -52,15 +54,13 @@ export class DonationDetailComponent implements OnInit {
             });
             this.refreshList.emit(true);
           },
-          erro => {
-            console.log(erro),
-            Swal.hideLoading();
+          (erro) => {
+            console.log(erro), Swal.hideLoading();
           }
         );
       } else if (result.isDenied) {
-        Swal.fire('Medicamento não reservado', '', 'info')
+        Swal.fire('Medicamento não reservado', '', 'info');
       }
     });
   }
-
 }

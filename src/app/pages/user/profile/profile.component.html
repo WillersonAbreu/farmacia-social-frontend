@@ -1,65 +1,147 @@
 <app-header></app-header>
 
-<section style="margin-top: 90px;">
+<section style="margin-top: 90px">
   <tabset [justified]="true">
     <tab heading="Meu cadastro">
       <ng-container *ngIf="userType == 1; else elseTemplate">
-        <form [formGroup]="form" (ngSubmit)="userSubmit()" class="centralize col-md-6 col-lg-6">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="userSubmit()"
+          class="centralize col-md-6 col-lg-6"
+        >
           <div>
             <div class="card-body" id="cadastro-perfil">
               <div class="form-group">
                 <label class="font-weight-bold">Dados da conta</label>
-                <br>
+                <br />
                 <label for="exampleInputName">Nome</label>
-                <input formControlName="name" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
-                  placeholder="Nome completo">
-                  <div class="error-message" *ngIf="!form.controls['name'].valid">{{form.controls['name'].errors}}</div>
+                <input
+                  formControlName="name"
+                  class="form-control"
+                  id="exampleInputName"
+                  aria-describedby="emailHelp"
+                  placeholder="Nome completo"
+                />
+                <div class="error-message" *ngIf="!form.controls['name'].valid">
+                  {{ form.controls['name'].errors }}
+                </div>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail">E-mail</label>
-                <input formControlName="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                  placeholder="E-mail">
-                  <div class="error-message" *ngIf="!form.controls['email'].valid">{{form.controls['email'].errors}}</div>
-                <small id="emailHelp" class="form-text text-muted">Não compartilharmos seus dados com
-                  terceiros.</small>
+                <input
+                  formControlName="email"
+                  class="form-control"
+                  id="exampleInputEmail"
+                  aria-describedby="emailHelp"
+                  placeholder="E-mail"
+                />
+                <div
+                  class="error-message"
+                  *ngIf="!form.controls['email'].valid"
+                >
+                  {{ form.controls['email'].errors }}
+                </div>
+                <small id="emailHelp" class="form-text text-muted"
+                  >Não compartilharmos seus dados com terceiros.</small
+                >
               </div>
               <div class="form-group">
                 <label for="exampleInputPhone">Telefone</label>
-                <input mask="{{phoneMask}}" formControlName="phone" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-                  placeholder="Telefone">
-                  <div class="error-message" *ngIf="!form.controls['phone'].valid">{{form.controls['phone'].errors}}</div>
+                <input
+                  mask="{{ phoneMask }}"
+                  formControlName="phone"
+                  class="form-control"
+                  id="exampleInputEmail"
+                  aria-describedby="emailHelp"
+                  placeholder="Telefone"
+                />
+                <div
+                  class="error-message"
+                  *ngIf="!form.controls['phone'].valid"
+                >
+                  {{ form.controls['phone'].errors }}
+                </div>
               </div>
               <div class="input-group flex-row">
-                <input formControlName="password" placeholder="Senha" class="form-control" type="{{showPassword ? 'text' : 'password'}}" />
-                <div class="input-group-append btn-eye" (click)="handlePasswordInput()">
-                  <fa-icon class="input-group-text" [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
+                <input
+                  formControlName="password"
+                  placeholder="Senha"
+                  class="form-control"
+                  type="{{ showPassword ? 'text' : 'password' }}"
+                />
+                <div
+                  class="input-group-append btn-eye"
+                  (click)="handlePasswordInput()"
+                >
+                  <fa-icon
+                    class="input-group-text"
+                    [icon]="showPassword ? faEyeSlash : faEye"
+                  ></fa-icon>
                 </div>
               </div>
               <div class="form-group">
                 <label for="exampleInputCPF">CPF</label>
-                <input mask="{{ cpfMask }}" formControlName="cpf" class="form-control" id="exampleCPF" placeholder="CPF">
-                <div class="error-message" *ngIf="!form.controls['cpf'].valid">{{form.controls['cpf'].errors}}</div>
+                <input
+                  mask="{{ cpfMask }}"
+                  formControlName="cpf"
+                  class="form-control"
+                  id="exampleCPF"
+                  placeholder="CPF"
+                />
+                <div class="error-message" *ngIf="!form.controls['cpf'].valid">
+                  {{ form.controls['cpf'].errors }}
+                </div>
               </div>
 
               <label class="font-weight-bold">Endereço</label>
               <div class="form-group">
                 <label for="inputZip">CEP</label>
-                <input mask="{{cepMask}}" (blur)="getAddressData($event.target)" formControlName="cep" type="text" class="form-control"
-                  id="inputZip">
-                  <div class="error-message" *ngIf="!form.controls['cep'].valid">{{form.controls['cep'].errors}}</div>
+                <input
+                  mask="{{ cepMask }}"
+                  (blur)="getAddressData($event.target)"
+                  formControlName="cep"
+                  type="text"
+                  class="form-control"
+                  id="inputZip"
+                />
+                <div class="error-message" *ngIf="!form.controls['cep'].valid">
+                  {{ form.controls['cep'].errors }}
+                </div>
               </div>
               <div class="form-group">
                 <div class="form-group row">
                   <div class="form-group col-md-9">
                     <label for="rua">Rua*</label>
-                    <input formControlName="address" type="text" class="form-control" id="inputAddress2" placeholder="">
-                    <div class="error-message" *ngIf="!form.controls['address'].valid">{{form.controls['address'].errors}}</div>
+                    <input
+                      formControlName="address"
+                      type="text"
+                      class="form-control"
+                      id="inputAddress2"
+                      placeholder=""
+                    />
+                    <div
+                      class="error-message"
+                      *ngIf="!form.controls['address'].valid"
+                    >
+                      {{ form.controls['address'].errors }}
+                    </div>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="inputAddress2">Número</label>
-                    <input (blur)="setNumberOnAddress($event.target)" formControlName="number" type="text"
-                      class="form-control" id="inputAddress2" placeholder="">
-                      <div class="error-message" *ngIf="!form.controls['number'].valid">{{form.controls['number'].errors}}</div>
+                    <input
+                      (blur)="setNumberOnAddress($event.target)"
+                      formControlName="number"
+                      type="text"
+                      class="form-control"
+                      id="inputAddress2"
+                      placeholder=""
+                    />
+                    <div
+                      class="error-message"
+                      *ngIf="!form.controls['number'].valid"
+                    >
+                      {{ form.controls['number'].errors }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -68,78 +150,202 @@
           </div>
         </form>
       </ng-container>
+
       <ng-template #elseTemplate>
-        <form [formGroup]="pharmacyForm" (ngSubmit)="pharmacySubmit()" class="form-cadastro-farmacia col-10 col-sm-10 col-md-8 col-lg-6">
+        <form
+          [formGroup]="pharmacyForm"
+          (ngSubmit)="pharmacySubmit()"
+          class="form-cadastro-farmacia col-10 col-sm-10 col-md-8 col-lg-6"
+        >
           <label>Nome Fantasia</label>
           <fieldset class="form-group">
-            <input formControlName="fantasyName" placeholder="Nome" class="form-control form-control-sm" type="text" />
-            <div class="error-message" *ngIf="!pharmacyForm.controls['fantasyName'].valid">{{pharmacyForm.controls['fantasyName'].errors}}</div>
+            <input
+              formControlName="fantasyName"
+              placeholder="Nome"
+              class="form-control form-control-sm"
+              type="text"
+            />
+            <div
+              class="error-message"
+              *ngIf="!pharmacyForm.controls['fantasyName'].valid"
+            >
+              {{ pharmacyForm.controls['fantasyName'].errors }}
+            </div>
           </fieldset>
 
           <label>CNPJ</label>
           <fieldset class="form-group">
-            <input formControlName="cnpj" mask={{cnpjMask}} placeholder="CNPJ" class="form-control form-control-sm" type="text" />
-            <div class="error-message" *ngIf="!pharmacyForm.controls['cnpj'].valid">{{pharmacyForm.controls['cnpj'].errors}}</div>
+            <input
+              formControlName="cnpj"
+              mask="{{ cnpjMask }}"
+              placeholder="CNPJ"
+              class="form-control form-control-sm"
+              type="text"
+            />
+            <div
+              class="error-message"
+              *ngIf="!pharmacyForm.controls['cnpj'].valid"
+            >
+              {{ pharmacyForm.controls['cnpj'].errors }}
+            </div>
           </fieldset>
 
           <label>Nome do Farmacêutico</label>
           <fieldset class="form-group">
-            <input formControlName="pharmaceutical" placeholder="Farmacêutico" class="form-control form-control-sm" type="text" />
-            <div class="error-message" *ngIf="!pharmacyForm.controls['pharmaceutical'].valid">{{pharmacyForm.controls['pharmaceutical'].errors}}</div>
+            <input
+              formControlName="pharmaceutical"
+              placeholder="Farmacêutico"
+              class="form-control form-control-sm"
+              type="text"
+            />
+            <div
+              class="error-message"
+              *ngIf="!pharmacyForm.controls['pharmaceutical'].valid"
+            >
+              {{ pharmacyForm.controls['pharmaceutical'].errors }}
+            </div>
           </fieldset>
 
           <label>Email</label>
           <fieldset class="form-group">
-            <input formControlName="email" placeholder="Email" class="form-control form-control-sm" type="text" />
-            <div class="error-message" *ngIf="!pharmacyForm.controls['email'].valid">{{pharmacyForm.controls['email'].errors}}</div>
+            <input
+              formControlName="email"
+              placeholder="Email"
+              class="form-control form-control-sm"
+              type="text"
+            />
+            <div
+              class="error-message"
+              *ngIf="!pharmacyForm.controls['email'].valid"
+            >
+              {{ pharmacyForm.controls['email'].errors }}
+            </div>
           </fieldset>
 
           <label>Telefone Celular</label>
           <fieldset class="form-group">
-            <input formControlName="phone" mask="{{phoneMask}}" placeholder="Telefone" class="form-control form-control-sm" maxlength="15" type="text" />
-            <div class="error-message" *ngIf="!pharmacyForm.controls['phone'].valid">{{pharmacyForm.controls['phone'].errors}}</div>
+            <input
+              formControlName="phone"
+              mask="{{ phoneMask }}"
+              placeholder="Telefone"
+              class="form-control form-control-sm"
+              maxlength="15"
+              type="text"
+            />
+            <div
+              class="error-message"
+              *ngIf="!pharmacyForm.controls['phone'].valid"
+            >
+              {{ pharmacyForm.controls['phone'].errors }}
+            </div>
           </fieldset>
 
           <label>Senha</label>
           <div class="input-group flex-row">
-            <input formControlName="password" placeholder="Senha" class="form-control form-control-sm" type="{{showPassword ? 'text' : 'password'}}" />
-            <div class="input-group-append sm btn-eye" (click)="handlePasswordInput()">
-              <fa-icon class="input-group-text" [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
+            <input
+              formControlName="password"
+              placeholder="Senha"
+              class="form-control form-control-sm"
+              type="{{ showPassword ? 'text' : 'password' }}"
+            />
+            <div
+              class="input-group-append sm btn-eye"
+              (click)="handlePasswordInput()"
+            >
+              <fa-icon
+                class="input-group-text"
+                [icon]="showPassword ? faEyeSlash : faEye"
+              ></fa-icon>
             </div>
           </div>
-          <div class="error-message" *ngIf="!pharmacyForm.controls['password'].valid">{{pharmacyForm.controls['password'].errors}}</div>
+          <div
+            class="error-message"
+            *ngIf="!pharmacyForm.controls['password'].valid"
+          >
+            {{ pharmacyForm.controls['password'].errors }}
+          </div>
 
           <label class="font-weight-bold">Endereço</label>
           <div class="form-group">
             <label for="inputZip">CEP</label>
-            <input mask="{{cepMask}}" (blur)="getAddressData($event.target)" formControlName="cep" type="text" class="form-control"
-              id="inputZip">
-              <div class="error-message" *ngIf="!pharmacyForm.controls['cep'].valid">{{pharmacyForm.controls['cep'].errors}}</div>
+            <input
+              mask="{{ cepMask }}"
+              (blur)="getAddressData($event.target)"
+              formControlName="cep"
+              type="text"
+              class="form-control"
+              id="inputZip"
+            />
+            <div
+              class="error-message"
+              *ngIf="!pharmacyForm.controls['cep'].valid"
+            >
+              {{ pharmacyForm.controls['cep'].errors }}
+            </div>
           </div>
           <div class="form-group">
             <label for="inputZip">Bairro</label>
-            <input formControlName="region" type="text" class="form-control"
-              id="inputZip">
-              <div class="error-message" *ngIf="!pharmacyForm.controls['region'].valid">{{pharmacyForm.controls['region'].errors}}</div>
+            <input
+              formControlName="region"
+              type="text"
+              class="form-control"
+              id="inputZip"
+            />
+            <div
+              class="error-message"
+              *ngIf="!pharmacyForm.controls['region'].valid"
+            >
+              {{ pharmacyForm.controls['region'].errors }}
+            </div>
           </div>
           <div class="form-group">
             <div class="form-group row">
               <div class="form-group col-md-9">
                 <label for="rua">Rua*</label>
-                <input formControlName="address" type="text" class="form-control sm" id="inputAddress2" placeholder="">
-                <div class="error-message" *ngIf="!pharmacyForm.controls['address'].valid">{{pharmacyForm.controls['address'].errors}}</div>
+                <input
+                  formControlName="address"
+                  type="text"
+                  class="form-control sm"
+                  id="inputAddress2"
+                  placeholder=""
+                />
+                <div
+                  class="error-message"
+                  *ngIf="!pharmacyForm.controls['address'].valid"
+                >
+                  {{ pharmacyForm.controls['address'].errors }}
+                </div>
               </div>
               <div class="form-group col-md-3">
                 <label for="inputAddress2">Número</label>
-                <input (blur)="setNumberOnPharmacyAddress($event.target)" formControlName="number" type="text"
-                  class="form-control sm" id="inputAddress2" placeholder="">
-                  <div class="error-message" *ngIf="!pharmacyForm.controls['number'].valid">{{pharmacyForm.controls['number'].errors}}</div>
+                <input
+                  (blur)="setNumberOnPharmacyAddress($event.target)"
+                  formControlName="number"
+                  type="text"
+                  class="form-control sm"
+                  id="inputAddress2"
+                  placeholder=""
+                />
+                <div
+                  class="error-message"
+                  *ngIf="!pharmacyForm.controls['number'].valid"
+                >
+                  {{ pharmacyForm.controls['number'].errors }}
+                </div>
               </div>
             </div>
           </div>
 
-          <label>Confirme no mapa se a localização está correta, se não estive selecione o local certo.</label>
-          <div class="error-message" *ngIf="!pharmacyForm.controls['latitude'].valid">{{pharmacyForm.controls['latitude'].errors}}</div>
+          <label
+            >Confirme no mapa se a localização está correta, se não estive
+            selecione o local certo.</label
+          >
+          <div
+            class="error-message"
+            *ngIf="!pharmacyForm.controls['latitude'].valid"
+          >
+            {{ pharmacyForm.controls['latitude'].errors }}
+          </div>
 
           <agm-map
             [latitude]="latitude"
@@ -158,15 +364,13 @@
             </agm-marker>
           </agm-map>
 
-          <button class="btn btn-block btn-orange" type="submit">
-            Salvar
-          </button>
+          <button class="btn btn-block btn-orange" type="submit">Salvar</button>
         </form>
+      </ng-template>
+    </tab>
 
-      </ng-template>
-    </tab>
-    <tab heading="{{userType == 1 ? 'Meus pedidos' : 'Doações pendentes'}}">
-      <ng-container *ngIf="userType == 1; else elseTemplate">
+    <tab heading="{{ userType == 1 ? 'Meus pedidos' : 'Pedidos Pendentes' }}">
+      <ng-container *ngIf="userType == 1; else pendentDonationsTemplate">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -177,25 +381,33 @@
               <th scope="col">Dosagem</th>
               <th scope="col">Validade</th>
               <th scope="col">Local de encontro</th>
-              <th scope="col">Data de encontro</th>
             </tr>
           </thead>
-          <tbody *ngIf="donationsList" >
-            <tr *ngFor="let donation of reservedDonationsList" (click)="setModalData(donation); openModal(templateOrders, true)" class="pointer" >
-              <th> {{donation.medicineDonation.status.status_string}} </th>
-              <td> {{donation.medicineDonation.title}} </td>
+          <tbody *ngIf="donationsList">
+            <tr
+              *ngFor="let donation of reservedDonationsList"
+              (click)="setModalData(donation); openModal(templateOrders, true)"
+              class="pointer"
+            >
+              <th>{{ donation.medicineDonation.status.status_string }}</th>
+              <td>{{ donation.medicineDonation.title }}</td>
               <td>
-                <div [style.background-color]="donation.medicineDonation.stripe" style="height: 30px; width: 100%"></div>
+                <div
+                  [style.background-color]="donation.medicineDonation.stripe"
+                  style="height: 30px; width: 100%"
+                ></div>
               </td>
-              <td> {{donation.medicineDonation.packing}} </td>
-              <td> {{donation.medicineDonation.dosage}} </td>
-              <td> {{donation.medicineDonation.shelfLife | date:'dd/MM/yyyy'}} </td>
-              <td> {{donation.medicineDonation.pharmacy.address}} </td>
+              <td>{{ donation.medicineDonation.packing }}</td>
+              <td>{{ donation.medicineDonation.dosage }}</td>
+              <td>
+                {{ donation.medicineDonation.shelfLife | date: 'dd/MM/yyyy' }}
+              </td>
+              <td>{{ donation.medicineDonation.pharmacy.address }}</td>
             </tr>
           </tbody>
         </table>
       </ng-container>
-      <ng-template #elseTemplate>
+      <ng-template #pendentDonationsTemplate>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -206,27 +418,34 @@
               <th scope="col">Dosagem</th>
               <th scope="col">Validade</th>
               <th scope="col">Local de encontro</th>
-              <th scope="col">Data de encontro</th>
             </tr>
           </thead>
-          <tbody *ngIf="pendentDonations" >
-            <tr *ngFor="let donation of pendentDonations" (click)="setModalData(donation); openModal(templateOrders, true)" class="pointer" >
-              <th> {{donation.medicineDonation.status.status_string}} </th>
-              <td> {{donation.medicineDonation.title}} </td>
+          <tbody *ngIf="pendentDonations">
+            <tr
+              class="pointer"
+              (click)="setModalData(donation); openModal(pharmacyPendentTemplate)"
+              *ngFor="let donation of pendentDonations"
+            >
+              <th>{{ donation.status.status_string }}</th>
+              <td>{{ donation.title }}</td>
               <td>
-                <div [style.background-color]="donation.medicineDonation.stripe" style="height: 30px; width: 100%"></div>
+                <div
+                  [style.background-color]="donation.stripe"
+                  style="height: 30px; width: 100%"
+                ></div>
               </td>
-              <td> {{donation.medicineDonation.packing}} </td>
-              <td> {{donation.medicineDonation.dosage}} </td>
-              <td> {{donation.medicineDonation.shelfLife | date:'dd/MM/yyyy'}} </td>
-              <td> {{donation.medicineDonation.pharmacy.address}} </td>
+              <td>{{ donation.packing }}</td>
+              <td>{{ donation.dosage }}</td>
+              <td>{{ donation.shelfLife | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ donation.pharmacy.address }}</td>
             </tr>
           </tbody>
         </table>
       </ng-template>
     </tab>
-    <tab heading="{{userType == 1 ? 'Minhas doações' : 'Doações concluídas'}} ">
-      <ng-container *ngIf="userType == 1; else elseTemplate">
+
+    <tab heading="{{ userType == 1 ? 'Minhas doações' : 'Pedidos Entregues' }}">
+      <ng-container *ngIf="userType == 1; else doneDonationsTemplate">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -239,22 +458,29 @@
               <th scope="col">Local de encontro</th>
             </tr>
           </thead>
-          <tbody *ngIf="donationsList" >
-            <tr class="pointer" (click)="setModalData(donation); openModal(template)" *ngFor="let donation of donationsList" >
-              <th> {{donation.status.status_string}} </th>
-              <td> {{donation.title}} </td>
+          <tbody *ngIf="donationsList">
+            <tr
+              class="pointer"
+              (click)="setModalData(donation); openModal(template)"
+              *ngFor="let donation of donationsList"
+            >
+              <th>{{ donation.status.status_string }}</th>
+              <td>{{ donation.title }}</td>
               <td>
-                <div [style.background-color]="donation.stripe" style="height: 30px; width: 100%"></div>
+                <div
+                  [style.background-color]="donation.stripe"
+                  style="height: 30px; width: 100%"
+                ></div>
               </td>
-              <td> {{donation.packing}} </td>
-              <td> {{donation.dosage}} </td>
-              <td> {{donation.shelfLife | date:'dd/MM/yyyy'}} </td>
-              <td> {{donation.pharmacy.address}} </td>
+              <td>{{ donation.packing }}</td>
+              <td>{{ donation.dosage }}</td>
+              <td>{{ donation.shelfLife | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ donation.pharmacy.address }}</td>
             </tr>
           </tbody>
         </table>
       </ng-container>
-      <ng-template #elseTemplate>
+      <ng-template #doneDonationsTemplate>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -267,17 +493,24 @@
               <th scope="col">Local de encontro</th>
             </tr>
           </thead>
-          <tbody *ngIf="doneDonations" >
-            <tr class="pointer" (click)="setModalData(donation); openModal(template)" *ngFor="let donation of doneDonations" >
-              <th> {{donation.status.status_string}} </th>
-              <td> {{donation.title}} </td>
+          <tbody *ngIf="doneDonations">
+            <tr
+              class="pointer"
+              (click)="setModalData(donation); openModal(pharmacyDoneTemplate)"
+              *ngFor="let donation of doneDonations"
+            >
+              <th>{{ donation.status.status_string }}</th>
+              <td>{{ donation.title }}</td>
               <td>
-                <div [style.background-color]="donation.stripe" style="height: 30px; width: 100%"></div>
+                <div
+                  [style.background-color]="donation.stripe"
+                  style="height: 30px; width: 100%"
+                ></div>
               </td>
-              <td> {{donation.packing}} </td>
-              <td> {{donation.dosage}} </td>
-              <td> {{donation.shelfLife | date:'dd/MM/yyyy'}} </td>
-              <td> {{donation.pharmacy.address}} </td>
+              <td>{{ donation.packing }}</td>
+              <td>{{ donation.dosage }}</td>
+              <td>{{ donation.shelfLife | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ donation.pharmacy.address }}</td>
             </tr>
           </tbody>
         </table>
@@ -287,29 +520,86 @@
 </section>
 <app-footer></app-footer>
 
-<ng-template #template>
+<ng-template #pharmacyDoneTemplate>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{selectedDoantion.title}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <h4 class="modal-title pull-left">{{ selectedDonation.title }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <app-donation-form (refreshList)="getAllDonations(); modalRef.hide();" [donationData]="selectedDoantion" ></app-donation-form>
+    <app-pharmacy-donation-detail
+      (refreshList)="getAllDonations(); modalRef.hide()"
+      [donationData]="selectedDonation"
+      [isDoneDonations]="true"
+    ></app-pharmacy-donation-detail>
+  </div>
+</ng-template>
+
+<ng-template #pharmacyPendentTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ selectedDonation.title }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-pharmacy-donation-detail
+      (refreshList)="getAllDonations(); modalRef.hide()"
+      [donationData]="selectedDonation"
+    ></app-pharmacy-donation-detail>
+  </div>
+</ng-template>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ selectedDonation.title }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-donation-form
+      (refreshList)="getAllDonations(); modalRef.hide()"
+      [donationData]="selectedDonation"
+    ></app-donation-form>
   </div>
 </ng-template>
 
 <ng-template #templateOrders>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{selectedDoantion.medicineDonation.title}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <h4 class="modal-title pull-left">
+      {{ selectedDonation.medicineDonation.title }}
+    </h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <app-donation-detail
-      (refreshList)="getAllDonations(); modalRef.hide();"
-      [donationData]="this.selectedDoantion">
+      (refreshList)="getAllDonations(); modalRef.hide()"
+      [donationData]="this.selectedDonation"
+    >
     </app-donation-detail>
   </div>
 </ng-template>

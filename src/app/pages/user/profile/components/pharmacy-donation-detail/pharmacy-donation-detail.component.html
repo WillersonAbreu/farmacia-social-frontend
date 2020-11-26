@@ -1,49 +1,34 @@
-<button
-  style="display: flex; margin: 1vh auto"
-  (click)="deleteConfirm(donationData.id, donationData.title)"
-  class="btn btn-danger btn-lg"
->
-  Deletar
-</button>
-
-<form [formGroup]="form" (ngSubmit)="submit()">
+<div class="d-flex flex-row content-between" *ngIf="!isDoneDonations">
+  <button
+    (click)="onDone()"
+    style="display: flex; margin: 1vh auto"
+    class="btn btn-success btn-lg"
+  >
+    Concluir
+  </button>
+  <button
+    (click)="onReprove()"
+    style="display: flex; margin: 1vh auto"
+    class="btn btn-warning btn-lg"
+  >
+    Reprovar
+  </button>
+  <button
+    (click)="onCancel()"
+    style="display: flex; margin: 1vh auto"
+    class="btn btn-danger btn-lg"
+  >
+    Cancelar
+  </button>
+</div>
+<hr />
+<form [formGroup]="form">
   <div class="formatForm shadow-sm">
     <div class="row">
       <div class="form-group col-sm-12 col-md-6">
         <label>Imagem Frontal</label>
-        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-          <!-- <input id="upload-front" type="file" onchange="readURLFront(this);" class="upload form-control border-0"> -->
-          <input
-            id="upload-front"
-            type="file"
-            accept=".png, .jpg, .jpeg"
-            class="upload form-control border-0"
-            (change)="handleFileInput($event.target.files, 'Front')"
-          />
-          <label
-            id="upload-front-label"
-            for="upload-front"
-            class="upload-label font-weight-light text-muted"
-            >Selecione o arquivo</label
-          >
-          <div class="input-group-append">
-            <label
-              for="upload-front"
-              class="btn btn-light m-0 rounded-pill px-4"
-            >
-              <fa-icon
-                class="mr-2 text-muted"
-                [icon]="faCloudUploadAlt"
-              ></fa-icon>
-              <small class="text-uppercase font-weight-bold text-muted">
-                Selecione o arquivo</small
-              >
-            </label>
-          </div>
-        </div>
         <!-- Area de Update da Imagem -->
         <div class="image-area mt-4">
-          <!-- <img id="imageResultFront" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"> -->
           <img
             src="{{ imageBase64Front }}"
             alt=""
@@ -54,6 +39,7 @@
         </div>
         <fieldset class="form-group">
           <input
+            disabled
             formControlName="pictureFile"
             class="form-control"
             required
@@ -65,39 +51,8 @@
       </div>
       <div class="form-group col-sm-12 col-md-6">
         <label>Imagem Traseira</label>
-        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-          <!-- <input id="upload-back" type="file" onchange="readURLBack(this);" class="upload form-control border-0"> -->
-          <input
-            id="upload-back"
-            type="file"
-            accept=".png, .jpg, .jpeg"
-            class="upload form-control border-0"
-            (change)="handleFileInput($event.target.files, 'Back')"
-          />
-          <label
-            id="upload-back-label"
-            for="upload-back"
-            class="upload-label font-weight-light text-muted"
-            >Selecione o arquivo</label
-          >
-          <div class="input-group-append">
-            <label
-              for="upload-back"
-              class="btn btn-light m-0 rounded-pill px-4"
-            >
-              <fa-icon
-                class="mr-2 text-muted"
-                [icon]="faCloudUploadAlt"
-              ></fa-icon>
-              <small class="text-uppercase font-weight-bold text-muted">
-                Selecione o arquivo</small
-              >
-            </label>
-          </div>
-        </div>
         <!-- Area de Update da Imagem -->
         <div class="image-area mt-4">
-          <!-- <img id="imageResultBack" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"> -->
           <img
             src="{{ imageBase64Back }}"
             alt=""
@@ -108,6 +63,7 @@
         </div>
         <fieldset class="form-group">
           <input
+            disabled
             formControlName="pictureFileBack"
             class="form-control"
             required
@@ -122,6 +78,7 @@
       <label for="formTitulo">Título</label>
       <fieldset class="form-group">
         <input
+          disabled
           formControlName="title"
           placeholder="Nome do medicamento.."
           class="form-control"
@@ -134,6 +91,7 @@
       <label for="formDescricao">Descrição</label>
       <fieldset class="form-group">
         <textarea
+          disabled
           formControlName="description"
           rows="3"
           placeholder="Descreva a composição do medicamento.."
@@ -148,6 +106,7 @@
         <div class="form-check d-flex">
           <fieldset class="form-group">
             <input
+              disabled
               formControlName="stripe"
               id="tarjaVerde"
               value="green"
@@ -164,6 +123,7 @@
         <div class="form-check d-flex">
           <fieldset class="form-group">
             <input
+              disabled
               formControlName="stripe"
               id="tarjaAmarela"
               value="yellow"
@@ -179,6 +139,7 @@
         <div class="form-check d-flex">
           <fieldset class="form-group">
             <input
+              disabled
               formControlName="stripe"
               id="tarjaVermelha"
               value="red"
@@ -194,6 +155,7 @@
         <div class="form-check d-flex">
           <fieldset class="form-group">
             <input
+              disabled
               formControlName="stripe"
               id="tarjaPreta"
               value="black"
@@ -214,6 +176,7 @@
         <div class="form-check d-flex">
           <fieldset class="form-group">
             <input
+              disabled
               formControlName="packing"
               id="caixa"
               value="caixa"
@@ -234,6 +197,7 @@
         <div class="form-check d-flex">
           <fieldset class="form-group">
             <input
+              disabled
               formControlName="packing"
               id="cartela"
               value="cartela"
@@ -254,6 +218,7 @@
         <label for="formQuantidade">Quantidade</label>
         <fieldset class="form-group">
           <input
+            disabled
             formControlName="amount"
             placeholder="Unidades a doar.."
             class="form-control"
@@ -267,6 +232,7 @@
         <label for="formDosagem">Dosagem (mg)</label>
         <fieldset class="form-group">
           <input
+            disabled
             formControlName="dosage"
             placeholder="Descreva a dosagem do medicamento.."
             class="form-control"
@@ -278,17 +244,12 @@
       </div>
     </div>
 
-    <!-- <label class="text-bold">Embalagem</label>
-  <div class="custom-control custom-switch mb-3">
-    <input required type="checkbox" [value]="true" class="custom-control-input" id="customSwitch1">
-    <label class="custom-control-label" for="customSwitch1"></label> A caixa ou cartelas estão lacradas e bem conservadas?
-  </div> -->
-
     <div class="row">
       <div class="form-group col-sm-12 col-md-6">
         <label for="formFabricação">Data de fabricação</label>
         <fieldset class="form-group">
           <input
+            disabled
             formControlName="manufacturyDate"
             class="form-control"
             required
@@ -301,6 +262,7 @@
         <label for="formValidade">Data de validade</label>
         <fieldset class="form-group">
           <input
+            disabled
             formControlName="shelfLife"
             class="form-control"
             required
@@ -314,6 +276,7 @@
       <label for="formLote">Número do lote</label>
       <fieldset class="form-group">
         <input
+          disabled
           formControlName="batchCode"
           placeholder="Digite o número do lote do medicamento.."
           class="form-control"
@@ -327,6 +290,7 @@
       <label for="formLote">Farmácia</label>
       <fieldset class="form-group">
         <select
+          disabled
           formControlName="pharmacyId"
           placeholder="Id da farmácia.."
           class="form-control"
@@ -344,34 +308,5 @@
         </select>
       </fieldset>
     </div>
-    <div class="form-group">
-      <label for="formLote">Status</label>
-      <fieldset class="form-group">
-        <select
-          formControlName="statusId"
-          class="form-control"
-          required
-          type="number"
-          min="1"
-        >
-          <option
-            *ngFor="let status of statusList"
-            value="{{ status.id }}"
-            [selected]="donationData.statusId === status.id"
-          >
-            {{ status.status_string }}
-          </option>
-        </select>
-      </fieldset>
-    </div>
-  </div>
-
-  <div class="row p-3 align-items-center">
-    <legend class="termosUso col-sm-12 col-md-9 mt-2">
-      Ao publicar você concorda e aceita nossos Termos de Uso e Privacidade
-    </legend>
-    <button class="logo btn btn-orange col-sm-12 col-md-3 mt-2" type="submit">
-      Atualizar Anúncio
-    </button>
   </div>
 </form>

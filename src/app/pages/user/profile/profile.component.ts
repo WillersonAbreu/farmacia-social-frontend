@@ -1,20 +1,33 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
 import { Endereco, ErroCep, NgxViacepService } from '@brunoc/ngx-viacep';
 import Swal from 'sweetalert2';
-import { formatCep,customYupCepValidator, customYupCpfValidator, customYupPhoneValidator, formatCpf, formatPhone, updateUserSchemaValidator, formatCnpj, updatePharmacySchemaValidator } from 'src/app/core/utils/formUserHelpers';
+import {
+  formatCep,
+  customYupCepValidator,
+  customYupCpfValidator,
+  customYupPhoneValidator,
+  formatCpf,
+  formatPhone,
+  updateUserSchemaValidator,
+  formatCnpj,
+  updatePharmacySchemaValidator,
+} from 'src/app/core/utils/formUserHelpers';
 import { Store } from '@ngrx/store';
 import { IUserType } from 'src/app/core/store/user/user.actions';
 import * as Yup from 'yup';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { IResponse, marker } from '../../home/signup-pharmacy/signup-pharmacy.component';
+import {
+  IResponse,
+  marker,
+} from '../../home/signup-pharmacy/signup-pharmacy.component';
 import { PharmacyService } from 'src/app/core/services/pharmacyService.service';
 import { GeoLocationService } from 'src/app/core/services/geoLocationService.service';
 
 // Maps
-import { MouseEvent } from "@agm/core";
+import { MouseEvent } from '@agm/core';
 import { ReservedDonationsServiceService } from 'src/app/core/services/reservedDonationsService.service';
 import { DonationsService } from '../../donations/donations.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -28,7 +41,7 @@ customYupPhoneValidator();
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
   showPassword: boolean = false;
@@ -44,7 +57,7 @@ export class ProfileComponent implements OnInit {
   userSchema = updateUserSchemaValidator();
   pharmacySchema = updatePharmacySchemaValidator();
   userType: number;
-  selectedDoantion: any = {};
+  selectedDonation: any = {};
 
   //Input masks
   phoneMask: string = '(00) 00000-0000';
@@ -61,7 +74,6 @@ export class ProfileComponent implements OnInit {
   longitude: number;
   modalRef: BsModalRef;
 
-
   constructor(
     private viacep: NgxViacepService,
     private formBuilder: FormBuilder,
@@ -76,11 +88,10 @@ export class ProfileComponent implements OnInit {
   ) {
     const reduxUser = this.store.select('user');
     reduxUser.subscribe(
-      res => {
-        this.id = res.id,
-        this.userType = res.roleId
+      (res) => {
+        (this.id = res.id), (this.userType = res.roleId);
       },
-      err => err
+      (err) => err
     );
   }
 
@@ -93,7 +104,7 @@ export class ProfileComponent implements OnInit {
       cpf: [''],
       cep: [''],
       address: [''],
-      number: ['']
+      number: [''],
     });
 
     this.pharmacyForm = this.formBuilder.group({
@@ -108,46 +119,41 @@ export class ProfileComponent implements OnInit {
       phone: [''],
       region: [''],
       password: [''],
-      number: ['']
+      number: [''],
     });
 
-    if(this.userType === 1){
-      this.service.getOne(this.id).subscribe(
-        userData => {
-          this.form.patchValue(userData);
-          let address = userData.address;
-          let target = { value: ''};
+    if (this.userType === 1) {
+      this.service.getOne(this.id).subscribe((userData) => {
+        this.form.patchValue(userData);
+        let address = userData.address;
+        let target = { value: '' };
 
-          if (address.length > 0) {
-            address = address.split(', ');
+        if (address.length > 0) {
+          address = address.split(', ');
 
-            if (address.length == 4) {
-              target.value = address[1];
-              this.form.controls.number.setValue(`${address[1]}`);
-              this.setNumberOnAddress(target);
-            }
+          if (address.length == 4) {
+            target.value = address[1];
+            this.form.controls.number.setValue(`${address[1]}`);
+            this.setNumberOnAddress(target);
           }
         }
-      );
-    }else{
-      this.pharmacyService.getOne(this.id).subscribe(
-        userData => {
-          console.log(userData);
-          this.pharmacyForm.patchValue(userData);
-          let address = userData.address;
-          let target = { value: ''};
+      });
+    } else {
+      this.pharmacyService.getOne(this.id).subscribe((userData) => {
+        this.pharmacyForm.patchValue(userData);
+        let address = userData.address;
+        let target = { value: '' };
 
-          if (address.length > 0) {
-            address = address.split(', ');
+        if (address.length > 0) {
+          address = address.split(', ');
 
-            if (address.length == 4) {
-              target.value = address[1];
-              this.pharmacyForm.controls.number.setValue(`${address[1]}`);
-              this.setNumberOnPharmacyAddress(target);
-            }
+          if (address.length == 4) {
+            target.value = address[1];
+            this.pharmacyForm.controls.number.setValue(`${address[1]}`);
+            this.setNumberOnPharmacyAddress(target);
           }
         }
-      );
+      });
     }
 
     this.getAllDonations();
@@ -156,20 +162,36 @@ export class ProfileComponent implements OnInit {
     this.longitude = -44.961761303964614;
   }
 
-  @Output() getAllDonations(){
-    //Get the list of done donations
+  @Output() getAllDonations() {
+    if (this.userType == 1) {
+      // Get the list of reserved donations
+      const myReservedDonations = this.reservedDonationService.findAllById(
+        this.id
+      );
+      myReservedDonations.subscribe((reservedDonations) => {
+        this.reservedDonationsList = reservedDonations;
+      });
 
-    // Get the list of reserved donations
-    const myReservedDonations = this.reservedDonationService.findAllById(this.id);
-    myReservedDonations.subscribe(reservedDonations => {
-      this.reservedDonationsList = reservedDonations;
-    });
+      // Get the list my donations
+      const myDonations = this.donationsService.findAllById(this.id);
+      myDonations.subscribe((donations) => {
+        this.donationsList = donations;
+      });
+    } else {
+      //Get the list of done donations
+      this.donationsService
+        .findAllDoneDonationsByPharmacyId(this.id)
+        .subscribe((doneDonations) => {
+          this.doneDonations = doneDonations;
+        });
 
-    // Get the list my donations
-    const myDonations = this.donationsService.findAllById(this.id);
-    myDonations.subscribe(donations => {
-      this.donationsList = donations;
-    });
+      //Get the list of pendent donations
+      this.donationsService
+        .findAllPendentDonationsByPharmacyId(this.id)
+        .subscribe((pendentDonations) => {
+          this.pendentDonations = pendentDonations;
+        });
+    }
   }
 
   handlePasswordInput(): boolean {
@@ -178,21 +200,29 @@ export class ProfileComponent implements OnInit {
   }
 
   getAddressData(target): void {
-    this.viacep.buscarPorCep(target.value).then((endereco: Endereco) => {
-      const { logradouro, bairro, localidade, uf } = endereco;
-      // Injecting the address string to the input
-      if(this.userType === 1){
-        this.form.controls.address.setValue(`${logradouro}, ${bairro}, ${localidade} - ${uf}`);
-      }else{
-        this.pharmacyForm.controls.address.setValue(`${logradouro}, ${bairro}, ${localidade} - ${uf}`);
-      }
-    }).catch((error: ErroCep) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Erro ao encontrar o endereço pelo CEP!',
-        text: 'Tente outro CEP ou insira o endereço manualmente no campo "Endereço".'
+    this.viacep
+      .buscarPorCep(target.value)
+      .then((endereco: Endereco) => {
+        const { logradouro, bairro, localidade, uf } = endereco;
+        // Injecting the address string to the input
+        if (this.userType === 1) {
+          this.form.controls.address.setValue(
+            `${logradouro}, ${bairro}, ${localidade} - ${uf}`
+          );
+        } else {
+          this.pharmacyForm.controls.address.setValue(
+            `${logradouro}, ${bairro}, ${localidade} - ${uf}`
+          );
+        }
+      })
+      .catch((error: ErroCep) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao encontrar o endereço pelo CEP!',
+          text:
+            'Tente outro CEP ou insira o endereço manualmente no campo "Endereço".',
+        });
       });
-    });
   }
 
   setNumberOnAddress(target): void {
@@ -203,18 +233,22 @@ export class ProfileComponent implements OnInit {
 
       if (address.length == 4) {
         address[1] = target.value;
-        this.form.controls.address.setValue(`${address[0]}, ${address[1]}, ${address[2]}, ${address[3]}`);
+        this.form.controls.address.setValue(
+          `${address[0]}, ${address[1]}, ${address[2]}, ${address[3]}`
+        );
       } else {
-        this.form.controls.address.setValue(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`);
+        this.form.controls.address.setValue(
+          `${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`
+        );
       }
     } else {
       Swal.fire({
         icon: 'warning',
         title: 'É necessário preencher o campo "Endereço" antes',
-        text: 'Preencha o campo "Endereço automaticamente através do CEP ou manualmente'
+        text:
+          'Preencha o campo "Endereço automaticamente através do CEP ou manualmente',
       });
     }
-
   }
 
   setNumberOnPharmacyAddress(target): void {
@@ -225,22 +259,32 @@ export class ProfileComponent implements OnInit {
 
       if (address.length == 4) {
         address[1] = target.value;
-        this.pharmacyForm.controls.address.setValue(`${address[0]}, ${address[1]}, ${address[2]}, ${address[3]}`);
+        this.pharmacyForm.controls.address.setValue(
+          `${address[0]}, ${address[1]}, ${address[2]}, ${address[3]}`
+        );
       } else {
-        this.pharmacyForm.controls.address.setValue(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`);
+        this.pharmacyForm.controls.address.setValue(
+          `${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`
+        );
       }
-      this.geoLocationService.getGeoLocation(`${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`)
+      this.geoLocationService
+        .getGeoLocation(
+          `${address[0]}, ${target.value}, ${address[1]}, ${address[2]}`
+        )
         .subscribe(
           (data: IResponse) => {
             const results = data.results[0];
-            if(results.geometry.location.lat && results.geometry.location.lng){
+            if (
+              results.geometry.location.lat &&
+              results.geometry.location.lng
+            ) {
               this.latitude = results.geometry.location.lat;
               this.longitude = results.geometry.location.lng;
               this.pharmacyForm.controls.latitude.setValue(this.latitude);
               this.pharmacyForm.controls.longitude.setValue(this.longitude);
             }
           },
-          error => {
+          (error) => {
             return error;
           }
         );
@@ -248,20 +292,17 @@ export class ProfileComponent implements OnInit {
       Swal.fire({
         icon: 'warning',
         title: 'É necessário preencher o campo "Endereço" antes',
-        text: 'Preencha o campo "Endereço automaticamente através do CEP ou manualmente'
+        text:
+          'Preencha o campo "Endereço automaticamente através do CEP ou manualmente',
       });
     }
-
   }
 
   getUser(): void {
     if (this.id) {
-      this.service.getOne(this.id)
-        .subscribe(
-          user => {
-            this.form.patchValue(user);
-          }
-        );
+      this.service.getOne(this.id).subscribe((user) => {
+        this.form.patchValue(user);
+      });
     }
   }
 
@@ -277,10 +318,10 @@ export class ProfileComponent implements OnInit {
     return null;
   }
 
-
   openModal(template: TemplateRef<any>, isReservedDonation?: boolean) {
-    this.modalRef = this.modalService.show(template,
-      Object.assign({}, {class: isReservedDonation ? 'modal-xl' : 'modal-lg' })
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: isReservedDonation ? 'modal-xl' : 'modal-lg' })
     );
   }
 
@@ -288,8 +329,8 @@ export class ProfileComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  setModalData(donation){
-    this.selectedDoantion = donation;
+  setModalData(donation) {
+    this.selectedDonation = donation;
   }
 
   userSubmit() {
@@ -309,34 +350,35 @@ export class ProfileComponent implements OnInit {
     user.phone = cleanPhone;
     user.cep = cleanCep;
 
-
     if (this.id) {
       // atualizar
-      this.userSchema.validate(user, { abortEarly: false }).then(_success => {
-        // Format some input before save on database
-        user.cep = formatCep(user.cep);
-        user.cpf = formatCpf(user.cpf);
-        user.phone = formatPhone(user.phone);
+      this.userSchema
+        .validate(user, { abortEarly: false })
+        .then((_success) => {
+          // Format some input before save on database
+          user.cep = formatCep(user.cep);
+          user.cpf = formatCpf(user.cpf);
+          user.phone = formatPhone(user.phone);
 
-        this.service.update(this.id, user).subscribe(
-          data => {
-            Swal.fire({
-              title: data.message,
-              confirmButtonText: `OK`,
+          this.service.update(this.id, user).subscribe(
+            (data) => {
+              Swal.fire({
+                title: data.message,
+                confirmButtonText: `OK`,
+              });
+              this.router.navigate(['usuarios/meu-perfil']);
+            },
+            (erro) => erro
+          );
+        })
+        .catch((err) => {
+          Swal.hideLoading();
+          if (err instanceof Yup.ValidationError) {
+            err.inner.forEach((error) => {
+              this.form.controls[error.path].setErrors(error.message);
             });
-            this.router.navigate(['usuarios/meu-perfil']);
-          },
-          erro => erro
-        );
-      })
-      .catch(err => {
-        Swal.hideLoading();
-        if (err instanceof Yup.ValidationError) {
-          err.inner.forEach((error) => {
-            this.form.controls[error.path].setErrors(error.message);
-          });
-        }
-      });
+          }
+        });
     } else {
       Swal.fire({
         icon: 'warning',
@@ -363,41 +405,46 @@ export class ProfileComponent implements OnInit {
     pharmacy.phone = cleanPhone;
     pharmacy.cep = cleanCep;
 
-    if(this.id) {
-    this.pharmacySchema.validate(pharmacy, {abortEarly: false}).then(_success => {
-      Swal.showLoading();
-      // Format some input before save on database
-      pharmacy.cep = formatCep(pharmacy.cep);
-      pharmacy.cnpj = formatCnpj(pharmacy.cnpj);
-      pharmacy.phone = formatPhone(pharmacy.phone);
-      const [,,region] = pharmacy.address.split(",");
-      pharmacy.region = region;
+    if (this.id) {
+      this.pharmacySchema
+        .validate(pharmacy, { abortEarly: false })
+        .then((_success) => {
+          Swal.showLoading();
+          // Format some input before save on database
+          pharmacy.cep = formatCep(pharmacy.cep);
+          pharmacy.cnpj = formatCnpj(pharmacy.cnpj);
+          pharmacy.phone = formatPhone(pharmacy.phone);
+          const [, , region] = pharmacy.address.split(',');
+          pharmacy.region = region;
 
-      // cadastrar
-      this.pharmacyService.update(this.id, pharmacy).subscribe(
-        data => {
-          Swal.fire({icon: 'success', title: data.message});
-        },
-        erro => {
-        Swal.hideLoading();
-          Swal.fire({icon: 'error', title: 'Erro ao atualizar os dados!', text: erro.error.message});
-        }
-      );
-    })
-    .catch(err => {
-      if(err instanceof Yup.ValidationError){
-        err.inner.forEach((error) => {
-          this.pharmacyForm.controls[error.path].setErrors(error.message);
+          // cadastrar
+          this.pharmacyService.update(this.id, pharmacy).subscribe(
+            (data) => {
+              Swal.fire({ icon: 'success', title: data.message });
+            },
+            (erro) => {
+              Swal.hideLoading();
+              Swal.fire({
+                icon: 'error',
+                title: 'Erro ao atualizar os dados!',
+                text: erro.error.message,
+              });
+            }
+          );
+        })
+        .catch((err) => {
+          if (err instanceof Yup.ValidationError) {
+            err.inner.forEach((error) => {
+              this.pharmacyForm.controls[error.path].setErrors(error.message);
+            });
+          }
         });
-      }
-    });
-  }else {
-    Swal.fire({
-      icon: 'warning',
-      title: 'É necessário estar logado para realizar alteração.',
-      //text: 'Preencha o campo "Endereço automaticamente através do CEP ou manualmente'
-    });
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'É necessário estar logado para realizar alteração.',
+        //text: 'Preencha o campo "Endereço automaticamente através do CEP ou manualmente'
+      });
+    }
   }
-  }
-
 }

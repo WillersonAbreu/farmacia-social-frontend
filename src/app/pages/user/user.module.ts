@@ -16,6 +16,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { DonationFormComponent } from './profile/components/donation-form/donation-form.component';
 import { DonationDetailComponent } from './profile/components/donation-detail/donation-detail.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { PharmacyDonationDetailComponent } from './profile/components/pharmacy-donation-detail/pharmacy-donation-detail.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -43,7 +44,8 @@ const maskConfig: Partial<IConfig> = {
     UserComponent,
     ProfileComponent,
     DonationFormComponent,
-    DonationDetailComponent
+    DonationDetailComponent,
+    PharmacyDonationDetailComponent
   ],
   providers: [
     UserService

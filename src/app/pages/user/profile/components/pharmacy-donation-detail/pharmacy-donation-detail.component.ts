@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
@@ -12,17 +11,18 @@ import { DonationsService } from 'src/app/pages/donations/donations.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-donation-form',
-  templateUrl: './donation-form.component.html',
-  styleUrls: ['./donation-form.component.css'],
+  selector: 'app-pharmacy-donation-detail',
+  templateUrl: './pharmacy-donation-detail.component.html',
+  styleUrls: ['./pharmacy-donation-detail.component.css'],
 })
-export class DonationFormComponent implements OnInit {
+export class PharmacyDonationDetailComponent implements OnInit {
   form: FormGroup;
   id: number;
   pharmacyList: any[];
   statusList: any[];
   imageBase64Front;
   imageBase64Back;
+  @Input() isDoneDonations: boolean;
   @Input() donationData: any;
   @Output() refreshList = new EventEmitter<boolean>();
 
@@ -77,70 +77,36 @@ export class DonationFormComponent implements OnInit {
     this.imageBase64Back = this.donationData.pictureFileBack;
   }
 
-  handleFileInput(files: FileList, tipoImagem: string) {
-    let file = files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
+  onDone() {
+    // this.form.controls.dosage.setValue(Number(this.form.controls.dosage.value));
+    this.form.controls.statusId.setValue(5);
 
-    reader.onload = () => {
-      if (tipoImagem == 'Front') {
-        this.imageBase64Front = reader.result;
-      }
-      if (tipoImagem == 'Back') {
-        this.imageBase64Back = reader.result;
-      }
-    };
-
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
+    this.submit();
   }
 
-  deleteConfirm(id: number, nome: string) {
-    Swal.fire({
-      title: 'Você tem certeza que quer deletar a doação de ' + nome + '?',
-      text: 'Essa alteração é irrevesível!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'OK',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.delete(id, nome);
-      }
-    });
+  onReprove() {
+    const donation = this.form.value;
+    donation.statusId = 4;
+
+    this.submit();
   }
 
-  delete(id: number, nome) {
-    this.service.delete(id).subscribe(
-      (data) => {
-        Swal.fire(
-          'Deletada com sucesso!',
-          'A doação ' + nome + ' foi deletada com exito!',
-          'success'
-        );
-        this.refreshList.emit(true);
-      },
-      (erro) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Aconteceu um erro ao deletar a doação',
-          text: erro + '',
-        });
-      }
-    );
+  onCancel() {
+    const donation = this.form.value;
+    donation.statusId = 6;
+
+    this.submit();
   }
 
   submit() {
     const donation = this.form.value;
     donation.pictureFile = this.imageBase64Front;
     donation.pictureFileBack = this.imageBase64Back;
+    donation.userId = Number(this.donationData.userId);
 
     if (this.id) {
       // atualizar
-      this.service.update(this.id, donation).subscribe(
+      this.service.update(donation.userId, donation).subscribe(
         (data) => {
           this.refreshList.emit(true);
           Swal.fire({
@@ -148,9 +114,10 @@ export class DonationFormComponent implements OnInit {
             title: 'Anúncio atualizado',
             text: data.message,
           });
-          // this.refreshList();
         },
-        (erro) => console.log(erro)
+        (erro) => {
+          console.log(this.donationData);
+        }
       );
     } else {
       // cadastrar
