@@ -7,6 +7,7 @@ import { faCloudUploadAlt, faPrescriptionBottle, faPills } from '@fortawesome/fr
 import { Store } from '@ngrx/store';
 import { PharmacyService } from 'src/app/core/services/pharmacyService.service';
 import { IUserType } from 'src/app/core/store/user/user.actions';
+import Swal from 'sweetalert2';
 import { DonationsService } from '../donations.service';
 
 
@@ -32,16 +33,16 @@ export class DonationFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private service: DonationsService,
-    private store: Store<{ user: IUserType}>
+    private store: Store<{ user: IUserType }>
   ) {
     this.store.select('user').subscribe(user => this.loggedUserId = user.id);
   }
 
-  getPharmacy(){
+  getPharmacy() {
     this.pharmacyService.getAll()
-    .subscribe(
-      farmacias=>this.pharmacyList = farmacias
-    )
+      .subscribe(
+        farmacias => this.pharmacyList = farmacias
+      )
   }
 
 
@@ -60,6 +61,7 @@ export class DonationFormComponent implements OnInit {
       batchCode: ['', Validators.required],
       userId: ['', Validators.required],
       pharmacyId: ['', Validators.required],
+      switchConservacao: ['']
     });
     this.getDonation();
     this.getPharmacy();
@@ -79,29 +81,73 @@ export class DonationFormComponent implements OnInit {
     // }
   }
 
+
+
+
   submit() {
     const donation = this.form.value;
     donation.pictureFile = this.imageBase64Front;
     donation.pictureFileBack = this.imageBase64Back;
 
-    if (this.id) {
-      // atualizar
-      this.service.update(this.id, donation).subscribe(
-        data => this.router.navigate(['usuarios/meu-perfil']),
-        erro => console.log(erro)
-      );
+    console.log(this.checaDatasEConservacao(donation));
+    if (this.checaDatasEConservacao(donation) != "validado!") {
+      Swal.fire({
+        title: 'Erro ao cadastrar a doação!',
+        text: this.checaDatasEConservacao(donation),
+        icon: 'error',
+        confirmButtonText: `OK`,
+      })
     } else {
-      console.log('Donation', donation);
-      // cadastrar
-      donation.statusId = 1;
-      donation.userId = this.loggedUserId;
-      this.service.store(donation).subscribe(
-        data => this.router.navigate(['usuarios/meu-perfil']),
-        erro => console.log(erro)
-      );
+
+      if (this.id) {
+        // atualizar
+        this.service.update(this.id, donation).subscribe(
+          data => {
+            Swal.fire({
+              title: 'A doação foi atualizada com sucesso!',
+              icon: 'success',
+              confirmButtonText: `OK`,
+            }),
+              this.router.navigate(['usuarios/meu-perfil'])
+          },
+          erro => console.log(erro)
+        );
+      } else {
+        console.log('Donation', donation);
+        // cadastrar
+        donation.statusId = 1;
+        donation.userId = this.loggedUserId;
+        this.service.store(donation).subscribe(
+          data => {
+            Swal.fire({
+              title: 'A doação foi cadastrada com sucesso!',
+              icon: 'success',
+              confirmButtonText: `OK`,
+            }),
+              this.router.navigate(['usuarios/meu-perfil'])
+          },
+          erro => console.log(erro)
+        );
+      }
     }
+
   }
 
+  checaDatasEConservacao(donation) {
+
+    if (donation.shelfLife == "" || donation.manufacturyDate == "") {
+      return "Erro! Data de validade ou fabricação estão em branco. Verifique os dados";
+    } else if (donation.shelfLife < donation.manufacturyDate) {
+      return "Erro! Data de validade é inferior a data de fabricação. Verifique os dados";
+    } else if (new Date(donation.shelfLife) <= new Date()) {
+      return "Erro! Medicamento já passou da Data de validade!";
+    } else if (donation.switchConservacao != true) {
+      return "Erro! Assegure-se da conservação da embalagem antes de prosseguir.";
+    } else {
+      return "validado!";
+    }
+
+  }
 
   handleFileInput(files: FileList, tipoImagem: string) {
     let file = files[0];
