@@ -1,25 +1,29 @@
-.corpoTela {
-    margin-top: 80px;
-    margin-bottom: 40px;
+agm-map {
+  height: 300px;
 }
 
-.corpoTela>h1 {
-    text-align: center;
+.corpoTela {
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.corpoTela > h1 {
+  text-align: center;
 }
 
 .imagem {
-    overflow: hidden;
-    border-radius: 15px;
-    border: 2px tomato;
+  overflow: hidden;
+  border-radius: 15px;
+  border: 2px tomato;
 }
 
 .carousel-slide-item {
-    max-height: 70vh;
+  max-height: 70vh;
 }
 
 .carousel-images {
-    display: flex;
-    width: 100%;
-    height: 100% !important;
-    object-fit: cover;
+  display: flex;
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
 }

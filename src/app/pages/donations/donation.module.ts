@@ -10,6 +10,8 @@ import { DonationFormComponent } from './donation-form/donation-form.component';
 import { DonationsService } from './donations.service';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { AgmCoreModule } from '@agm/core';
+import { GOOGLE_MAPS_API_KEY } from 'src/app/core/config/global';
 @NgModule({
   imports: [
     TabsModule.forRoot(),
@@ -20,6 +22,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     CoreModule,
     FontAwesomeModule,
     CarouselModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: GOOGLE_MAPS_API_KEY,
+      libraries: ['places']
+    }),
   ],
   declarations: [
     DonationsComponent,

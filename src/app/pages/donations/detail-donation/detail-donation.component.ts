@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 // FontAwsome Icons
 import {
@@ -8,7 +8,6 @@ import {
   faPills,
 } from '@fortawesome/free-solid-svg-icons';
 import { DonationsService } from '../donations.service';
-import { AuthService } from '../../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { IUserType } from 'src/app/core/store/user/user.actions';
 import { OrdersService } from '../orders.service';
@@ -31,24 +30,25 @@ export class DetailDonationComponent implements OnInit {
   faPrescriptionBottle = faPrescriptionBottle;
   faPills = faPills;
 
+  // Map variables
+  latitude: number;
+  longitude: number;
+  zoom: number = 16;
+
   constructor(
     private service: DonationsService,
     private route: ActivatedRoute,
-    private router: Router,
     private ordersService: OrdersService,
     private store: Store<{ user: IUserType }>
   ) {}
 
   ngOnInit() {
-    // this.router.routeReuseStrategy.shouldReuseRoute = () => {
-    //   return false;
-    // };
     this.getOne();
 
     const reduxUser = this.store.select('user');
     reduxUser.subscribe(
       (res) => {
-        (this.id = res.id), console.log('o id é: ' + this.id);
+        this.id = res.id;
       },
       (err) => console.log(err)
     );
@@ -60,10 +60,10 @@ export class DetailDonationComponent implements OnInit {
       this.doacaoSelecionada = id;
       this.service.getOne(id).subscribe(
         (data) => {
-          console.log('Dataaaa', data);
-          (this.donation = data),
-            (this.statusId = data.statusId),
-            console.log('o status é: ' + this.statusId);
+          this.donation = data;
+          this.statusId = data.statusId;
+          this.latitude = Number(data.pharmacy.latitude);
+          this.longitude = Number(data.pharmacy.longitude);
         },
         (erro) => console.log(erro)
       );

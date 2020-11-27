@@ -19,6 +19,22 @@
           />
         </slide>
       </carousel>
+      <hr />
+      <label>Veja abaixo a localização da farmácia</label>
+      <agm-map
+        [latitude]="latitude"
+        [longitude]="longitude"
+        [zoom]="zoom"
+        [disableDefaultUI]="false"
+        [mapDraggable]="false"
+      >
+        <agm-marker
+          [latitude]="latitude"
+          [longitude]="longitude"
+          [markerDraggable]="false"
+        >
+        </agm-marker>
+      </agm-map>
     </section>
     <section class="conteudo col-sm-12 col-md-6 d-flex-column">
       <h2 class="text-weight-bold text-center">

@@ -19,6 +19,11 @@ export class DonationDetailComponent implements OnInit {
   id = 0;
   statusId = 0;
 
+  // Map variables
+  latitude: number;
+  longitude: number;
+  zoom: number = 16;
+
   faCloudUploadAlt = faCloudUploadAlt;
   faPrescriptionBottle = faPrescriptionBottle;
   faPills = faPills;
@@ -32,6 +37,8 @@ export class DonationDetailComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.donationData);
+    this.latitude = Number(this.donationData.medicineDonation.pharmacy.latitude);
+    this.longitude = Number(this.donationData.medicineDonation.pharmacy.longitude);
   }
 
   submitReserve() {
