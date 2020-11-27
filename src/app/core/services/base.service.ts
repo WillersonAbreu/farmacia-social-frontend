@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RESOURCES_API_URL } from '../config/global';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 //necessário pra comunicar com o backend
 export abstract class BaseService {
 
-  protected baseURL = "http://localhost:8080/api";
+  protected baseURL = RESOURCES_API_URL;
 
   constructor(
     protected api: HttpClient
