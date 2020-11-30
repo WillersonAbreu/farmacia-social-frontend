@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { removeToken, saveToken } from '../store/auth/auth.actions';
 import { JwtTokenHelpers } from '../utils/jwtTokenHelpers';
 import { IUserType, removeUser } from '../store/user/user.actions';
+import { RESOURCES_API_URL } from '../config/global';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
-  protected baseUrl = 'http://localhost:8080/api';
+  protected baseUrl = RESOURCES_API_URL;
 
   constructor(
     private api: HttpClient,

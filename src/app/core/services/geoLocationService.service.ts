@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RESOURCES_API_URL } from '../config/global';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeoLocationService {
-  protected baseUrl = 'http://localhost:8080/api';
+  protected baseUrl = RESOURCES_API_URL;
 
   constructor(
       private api: HttpClient
