@@ -71,7 +71,7 @@ export class DonationFormComponent implements OnInit {
 
   getDonation(): void {
     this.id = this.donationData.id;
-
+    console.log(this.donationData);
     this.form.patchValue(this.donationData);
     this.imageBase64Front = this.donationData.pictureFile;
     this.imageBase64Back = this.donationData.pictureFileBack;

@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { IUserType } from 'src/app/core/store/user/user.actions';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-showcase',
   templateUrl: './showcase.component.html',
@@ -21,11 +22,24 @@ export class ShowcaseComponent implements OnInit {
   pageIndexes: Array<number> = [];
   filter = '';
   loggedUserId: number;
+  subscription: any;
 
   constructor(
     private service: DonationsService,
-    private store: Store<{ user: IUserType }>
+    private store: Store<{ user: IUserType }>,
+    private router: Router
   ) {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    }
+
+    this.subscription = this.router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd){
+        this.router.navigated = false;
+      }
+    });
+
     this.store
       .select('user')
       .subscribe((user) => (this.loggedUserId = user.id));
@@ -34,6 +48,10 @@ export class ShowcaseComponent implements OnInit {
   ngOnInit() {
     this.getAll(this.pageNumber);
     //this.getAll();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onChange(value: string) {

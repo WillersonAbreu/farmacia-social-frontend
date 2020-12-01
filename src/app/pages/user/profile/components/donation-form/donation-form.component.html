@@ -1,4 +1,5 @@
 <button
+  *ngIf="donationData.statusId != 3 && donationData.statusId != 5"
   style="display: flex; margin: 1vh auto"
   (click)="deleteConfirm(donationData.id, donationData.title)"
   class="btn btn-danger btn-lg"
@@ -353,6 +354,7 @@
           required
           type="number"
           min="1"
+          disabled
         >
           <option
             *ngFor="let status of statusList"
