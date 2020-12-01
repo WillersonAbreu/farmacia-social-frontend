@@ -33,9 +33,9 @@ import { IUserType } from '../../store/user/user.actions';
     //Define animation here
     trigger('animation', [
       state('hide', style({ height: '0px' })),
-      state('show', style({ height: '250px' })),
+      state('show', style({ height: '270px' })),
 
-      transition('hide <=> show', animate('300ms ease-in')),
+      transition('hide <=> show', animate('0.01s ease-in')),
     ]),
   ],
 })
