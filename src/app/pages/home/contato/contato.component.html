@@ -1,113 +1,109 @@
 <app-header></app-header>
 
-
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="title col-12 col-lg-8">
-            <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-5">
-                CONTATO
-            </h2>
-            <h4 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-6">
-                Preencha os campos abaixo para enviar a sua mensagem.
-            </h4>
-        </div>
+  <div class="row justify-content-center">
+    <div class="title col-12 col-lg-8">
+      <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-5">
+        CONTATO
+      </h2>
+      <h4
+        class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-6"
+      >
+        Preencha os campos abaixo para enviar a sua mensagem.
+      </h4>
     </div>
+  </div>
 </div>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="media-container-column col-lg-8" data-form-type="formoid">
-            <div data-form-alert="" hidden="">
-                Obrigado por preencher o formulário! Em breve entraremos em contato.
-            </div>
+  <div class="row justify-content-center">
+    <div class="media-container-column col-lg-8" data-form-type="formoid">
+      <div data-form-alert="" hidden="">
+        Obrigado por preencher o formulário! Em breve entraremos em contato.
+      </div>
 
-
-
-            <form [formGroup]="form" (ngSubmit)="submit()" class="mbr-form">
-
-                <div class="row row-sm-offset">
-                    <div class="col-md-4 multi-horizontal" data-for="name">
-                        <div class="form-group">
-
-                            <fieldset class="form-group">
-                                <input formControlName="nome" placeholder="Nome" class="form-control form-control-sm" type="text" />
-                            </fieldset>
-                            <!-- <fieldset class="form-group">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="mbr-form">
+        <div class="row row-sm-offset">
+          <div class="col-md-4 multi-horizontal" data-for="name">
+            <div class="form-group">
+              <fieldset class="form-group">
+                <input
+                  formControlName="nome"
+                  placeholder="Nome"
+                  class="form-control form-control-sm"
+                  type="text"
+                />
+              </fieldset>
+              <!-- <fieldset class="form-group">
                               <input formControlName="assunto" placeholder="assunto" class="form-control form-control-sm" type="text" />
                           </fieldset> -->
+            </div>
+          </div>
 
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 multi-horizontal" data-for="email">
-                        <div class="form-group">
-
-                            <fieldset class="form-group">
-                                <input formControlName="email" placeholder="Endereço de e-mail" class="form-control form-control-sm" type="email" />
-                            </fieldset>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4 multi-horizontal" data-for="phone">
-                        <div class="form-group">
-
-                            <fieldset class="form-group">
-                                <input formControlName="telefone"
-                                mask="{{phoneMask}}" placeholder="Telefone" class="form-control form-control-sm" type="text" maxlength="15" />
-                            </fieldset>
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <select formControlName="assunto" id="assunto" class="select-form form-control"  required autofocus>
-              <option selected value="0">Selecione um assunto</option>
-              <option value="Comercial">Comercial</option>
-              <option value="Duvidas">Dúvidas</option>
-              <option value="Parcerias">Parcerias</option>
-              <option value="Sugestao">Sugestão</option>
-              <option value="Reclamação">Reclamação</option>
-              <option value="Suporte">Suporte</option>
-            </select>
-                </div>
-                <div class="form-group" data-for="message">
-
-
-
-                    <textarea formControlName="mensagem" type="text" class="form-control" rows="7" placeholder="Deixe sua mensagem"></textarea>
-
-                </div>
-
-
-                <div class="send-btn">
-                    <span class="input-group-btn">
-              <button
-
-                type="submit"
-                class="logo btn btn-orange btn-form display-4"
-              >
-                ENVIAR
-              </button>
-            </span>
-                </div>
-            </form>
+          <div class="col-md-4 multi-horizontal" data-for="email">
+            <div class="form-group">
+              <fieldset class="form-group">
+                <input
+                  formControlName="email"
+                  placeholder="Endereço de e-mail"
+                  class="form-control form-control-sm"
+                  type="email"
+                />
+              </fieldset>
+            </div>
+          </div>
+          <div class="col-md-4 multi-horizontal" data-for="phone">
+            <div class="form-group">
+              <fieldset class="form-group">
+                <input
+                  formControlName="telefone"
+                  mask="{{ phoneMask }}"
+                  placeholder="Telefone"
+                  class="form-control form-control-sm"
+                  type="text"
+                  maxlength="15"
+                />
+              </fieldset>
+            </div>
+          </div>
         </div>
+        <div>
+          <select
+            formControlName="assunto"
+            id="assunto"
+            class="select-form form-control"
+            required
+            autofocus
+          >
+            <option selected value="0">Selecione um assunto</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Duvidas">Dúvidas</option>
+            <option value="Parcerias">Parcerias</option>
+            <option value="Sugestao">Sugestão</option>
+            <option value="Reclamação">Reclamação</option>
+            <option value="Suporte">Suporte</option>
+          </select>
+        </div>
+        <div class="form-group" data-for="message">
+          <textarea
+            formControlName="mensagem"
+            type="text"
+            class="form-control"
+            rows="7"
+            placeholder="Deixe sua mensagem"
+          ></textarea>
+        </div>
+
+        <div class="send-btn">
+          <span class="input-group-btn">
+            <button
+              type="submit"
+              class="logo btn btn-orange btn-form display-4"
+            >
+              ENVIAR
+            </button>
+          </span>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<app-footer></app-footer>
