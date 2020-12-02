@@ -292,7 +292,7 @@
           required
           type="number"
           min="1"
-          hidden
+
         >
           <option
             *ngFor="let status of statusList"
@@ -305,7 +305,14 @@
       </fieldset>
     </div>
   </div>
-  <div class="d-flex flex-row content-between" *ngIf="!isDoneDonations">
+  <button
+      style="display: flex; margin: 1vh auto"
+      class="btn btn-success btn-lg"
+      type="submit"
+  >
+    Atualizar
+  </button>
+  <!-- <div class="d-flex flex-row content-between" *ngIf="!isDoneDonations">
     <button
       value="done"
       (click)="setActionType($event)"
@@ -317,7 +324,7 @@
     </button>
     <button
       value="reprove"
-      (click)="setActionType()"
+      (click)="setActionType($event)"
       style="display: flex; margin: 1vh auto"
       class="btn btn-warning btn-lg"
       type="submit"
@@ -326,12 +333,12 @@
     </button>
     <button
       value="cancel"
-      (click)="setActionType()"
+      (click)="setActionType($event)"
       style="display: flex; margin: 1vh auto"
       class="btn btn-danger btn-lg"
       type="submit"
     >
       Cancelar
     </button>
-  </div>
+  </div> -->
 </form>

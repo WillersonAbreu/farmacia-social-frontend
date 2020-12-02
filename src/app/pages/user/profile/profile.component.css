@@ -115,3 +115,7 @@ agm-map {
     width: 60vw;
   }
 }
+
+app-footer {
+  display: none;
+}

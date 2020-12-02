@@ -59,7 +59,7 @@ export class PharmacyDonationDetailComponent implements OnInit {
       statusId: [''],
     });
 
-    console.log('Testeee 1', this.donationData);
+    // console.log('Testeee 1', this.donationData);
 
     this.getDonation();
 
@@ -112,12 +112,18 @@ export class PharmacyDonationDetailComponent implements OnInit {
     donation.pictureFile = this.imageBase64Front;
     donation.pictureFileBack = this.imageBase64Back;
 
-    if (this.actionType === 'reprove'){
-      donation.statusId = 4;
-    }else if(this.actionType === 'done'){
-      donation.statusId = 5;
-    }else if(this.actionType === 'cancel'){
-      donation.statusId = 6;
+    // if (this.actionType === 'reprove'){
+    //   donation.statusId = 4;
+    // }else if(this.actionType === 'done'){
+    //   donation.statusId = 5;
+    // }else if(this.actionType === 'cancel'){
+    //   donation.statusId = 6;
+    // }
+
+    if(donation.statusId == 1){
+      donation.isActive = true;
+    }else{
+      donation.isActive = false;
     }
 
     if (this.id) {

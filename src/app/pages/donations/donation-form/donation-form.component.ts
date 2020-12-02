@@ -117,6 +117,8 @@ export class DonationFormComponent implements OnInit {
         // cadastrar
         donation.statusId = 1;
         donation.userId = this.loggedUserId;
+        donation.isActive = false;
+
         this.service.store(donation).subscribe(
           data => {
             Swal.fire({
